@@ -443,11 +443,42 @@ INSERT INTO SerCandidato(DNINominado, IdCategoria) VALUES
     ("0000002k", 3),
     ("0000003k", 4),
     ("0000004k", 5);
-/*
-CREATE TABLE ValorarCategoria (
-    DNIJuez  , idCategoria
+
+DROP TABLE ValorarCategoria;
+CREATE TABLE IF NOT EXISTS ValorarCategoria (
+    DNIJuez VARCHAR(9),
+    IdCategoria INT,
+
+    FOREIGN KEY(DNIJuez) REFERENCES Jueces(DNIJuez),
+    FOREIGN KEY(IdCategoria) REFERENCES PresentadoCategoria(idCategoria),
+
+    PRIMARY KEY(DNIJuez, IdCategoria)
 );
 
-CREATE TABLE VotarNominado(
-    DNIJuez, DNINominado, idCategoria
-);*/
+INSERT INTO ValorarCategoria(DNIJuez, IdCategoria) VALUES
+    ("0000000k", 1),
+    ("0000001k", 2),
+    ("0000002k", 3),
+    ("0000003k", 4),
+    ("0000004k", 5);
+
+
+DROP TABLE VotarNominado;
+CREATE TABLE IF NOT EXISTS VotarNominado(
+    DNIJuez VARCHAR(9),
+    IdCategoria INT,
+    DNINominado VARCHAR(9),
+
+    FOREIGN KEY(DNIJuez) REFERENCES Jueces(DNIJuez),
+    FOREIGN KEY(IdCategoria) REFERENCES PresentadoCategoria(idCategoria),
+    FOREIGN KEY(DNINominado) REFERENCES Nominados(DNINominado),
+
+    PRIMARY KEY(DNIJuez, IdCategoria, DNINominado)
+);
+
+INSERT INTO VotarNominado(DNIJuez, IdCategoria, DNINominado) VALUES
+    ("0000000k", 1, "0000000k"),
+    ("0000001k", 2, "0000001k"),
+    ("0000002k", 3, "0000002k"),
+    ("0000003k", 4, "0000003k"),
+    ("0000004k", 5, "0000004k");
