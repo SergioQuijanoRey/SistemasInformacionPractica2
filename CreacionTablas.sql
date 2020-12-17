@@ -1,4 +1,3 @@
-DROP TABLE Invitados;
 CREATE TABLE IF NOT EXISTS Invitados (
     DNIInvitado VARCHAR(9) PRIMARY KEY,
     Nombre VARCHAR(300),
@@ -17,7 +16,6 @@ INSERT INTO Invitados (DNIInvitado, Nombre, covid) VALUES
     ("0000008k", "Lucía Salamanca 9", FALSE),
     ("0000009k", "Lucía Salamanca 10", FALSE);
 
-DROP TABLE Periodista;
 CREATE TABLE IF NOT EXISTS Periodista(
     DNIPeriodista VARCHAR(9) PRIMARY KEY,
     Nombre VARCHAR(300),
@@ -36,7 +34,6 @@ INSERT INTO Periodista (DNIPeriodista, Nombre, covid) VALUES
     ("0000008k", "Jesus Lopez 9", FALSE),
     ("0000009k", "Jesus Lopez 10", FALSE);
 
-DROP TABLE Jueces;
 CREATE TABLE IF NOT EXISTS Jueces(
     DNIJuez VARCHAR(9) PRIMARY KEY,
     Nombre VARCHAR(300)
@@ -53,7 +50,6 @@ INSERT INTO Jueces (DNIJuez, Nombre) VALUES
     ("0000008k", "Sergio Quijano 9"),
     ("0000009k", "Sergio Quijano 10");
 
-DROP TABLE Nominados;
 CREATE TABLE IF NOT EXISTS Nominados(
     DNINominado VARCHAR(9) PRIMARY KEY,
     Nombre VARCHAR(300)
@@ -70,7 +66,6 @@ INSERT INTO Nominados (DNINominado, Nombre) VALUES
     ("0000008k", "Antonio Merino 9"),
     ("0000009k", "Antonio Merino 10");
 
-DROP TABLE Asistentes;
 CREATE TABLE IF NOT EXISTS Asistentes (
     DNIAsistente VARCHAR(9) PRIMARY KEY,
     Nombre VARCHAR(300),
@@ -91,7 +86,6 @@ INSERT INTO Asistentes(DNIAsistente, Nombre, CuentaBancaria, Covid) VALUES
     ("0000010k", "Pilar Aranda 10","123456792jjx", FALSE);
 
 
-DROP TABLE Actividad;
 CREATE TABLE IF NOT EXISTS Actividad(
     IdActividad INT PRIMARY KEY AUTO_INCREMENT,
     Descripcion VARCHAR(3000),
@@ -99,59 +93,58 @@ CREATE TABLE IF NOT EXISTS Actividad(
 );
 
 INSERT INTO Actividad(Descripcion, Fecha) VALUES
-    ("Descripcion nº 0", "2020-12-13"),
-    ("Descripcion nº 1", "2020-12-13"),
-    ("Descripcion nº 2", "2020-12-13"),
-    ("Descripcion nº 3", "2020-12-13"),
-    ("Descripcion nº 4", "2020-12-13"),
-    ("Descripcion nº 5", "2020-12-13"),
-    ("Descripcion nº 6", "2020-12-13"),
-    ("Descripcion nº 7", "2020-12-13"),
-    ("Descripcion nº 8", "2020-12-13"),
-    ("Descripcion nº 9", "2020-12-13"),
-    ("Descripcion nº 10", "2020-12-13"),
-    ("Descripcion nº 11", "2020-12-13"),
-    ("Descripcion nº 12", "2020-12-13"),
-    ("Descripcion nº 13", "2020-12-13"),
-    ("Descripcion nº 14", "2020-12-13"),
-    ("Descripcion nº 15", "2020-12-13"),
-    ("Descripcion nº 16", "2020-12-13"),
-    ("Descripcion nº 17", "2020-12-13"),
-    ("Descripcion nº 18", "2020-12-13"),
-    ("Descripcion nº 19", "2020-12-13"),
-    ("Descripcion nº 20", "2020-12-13"),
-    ("Descripcion nº 21", "2020-12-13"),
-    ("Descripcion nº 22", "2020-12-13"),
-    ("Descripcion nº 23", "2020-12-13"),
-    ("Descripcion nº 24", "2020-12-13"),
-    ("Descripcion nº 25", "2020-12-13"),
-    ("Descripcion nº 26", "2020-12-13"),
-    ("Descripcion nº 27", "2020-12-13"),
-    ("Descripcion nº 28", "2020-12-13"),
-    ("Descripcion nº 29", "2020-12-13"),
-    ("Descripcion nº 30", "2020-12-13"),
-    ("Descripcion nº 31", "2020-12-13"),
-    ("Descripcion nº 32", "2020-12-13"),
-    ("Descripcion nº 33", "2020-12-13"),
-    ("Descripcion nº 34", "2020-12-13"),
-    ("Descripcion nº 35", "2020-12-13"),
-    ("Descripcion nº 36", "2020-12-13"),
-    ("Descripcion nº 37", "2020-12-13"),
-    ("Descripcion nº 38", "2020-12-13"),
-    ("Descripcion nº 39", "2020-12-13"),
-    ("Descripcion nº 40", "2020-12-13");
-    ("Descripcion nº 41", "2020-12-13");
-    ("Descripcion nº 42", "2020-12-13");
-    ("Descripcion nº 43", "2020-12-13");
-    ("Descripcion nº 44", "2020-12-13");
-    ("Descripcion nº 45", "2020-12-13");
-    ("Descripcion nº 46", "2020-12-13");
-    ("Descripcion nº 47", "2020-12-13");
-    ("Descripcion nº 48", "2020-12-13");
-    ("Descripcion nº 49", "2020-12-13");
-    ("Descripcion nº 50", "2020-12-13");
+    ("Desc 0", "2020-12-13"),
+    ("Desc 1", "2020-12-13"),
+    ("Desc 2", "2020-12-13"),
+    ("Desc 3", "2020-12-13"),
+    ("Desc 4", "2020-12-13"),
+    ("Desc 5", "2020-12-13"),
+    ("Desc 6", "2020-12-13"),
+    ("Desc 7", "2020-12-13"),
+    ("Desc 8", "2020-12-13"),
+    ("Desc 9", "2020-12-13"),
+    ("Desc 10", "2020-12-13"),
+    ("Desc 11", "2020-12-13"),
+    ("Desc 12", "2020-12-13"),
+    ("Desc 13", "2020-12-13"),
+    ("Desc 14", "2020-12-13"),
+    ("Desc 15", "2020-12-13"),
+    ("Desc 16", "2020-12-13"),
+    ("Desc 17", "2020-12-13"),
+    ("Desc 18", "2020-12-13"),
+    ("Desc 19", "2020-12-13"),
+    ("Desc 20", "2020-12-13"),
+    ("Desc 21", "2020-12-13"),
+    ("Desc 22", "2020-12-13"),
+    ("Desc 23", "2020-12-13"),
+    ("Desc 24", "2020-12-13"),
+    ("Desc 25", "2020-12-13"),
+    ("Desc 26", "2020-12-13"),
+    ("Desc 27", "2020-12-13"),
+    ("Desc 28", "2020-12-13"),
+    ("Desc 29", "2020-12-13"),
+    ("Desc 30", "2020-12-13"),
+    ("Desc 31", "2020-12-13"),
+    ("Desc 32", "2020-12-13"),
+    ("Desc 33", "2020-12-13"),
+    ("Desc 34", "2020-12-13"),
+    ("Desc 35", "2020-12-13"),
+    ("Desc 36", "2020-12-13"),
+    ("Desc 37", "2020-12-13"),
+    ("Desc 38", "2020-12-13"),
+    ("Desc 39", "2020-12-13"),
+    ("Desc 40", "2020-12-13"),
+    ("Desc 41", "2020-12-13"),
+    ("Desc 42", "2020-12-13"),
+    ("Desc 43", "2020-12-13"),
+    ("Desc 44", "2020-12-13"),
+    ("Desc 45", "2020-12-13"),
+    ("Desc 46", "2020-12-13"),
+    ("Desc 47", "2020-12-13"),
+    ("Desc 48", "2020-12-13"),
+    ("Desc 49", "2020-12-13"),
+    ("Desc 50", "2020-12-13");
 
-DROP TABLE AlfombraRoja;
 CREATE TABLE IF NOT EXISTS AlfombraRoja(
     idAlfombraRoja INT PRIMARY KEY,
     horaInicio TIME,
@@ -171,7 +164,6 @@ INSERT INTO AlfombraRoja(idAlfombraRoja, horaInicio, horaFin, lugar) VALUES
     (8, "20:00:00", "21:30:00", "Sala Magna"),
     (9, "20:00:00", "21:30:00", "Sala Magna");
 
-DROP TABLE ActividadSubastada;
 CREATE TABLE IF NOT EXISTS ActividadSubastada(
     IdActividadSubastada INT PRIMARY KEY,
     Nombre VARCHAR(300),
@@ -191,7 +183,6 @@ INSERT INTO ActividadSubastada(idActividadSubastada, Nombre, Lugar) VALUES
     (19, "Actividad Subastada 19", "Domingo en la tarde en los coches de choque");
 
 
-DROP TABLE Gala;
 CREATE TABLE IF NOT EXISTS Gala(
     idGala INT PRIMARY KEY,
     Presentador VARCHAR(300),
@@ -210,7 +201,6 @@ INSERT INTO Gala(idGala, Presentador) VALUES
     (28, "1.5 Juan"),
     (29, "1.5 Juan");
 
-DROP TABLE Patrocinador;
 CREATE TABLE IF NOT EXISTS Patrocinador (
     IdPatrocinador INT PRIMARY KEY AUTO_INCREMENT,
     Nombre VARCHAR(200),
@@ -230,7 +220,6 @@ INSERT INTO Patrocinador(Nombre, Prevision) VALUES
     ("Cola Coca", 1000009.0);
 
 
-DROP TABLE Pelicula;
 CREATE TABLE IF NOT EXISTS Pelicula(
     idPelicula INT PRIMARY KEY AUTO_INCREMENT,
     Nombre VARCHAR(300),
@@ -249,7 +238,6 @@ INSERT INTO Pelicula(Nombre, Genero) VALUES
     ("Padre no hay mas que 9", "Familiar"),
     ("Padre no hay mas que 10", "Familiar");
 
-DROP TABLE ActividadAsignada;
 CREATE TABLE IF NOT EXISTS ActividadAsignada(
     IdActividadAsignada INT PRIMARY KEY,
     FOREIGN KEY(IdActividadAsignada) REFERENCES ActividadSubastada(idActividadSubastada)
@@ -266,7 +254,6 @@ INSERT INTO ActividadAsignada(idActividadAsignada) VALUES
     (18),
     (19);
 
-DROP TABLE UsarEntradas;
 CREATE TABLE IF NOT EXISTS UsarEntradas(
     IdEntrada INT,
     IdActividad INT,
@@ -295,7 +282,6 @@ INSERT INTO UsarEntradas(IdEntrada, IdActividad, DNIAsistentes) VALUES
     (3, 9, "0000008k");
 
 
-DROP TABLE AbonaPagos;
 CREATE TABLE IF NOT EXISTS AbonaPagos(
     IdPago INT PRIMARY KEY AUTO_INCREMENT,
     Cantidad DOUBLE,
@@ -312,7 +298,6 @@ INSERT INTO AbonaPagos(Cantidad, IdEntrada, IdActividad) VALUES
 
 
 
-DROP TABLE Acudir;
 CREATE TABLE IF NOT EXISTS Acudir(
     DNIInvitado VARCHAR(9),
     idAlfombraRoja INT,
@@ -330,7 +315,6 @@ INSERT INTO Acudir(DNIInvitado, idAlfombraRoja, hora) VALUES
     ("0000004k", 4, "20:00:00"),
     ("0000005k", 5, "20:00:00");
 
-DROP TABLE RuedaDePrensaAsigna;
 CREATE TABLE IF NOT EXISTS RuedaDePrensaAsigna(
     IdRuedaPrensa INT PRIMARY KEY,
     idPelicula INT NOT NULL,
@@ -354,7 +338,6 @@ INSERT INTO RuedaDePrensaAsigna(IdRuedaPrensa, idPelicula, nombre, lugar) VALUES
     (38, 9, "Rueda de prensa 8", "Sitio donde se hacen las ruedas de prensa"),
     (39, 10, "Rueda de prensa 9", "Sitio donde se hacen las ruedas de prensa");
 
-DROP TABLE Acceder;
 CREATE TABLE IF NOT EXISTS Acceder(
     DNIPeriodista VARCHAR(9),
     IdRuedaPrensa INT,
@@ -372,7 +355,6 @@ INSERT INTO Acceder(DNIPeriodista, IdRuedaPrensa) VALUES
     ("0000003k", 33),
     ("0000004k", 34);
 
-DROP TABLE Puja;
 CREATE TABLE IF NOT EXISTS Puja (
     IdPatrocinador INT ,
     IdActividad INT ,
@@ -390,7 +372,6 @@ INSERT INTO Puja(IdPatrocinador, IdActividad, Valor) VALUES
     (3, 13, 204.20),
     (5, 15, 208.20);
 
-DROP TABLE OfertaActividadNoEconomica;
 CREATE TABLE IF NOT EXISTS OfertaActividadNoEconomica(
     IdActividadNoEconomica INT PRIMARY KEY,
     IdPatrocinador INT NOT NULL,
@@ -408,7 +389,6 @@ INSERT INTO OfertaActividadNoEconomica(IdActividadNoEconomica, IdPatrocinador, C
     (44, 4, 206.20, "Descripcion 4"),
     (45, 5, 208.20, "Descripcion 5");
 
-DROP TABLE PresentadoCategoria;
 CREATE TABLE IF NOT EXISTS PresentadoCategoria(
     idCategoria INT PRIMARY KEY AUTO_INCREMENT,
     Descripcion VARCHAR(3000),
@@ -426,7 +406,6 @@ INSERT INTO PresentadoCategoria(Descripcion, Presentador, idGala) VALUES
     ("Mejor Actriz no 5", "David Broncano", 26);
 
 
-DROP TABLE SerCandidato;
 CREATE TABLE IF NOT EXISTS SerCandidato (
     DNINominado VARCHAR(9),
     IdCategoria INT,
@@ -444,7 +423,6 @@ INSERT INTO SerCandidato(DNINominado, IdCategoria) VALUES
     ("0000003k", 4),
     ("0000004k", 5);
 
-DROP TABLE ValorarCategoria;
 CREATE TABLE IF NOT EXISTS ValorarCategoria (
     DNIJuez VARCHAR(9),
     IdCategoria INT,
@@ -463,7 +441,6 @@ INSERT INTO ValorarCategoria(DNIJuez, IdCategoria) VALUES
     ("0000004k", 5);
 
 
-DROP TABLE VotarNominado;
 CREATE TABLE IF NOT EXISTS VotarNominado(
     DNIJuez VARCHAR(9),
     IdCategoria INT,
