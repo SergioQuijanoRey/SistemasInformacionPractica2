@@ -58,7 +58,7 @@ class DatabaseRepository:
         print(err_msg)
         print(f"El codigo del error fue: {err}")
 
-class SQLiteDatabase:
+class SQLiteDatabase(DatabaseRepository):
     def connect(self):
         try:
             conn = sqlite3.connect('example2.db')
@@ -69,7 +69,7 @@ class SQLiteDatabase:
         self.conn = conn
         self.cursor = self.conn.cursor()
 
-class MariaDatabase:
+class MariaDatabase(DatabaseRepository):
 
     def connect(self):
         try:
