@@ -313,26 +313,26 @@ def input_actividad():
 
 def input_asistente():
     nombre = input("Introduce el nombre del asistente")
-    while type(nombre) != str or len(nombre)<= 0 or len(nombre) >300:
+    while len(nombre)<= 0 or len(nombre) >300:
         nombre = input("Nombre no valido, insertelo de nuevo:")
 
     dni = input("Introduce el dni del asistente")
-    while type(dni) != str or len(dni)<=0 or len(dni)>9:
+    while len(dni)<=0 or len(dni)>9:
         dni = input("Dni incorrecto, insertelo de nuevo:")
     
     cuentaBancaria = input("introduce el numero de cuenta bancaria")
-    while type(cuentaBancaria) != str or len(cuentaBancaria)>400 or len(cuentaBancaria)<= 0:
+    while len(cuentaBancaria)>400 or len(cuentaBancaria)<= 0:
         cuentaBancaria = input("Cuenta Bancaria no valida, inserte otra")
     
     return nombre, dni, cuentaBancaria
 
 def input_UsarEntrada():
 
-    idEntrada = input("Inserte el identificador de la entrada")
+    idEntrada = int(input("Inserte el identificador de la entrada"))
     while type(idEntrada) != int:
         input("Identificador no valido, insertelo de nuevo:")
 
-    idActividad = input("Inserte el identificador de la actividad")
+    idActividad = int(input("Inserte el identificador de la actividad"))
     while type(idActividad) != int:
         input("Identificador no valido, insertelo de nuevo:")
     
