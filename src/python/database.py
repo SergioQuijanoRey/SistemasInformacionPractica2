@@ -1,5 +1,5 @@
 import sqlite3
-import mariadb
+#import mariadb
 import os
 
 class DatabaseFactory:
