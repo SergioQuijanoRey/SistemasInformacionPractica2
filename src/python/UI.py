@@ -328,31 +328,40 @@ def input_asistente():
 
 def input_UsarEntrada():
 
-    idEntrada = int(input("Inserte el identificador de la entrada"))
-    while type(idEntrada) != int:
-        input("Identificador no valido, insertelo de nuevo:")
+    idEntrada = int(input("Inserte el identificador de la entrada: "))
+    while idEntrada < 0 :
+        idEntrada = int(input("Identificador no valido, insertelo de nuevo: "))
 
-    idActividad = int(input("Inserte el identificador de la actividad"))
-    while type(idActividad) != int:
-        input("Identificador no valido, insertelo de nuevo:")
+    idActividad = int(input("Inserte el identificador de la actividad: "))
+    while idActividad < 0:
+        idActividad = int(input("Identificador no valido, insertelo de nuevo: "))
+
+    dniAsistente = input ("Introduzca el DNI del Asistente o escriba 'null' ")
+    while len(dniAsistente) < 0 or len(dniAsistente) > 9:
+        dniAsistente = input ("DNI erroneo. Introduzca el DNI del Asistente o escriba 'null' ")
+
+    cantidad = int(input("Introduzca la cantidad, por defecto es 1: "))
+    while cantidad < 1:
+        cantidad = int (input("Cantidad no valida, introduzcala de nuevo: "))
     
-    return idEntrada, idActividad
+    return idEntrada, idActividad, dniAsistente, cantidad
 
 def input_AbonaPagos():
-    idPago = input("Introduce el identificador del pago")
-    while type(idPago) != int: 
-        idPago =input("Identificador erroneo, insertelo de nuevo")
+    idPago = int(input("Introduce el identificador del pago: "))
+    while idPago < 0: 
+        idPago = int(input("Identificador erroneo, insertelo de nuevo: "))
     
-    cantidad = input("Introduce la cantidad del pago")
-    while type(cantidad) != float: 
-        cantidad =input("cantidad erronea, insertela de nuevo")
+    cantidad = float(input("Introduce la cantidad del pago: "))
+    while cantidad < 0 : 
+        cantidad = float(input("cantidad erronea, insertela de nuevo: "))
 
-    idEntrada = input("Introduce el identificador de la entada")
-    while type(idEntrada) != int: 
-        idEntrada =input("Identificador erroneo, insertelo de nuevo")
+    idEntrada = int(input("Introduce el identificador de la entada: "))
+    while idEntrada < 0 : 
+        idEntrada = int(input("Identificador erroneo, insertelo de nuevo: "))
 
-    idActividad = input("Introduce el identificador de la Actividad")
-    while type(idActividad) != int: 
-        idActividad =input("Identificador erroneo, insertelo de nuevo")
+    idActividad = int(input("Introduce el identificador de la Actividad: "))
+    while idActividad < 0 : 
+        idActividad = int(input("Identificador erroneo, insertelo de nuevo: "))
 
     return idPago, cantidad, idEntrada, idActividad
+
