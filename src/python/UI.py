@@ -336,9 +336,12 @@ def input_UsarEntrada():
     while idActividad < 0:
         idActividad = int(input("Identificador no valido, insertelo de nuevo: "))
 
-    dniAsistente = input ("Introduzca el DNI del Asistente o escriba 'null' ")
-    while len(dniAsistente) < 0 or len(dniAsistente) > 9:
-        dniAsistente = input ("DNI erroneo. Introduzca el DNI del Asistente o escriba 'null' ")
+    opcion = input("Desea Introducir DNI del Asistente: y/n? ")
+    dniAsistente = NULL
+    if opcion == 'y'
+        dniAsistente = input ("Introduzca el DNI del Asistente: ")
+        while len(dniAsistente) < 0 or len(dniAsistente) > 9:
+            dniAsistente = input ("DNI erroneo. Introduzca el DNI del Asistente: ")
 
     cantidad = int(input("Introduzca la cantidad, por defecto es 1: "))
     while cantidad < 1:
