@@ -5,9 +5,9 @@ def crear_actividad(db):
 
     idActividad, descripcion, fecha = UI.input_actividad()
     db.try_execute(
-        "INSERT INTO Actividad VALUES ({idActividad}, {descripcion}, {fecha})"
+        f"INSERT INTO Actividad VALUES ({idActividad}, {descripcion}, {fecha})"
     )
-    db.commit()
+    #db.commit()
 
 def rueda_pelicula(db):
     pass

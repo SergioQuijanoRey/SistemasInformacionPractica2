@@ -81,6 +81,15 @@ class DatabaseRepository:
         for sentence in sqlSentences:
             self.try_execute(sentence, f"ERROR! Ejecutando sentencia {sentence}")
 
+    def commit(self):
+        """Saves  the current changes to the database"""
+        try:
+            self.conn.commit()
+        except Exception as err:
+            print("Hubo un error commitenado los cambios")
+            print(f"El codigo de error fue: {e}")
+            print("Los cambios no se han guardado :(((")
+
 
 class SQLiteDatabase(DatabaseRepository):
     def connect(self):
