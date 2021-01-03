@@ -8,16 +8,20 @@ install:
 	@echo "================================================================================"
 	docker build -t mariadb_practicas:latest .
 
+	@echo "Asignando red de docker"
+	@echo "================================================================================"
+	docker network create own_network || echo "La red ya existe"
+
 	@echo ""
 	@echo "Limpiando contenedores anteriores"
 	@echo "================================================================================"
-	docker stop mariadb_practica 2> /dev/null || echo "No hay contenedor que limpiar"
+	docker stop mariadb_practicas 2> /dev/null || echo "No hay contenedor que limpiar" && echo "Contenedor parado"
 	docker rm -f mariadb_practicas
 
 	@echo ""
 	@echo "Corriendo un contenedor de dicha imagen"
 	@echo "================================================================================"
-	docker run --name mariadb_practicas -d mariadb_practicas:latest
+	docker run --name mariadb_practicas --net=own_network -d mariadb_practicas:latest
 
 	@echo ""
 	@echo "La ip del contenedor es:"

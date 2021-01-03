@@ -1,5 +1,5 @@
 import sqlite3
-#import mariadb
+import mariadb
 import os
 
 class DatabaseFactory:
@@ -98,10 +98,10 @@ class MariaDatabase(DatabaseRepository):
     def connect(self):
         try:
             # Datos de la base de datos
-            server = '172.17.0.2'
-            database = 'base_datos_almacenamiento'
+            server = '172.20.0.2'
+            database = 'sergio'
             username = 'sergio'
-            password = 'sergioquijano'
+            password = 'sergio'
             port = 3306
 
             conn = mariadb.connect(
