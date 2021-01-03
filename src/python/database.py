@@ -2,19 +2,6 @@ import sqlite3
 import mariadb
 import os
 
-class DatabaseFactory:
-    """Clase que se encarga de devolver los tipos de bases de datos que soportamos"""
-    def get_database(database_type: str):
-        if database_type == "SQLite":
-            return SQLiteDatabase()
-        elif database_type == "MariaDB":
-            return MariaDatabase()
-        else:
-            print("ERROR! No hay una base de datos de ese tipo")
-            print("Los tipos de base de datos disponibles son:")
-            print("\tMariaDB")
-            print("\tSQLite")
-
 class DatabaseRepository:
     """
     Interfaz que declara las operaciones que puede realizarse con una base de datos
@@ -60,10 +47,23 @@ class DatabaseRepository:
             print(f"El codigo del error fue: {err}")
 
 
+class DatabaseFactory:
+    """Clase que se encarga de devolver los tipos de bases de datos que soportamos"""
+    def get_database(database_type: str) -> DatabaseRepository:
+        if database_type == "SQLite":
+            return SQLiteDatabase()
+        elif database_type == "MariaDB":
+            return MariaDatabase()
+        else:
+            print("ERROR! No hay una base de datos de ese tipo")
+            print("Los tipos de base de datos disponibles son:")
+            print("\tMariaDB")
+            print("\tSQLite")
+
 class SQLiteDatabase(DatabaseRepository):
     def connect(self):
         try:
-            conn = sqlite3.connect('example2.db')
+            conn = sqlite3.connect('example.db')
         except:
             print("ERROR conectando con la base de datos de testing")
             exit(-1)
