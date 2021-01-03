@@ -338,7 +338,7 @@ def input_UsarEntrada():
 
     opcion = input("Desea Introducir DNI del Asistente: y/n? ")
     dniAsistente = NULL
-    if opcion == 'y'
+    if opcion == 'y':
         dniAsistente = input ("Introduzca el DNI del Asistente: ")
         while len(dniAsistente) < 0 or len(dniAsistente) > 9:
             dniAsistente = input ("DNI erroneo. Introduzca el DNI del Asistente: ")
