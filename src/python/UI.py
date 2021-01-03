@@ -300,12 +300,11 @@ def process_patrocinadores(option,db):
 # JUANJO
 
 def input_actividad():
-    idActividad = input('Inserte el identificador de Actividad:')
-    while type(idActividad) != int:
-        idActividad = input('Identificador no válido, inserte otro de nuevo:')
+
+    idActividad = int(input('Inserte el identificador de Actividad:'))
 
     descripcion = input("Inserte la descripcion de la actividad: ")
-    while len(descripcion)<= 0 or len(descripcion) >300 or type(descripcion) != str:
+    while len(descripcion)<= 0 or len(descripcion) >300:
         descripcion = input("Descripcion no valida, inserte otra:")
 
     fecha = input('Inserte un fecha')
