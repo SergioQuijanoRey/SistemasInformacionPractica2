@@ -2,6 +2,19 @@ import sqlite3
 import mariadb
 import os
 
+class DatabaseFactory:
+    """Clase que se encarga de devolver los tipos de bases de datos que soportamos"""
+    def get_database(database_type: str):
+        if database_type == "SQLite":
+            return SQLiteDatabase()
+        elif database_type == "MariaDB":
+            return MariaDatabase()
+        else:
+            print("ERROR! No hay una base de datos de ese tipo")
+            print("Los tipos de base de datos disponibles son:")
+            print("\tMariaDB")
+            print("\tSQLite")
+
 class DatabaseRepository:
     """
     Interfaz que declara las operaciones que puede realizarse con una base de datos
@@ -19,11 +32,16 @@ class DatabaseRepository:
         """Codigo que conecta con la base de datos"""
         raise Exception("DatabaseRepository es una interfaz que no puede ser instanciada")
 
-    def try_execute(self, query: str, err_msg: str = "ERROR! ejecutando una peticion a la base de datos", should_return : bool = False):
+    def try_execute(self, query: str, err_msg: str = "ERROR! ejecutando una peticion a la base de datos"):
         """
         Tries to execute a database query
         Shows error msg if it fails
         """
+
+        # Las sentencias con SELECT deben retornar
+        should_return = False
+        if "SELECT" in query or "select" in query:
+            should_return = True
 
         try:
             self.cursor.execute(query)
@@ -46,19 +64,23 @@ class DatabaseRepository:
             print(err_msg)
             print(f"El codigo del error fue: {err}")
 
+    def try_execute_sql_file(self, file_path: str):
+        """
+        Lee un archivo con un script en sql y lo ejecuta sentencia a sentencia
+        """
 
-class DatabaseFactory:
-    """Clase que se encarga de devolver los tipos de bases de datos que soportamos"""
-    def get_database(database_type: str) -> DatabaseRepository:
-        if database_type == "SQLite":
-            return SQLiteDatabase()
-        elif database_type == "MariaDB":
-            return MariaDatabase()
-        else:
-            print("ERROR! No hay una base de datos de ese tipo")
-            print("Los tipos de base de datos disponibles son:")
-            print("\tMariaDB")
-            print("\tSQLite")
+        # Tomo los contenidos del fichero
+        sqlContent = None
+        with open(file_path, 'r') as file_obj:
+            sqlContent = file_obj.read()
+
+        # Obtengo las sentencias del fichero
+        sqlSentences = sqlContent.split(";")
+        sqlSentences = [sentence + ";" for sentence in sqlSentences]
+
+        for sentence in sqlSentences:
+            self.try_execute(sentence, f"ERROR! Ejecutando sentencia {sentence}")
+
 
 class SQLiteDatabase(DatabaseRepository):
     def connect(self):

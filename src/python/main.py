@@ -10,5 +10,8 @@ if __name__ == "__main__":
     # Lanzamos la aplicacion
     UI.main_menu(db)
 
+    # DEBUG
+    db.try_execute_sql_file("./src/sql/CreacionTablas.sql")
+
     # Finaliza la aplicacion
     print("Aplicacion finalizada con exito")
