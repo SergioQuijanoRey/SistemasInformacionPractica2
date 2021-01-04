@@ -1,5 +1,6 @@
 import sqlite3
 import mariadb
+import secrets
 import os
 
 class DatabaseFactory:
@@ -86,7 +87,7 @@ class DatabaseRepository:
 
     def savepoint(self, name: str):
         self.try_execute(f"SAVEPOINT {name};", f"Trying to set savepoint {name} failed")
-        
+
     def commit(self):
         """Saves  the current changes to the database"""
         try:
@@ -113,7 +114,7 @@ class MariaDatabase(DatabaseRepository):
     def connect(self):
         try:
             # Datos de la base de datos
-            server = '172.20.0.2'
+            server = secrets.docker_ip
             database = 'sergio'
             username = 'sergio'
             password = 'sergio'
