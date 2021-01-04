@@ -15,8 +15,8 @@ install:
 	@echo ""
 	@echo "Limpiando contenedores anteriores"
 	@echo "================================================================================"
-	docker stop mariadb_practicas 2> /dev/null || echo "No hay contenedor que limpiar"
-	docker rm -f mariadb_practicas
+	docker stop mariadb_practicas 2> /dev/null || echo "No hay contenedor que limpiar" && echo "Contenedor parado"
+	docker rm -f mariadb_practicas || echo "No hay contenedor que borrar" && echo "Contenedor borrado"
 
 	@echo ""
 	@echo "Corriendo un contenedor de dicha imagen"
