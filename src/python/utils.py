@@ -1,13 +1,16 @@
 def get_int(input_msg: str):
+    return get_usr_data(input_msg, int, "El dato introducido no es un entero")
+
+def get_usr_data(input_msg: str, datatype_converter, err_msg: str = "El tipo de dato introducido no es correcto"):
     value = None
     correcto = False
 
     while correcto == False:
         value = input(input_msg)
         try:
-            value = int(value)
+            value = datatype_converter(value)
         except:
-            print("El valor dado no es un entero valido")
+            print(err_msg)
             continue
 
         correcto = True
