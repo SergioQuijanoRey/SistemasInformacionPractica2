@@ -40,7 +40,7 @@ class DatabaseRepository:
     def initialize_data(self):
         raise Exception("DatabaseRepository es una interfaz que no puede ser instanciada")
 
-    def try_execute(self, query: str, err_msg: str = "ERROR! ejecutando una peticion a la base de datos"):
+    def try_execute(self, query: str, err_msg: str = "ERROR! ejecutando una peticion a la base de datos", ignore_error: bool = False):
         """
         Tries to execute a database query
         Shows error msg if it fails
@@ -69,8 +69,9 @@ class DatabaseRepository:
             return result
 
         except Exception as err:
-            print(err_msg)
-            print(f"El codigo del error fue: {err}")
+            if ignore_error == False:
+                print(err_msg)
+                print(f"El codigo del error fue: {err}")
 
     def try_execute_sql_file(self, file_path: str):
         """
@@ -87,7 +88,8 @@ class DatabaseRepository:
         sqlSentences = [sentence + ";" for sentence in sqlSentences]
 
         for sentence in sqlSentences:
-            self.try_execute(sentence, f"ERROR! Ejecutando sentencia {sentence}")
+            # TODO -- estamos ignorando los errores
+            self.try_execute(sentence, f"ERROR! Ejecutando sentencia {sentence}", ignore_error = True)
 
     def rollback(self, savepoint: str):
         self.try_execute(f"ROLLBACK TO {savepoint};", f"ERROR haciendo el Rollback al savepoint {savepoint}")
