@@ -22,6 +22,7 @@ def hora_invitado(db):
         f"INSERT INTO Acudir(DNIInvitado, idAlfombraRoja, hora) VALUES (\"{dni}\", {alfombra}, \"{hora}\")"
     )
 
+    db.commit()
     
 
 def permiso_periodista(db):

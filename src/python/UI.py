@@ -222,7 +222,6 @@ def process_actividades(option,db):
 
     elif option == 3:
         actividades.hora_invitado(db)
-        os.system("clear")
 
     elif option == 4:
         actividades.permiso_periodista(db)
