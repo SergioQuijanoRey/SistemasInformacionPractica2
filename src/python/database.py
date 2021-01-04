@@ -73,7 +73,7 @@ class DatabaseRepository:
                 print(err_msg)
                 print(f"El codigo del error fue: {err}")
 
-    def try_execute_sql_file(self, file_path: str):
+    def try_execute_sql_file(self, file_path: str, ignore_error: bool = False):
         """
         Lee un archivo con un script en sql y lo ejecuta sentencia a sentencia
         """
@@ -88,8 +88,7 @@ class DatabaseRepository:
         sqlSentences = [sentence + ";" for sentence in sqlSentences]
 
         for sentence in sqlSentences:
-            # TODO -- estamos ignorando los errores
-            self.try_execute(sentence, f"ERROR! Ejecutando sentencia {sentence}", ignore_error = True)
+            self.try_execute(sentence, f"ERROR! Ejecutando sentencia {sentence}", ignore_error = ignore_error)
 
     def rollback(self, savepoint: str):
         self.try_execute(f"ROLLBACK TO {savepoint};", f"ERROR haciendo el Rollback al savepoint {savepoint}")
@@ -149,4 +148,4 @@ class MariaDatabase(DatabaseRepository):
         self.cursor = self.conn.cursor()
 
     def initialize_data(self):
-        self.try_execute_sql_file("./src/sql/CreacionTablas.sql")
+        self.try_execute_sql_file("./src/sql/CreacionTablas.sql", ignore_error = True)
