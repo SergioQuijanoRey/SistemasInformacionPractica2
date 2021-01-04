@@ -4,6 +4,7 @@ import asistentes
 import premios
 import patrocinadores
 import actividades
+from utils import get_int
 
 # MENU PRINCIPAL
 
@@ -15,12 +16,12 @@ def main_menu(db):
     while True:
         show_options()
         try:
-            option = int(input("Elija una opcion: "))  
+            option = int(input("Elija una opcion: "))
         except:
             option = 6
 
         process_input(option,db)
-        
+
 
 
 def process_input(option,db):
@@ -40,7 +41,7 @@ def process_input(option,db):
 
     elif option == 4:
         menu_patrocinadores(db)
-            
+
     else:
         os.system("clear")
         print('Opción no válida.')
@@ -74,7 +75,7 @@ def menu_asistentes(db):
         show_asistentes()
 
         try:
-            option = int(input("Elija una opcion: "))  
+            option = int(input("Elija una opcion: "))
         except:
             option = 6
 
@@ -90,7 +91,7 @@ def process_asistentes(option,db):
         bucle = False
         os.system("clear")
         print('Volviendo al menu principal...')
-        
+
     elif option == 1:
         asistentes.comprar_entrada(db)
         os.system("clear")
@@ -106,7 +107,7 @@ def process_asistentes(option,db):
     elif option == 4:
         asistentes.actividad_gratuita(db)
         os.system("clear")
-            
+
     else:
         os.system("clear")
         print('Opción no válida.')
@@ -135,7 +136,7 @@ def menu_premios(db):
         show_premios()
 
         try:
-            option = int(input("Elija una opcion: "))  
+            option = int(input("Elija una opcion: "))
         except:
             option = 6
 
@@ -146,12 +147,12 @@ def menu_premios(db):
 def process_premios(option,db):
     """Procesa la opcion del menu premios"""
     bucle = True
-    
+
     if option == 0:
         bucle = False
         os.system("clear")
         print('Volviendo al menu principal...')
-        
+
     elif option == 1:
         premios.votar(db)
         os.system("clear")
@@ -167,7 +168,7 @@ def process_premios(option,db):
     elif option == 4:
         premios.fallar_premio(db)
         os.system("clear")
-            
+
     else:
         os.system("clear")
         print('Opción no válida.')
@@ -194,7 +195,7 @@ def menu_actividades(db):
         show_actividades()
 
         try:
-            option = int(input("Elija una opcion: "))  
+            option = int(input("Elija una opcion: "))
         except:
             option = 6
 
@@ -205,12 +206,12 @@ def menu_actividades(db):
 def process_actividades(option,db):
     """Procesa la opcion del menu actividades"""
     bucle = True
-    
+
     if option == 0:
         bucle = False
         os.system("clear")
         print('Volviendo al menu principal...')
-        
+
     elif option == 1:
         actividades.crear_actividad(db)
         os.system("clear")
@@ -226,7 +227,7 @@ def process_actividades(option,db):
     elif option == 4:
         actividades.permiso_periodista(db)
         os.system("clear")
-            
+
     else:
         os.system("clear")
         print('Opción no válida.')
@@ -256,7 +257,7 @@ def menu_patrocinadores(db):
         show_patrocinadores()
 
         try:
-            option = int(input("Elija una opcion: "))  
+            option = int(input("Elija una opcion: "))
         except:
             option = 6
 
@@ -267,12 +268,12 @@ def menu_patrocinadores(db):
 def process_patrocinadores(option,db):
     """Procesa la opcion del menu patrocinadores"""
     bucle = True
-    
+
     if option == 0:
         bucle = False
         os.system("clear")
         print('Volviendo al menu principal...')
-        
+
     elif option == 1:
         patrocinadores.alta_patrocinador(db)
         os.system("clear")
@@ -288,7 +289,7 @@ def process_patrocinadores(option,db):
     elif option == 4:
         patrocinadores.fijar(db)
         os.system("clear")
-            
+
     else:
         os.system("clear")
         print('Opción no válida.')
@@ -319,11 +320,11 @@ def input_asistente():
     dni = input("Introduce el dni del asistente")
     while len(dni)<=0 or len(dni)>9:
         dni = input("Dni incorrecto, insertelo de nuevo:")
-    
+
     cuentaBancaria = input("introduce el numero de cuenta bancaria")
     while len(cuentaBancaria)>400 or len(cuentaBancaria)<= 0:
         cuentaBancaria = input("Cuenta Bancaria no valida, inserte otra")
-    
+
     return nombre, dni, cuentaBancaria
 
 def input_UsarEntrada():
@@ -346,25 +347,12 @@ def input_UsarEntrada():
     cantidad = int(input("Introduzca la cantidad, por defecto es 1: "))
     while cantidad < 1:
         cantidad = int (input("Cantidad no valida, introduzcala de nuevo: "))
-    
+
     return idEntrada, idActividad, dniAsistente, cantidad
 
+
 def input_AbonaPagos():
-    idPago = int(input("Introduce el identificador del pago: "))
-    while idPago < 0: 
-        idPago = int(input("Identificador erroneo, insertelo de nuevo: "))
-    
-    cantidad = float(input("Introduce la cantidad del pago: "))
-    while cantidad < 0 : 
-        cantidad = float(input("cantidad erronea, insertela de nuevo: "))
+    pass
 
-    idEntrada = int(input("Introduce el identificador de la entada: "))
-    while idEntrada < 0 : 
-        idEntrada = int(input("Identificador erroneo, insertelo de nuevo: "))
 
-    idActividad = int(input("Introduce el identificador de la Actividad: "))
-    while idActividad < 0 : 
-        idActividad = int(input("Identificador erroneo, insertelo de nuevo: "))
-
-    return idPago, cantidad, idEntrada, idActividad
 

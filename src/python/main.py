@@ -8,7 +8,8 @@ if __name__ == "__main__":
     db = database.DatabaseFactory.get_database(database_type)
 
     # Lanzamos la aplicacion
-    UI.main_menu(db)
+    #UI.main_menu(db)
+    UI.input_AbonaPagos()
 
     # Finaliza la aplicacion
     print("Aplicacion finalizada con exito")
