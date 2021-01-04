@@ -218,7 +218,7 @@ def process_actividades(option,db):
 
     elif option == 2:
         actividades.rueda_pelicula(db)
-        os.system("clear")
+        
 
     elif option == 3:
         actividades.hora_invitado(db)

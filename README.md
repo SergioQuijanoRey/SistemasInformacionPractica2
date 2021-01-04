@@ -6,6 +6,6 @@
 
 * [ ] Conseguir que funcione python: Jesus y Juanjo
 * [ ] Crear actividad: Juanjo
-* [ ] Asignar rueda de prensa a pelicula: Jesus
-* [ ] Asignar hora invitado para alfombra roja: Lucía
+* [x] Asignar rueda de prensa a pelicula: Jesus
+* [x] Asignar hora invitado para alfombra roja: Lucía
 * [ ] Dar permiso a periodista: Sergio
