@@ -7,7 +7,7 @@ def crear_actividad(db):
     db.try_execute(
         f"INSERT INTO Actividad VALUES ({idActividad}, {descripcion}, {fecha})"
     )
-    #db.commit()
+    db.commit()
 
 def rueda_pelicula(db):
     pass

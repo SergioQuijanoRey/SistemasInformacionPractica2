@@ -81,6 +81,12 @@ class DatabaseRepository:
         for sentence in sqlSentences:
             self.try_execute(sentence, f"ERROR! Ejecutando sentencia {sentence}")
 
+    def rollback(self, savepoint: str):
+        self.try_execute(f"ROLLBACK TO {savepoint};", f"ERROR haciendo el Rollback al savepoint {savepoint}")
+
+    def savepoint(self, name: str):
+        self.try_execute(f"SAVEPOINT {name};", f"Trying to set savepoint {name} failed")
+        
     def commit(self):
         """Saves  the current changes to the database"""
         try:
