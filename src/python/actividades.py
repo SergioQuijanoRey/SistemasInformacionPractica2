@@ -1,5 +1,5 @@
-import database
-import UI 
+import DatabaseRepository
+import UI
 from utils import get_usr_data
 
 def crear_actividad(db):
@@ -23,9 +23,9 @@ def rueda_pelicula(db):
         f"INSERT INTO RuedaDePrensaAsigna(IdRuedaPrensa, idPelicula, nombre, plazas, lugar) VALUES ({ruedaPrensa}, {pelicula}, \"{nombre}\", {plazas}, \"{lugar}\")"
     )
     db.commit()
-    
 
-    
+
+
 
 
 def hora_invitado(db):
@@ -38,7 +38,7 @@ def hora_invitado(db):
     )
 
     db.commit()
-    
+
 
 def permiso_periodista(db):
     pass

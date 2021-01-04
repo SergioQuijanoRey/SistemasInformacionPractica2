@@ -1,4 +1,4 @@
-import database
+import DatabaseRepository
 import UI
 
 def comprar_entrada(db):

@@ -3,19 +3,6 @@ import mariadb
 import secrets
 import os
 
-class DatabaseFactory:
-    """Clase que se encarga de devolver los tipos de bases de datos que soportamos"""
-    def get_database(database_type: str):
-        if database_type == "SQLite":
-            return SQLiteDatabase()
-        elif database_type == "MariaDB":
-            return MariaDatabase()
-        else:
-            print("ERROR! No hay una base de datos de ese tipo")
-            print("Los tipos de base de datos disponibles son:")
-            print("\tMariaDB")
-            print("\tSQLite")
-
 class DatabaseRepository:
     """
     Interfaz que declara las operaciones que puede realizarse con una base de datos
@@ -41,6 +28,7 @@ class DatabaseRepository:
         raise Exception("DatabaseRepository es una interfaz que no puede ser instanciada")
 
     def initialize_data(self):
+        """Carga los datos iniciales en la base de datos a traves de ficheros sql"""
         raise Exception("DatabaseRepository es una interfaz que no puede ser instanciada")
 
     def try_execute(self, query: str, err_msg: str = "ERROR! ejecutando una peticion a la base de datos", ignore_error: bool = False):
@@ -112,30 +100,6 @@ class DatabaseRepository:
         """Carga los triggers de la base de datos, a partir de una serie de ficheros"""
         raise Exception("DatabaseRepository es una interfaz que no puede ser instanciada")
 
-
-class SQLiteDatabase(DatabaseRepository):
-    def connect(self):
-        try:
-            conn = sqlite3.connect('example.db')
-        except:
-            print("ERROR conectando con la base de datos de testing")
-            exit(-1)
-
-        self.conn = conn
-        self.cursor = self.conn.cursor()
-
-    def initialize_data(self):
-        self.try_execute_sql_file("./src/sql/CreacionTablas.sql")
-
-    def load_triggers(self):
-        triggers = [
-            "./src/sql/Triggers.sql"
-        ]
-
-        for trigger in triggers:
-            self.try_execute_sql_file(trigger)
-
-
 class MariaDatabase(DatabaseRepository):
 
     def connect(self):
@@ -173,3 +137,27 @@ class MariaDatabase(DatabaseRepository):
 
         for trigger in triggers:
             self.try_execute_sql_file(trigger)
+
+class SQLiteDatabase(DatabaseRepository):
+    def connect(self):
+        try:
+            conn = sqlite3.connect('example.db')
+        except:
+            print("ERROR conectando con la base de datos de testing")
+            exit(-1)
+
+        self.conn = conn
+        self.cursor = self.conn.cursor()
+
+    def initialize_data(self):
+        self.try_execute_sql_file("./src/sql/CreacionTablas.sql")
+
+    def load_triggers(self):
+        triggers = [
+            "./src/sql/Triggers.sql"
+        ]
+
+        for trigger in triggers:
+            self.try_execute_sql_file(trigger)
+
+

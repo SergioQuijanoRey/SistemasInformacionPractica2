@@ -1,4 +1,4 @@
-import database
+import DatabaseRepository
 import UI
 
 def alta_patrocinador(db):

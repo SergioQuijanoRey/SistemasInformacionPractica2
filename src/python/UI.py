@@ -1,4 +1,4 @@
-import database
+import DatabaseRepository
 import os
 import asistentes
 import premios
@@ -218,7 +218,7 @@ def process_actividades(option,db):
 
     elif option == 2:
         actividades.rueda_pelicula(db)
-        
+
 
     elif option == 3:
         actividades.hora_invitado(db)
