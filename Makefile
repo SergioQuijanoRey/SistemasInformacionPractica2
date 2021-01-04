@@ -2,6 +2,7 @@ all:
 	@echo "Las funcionalidades de este makefile son:"
 	@echo "	install: instala el software necesario para lanzar la aplicacion: docker + pipenv"
 	@echo "	run: ejecuta la aplicacion"
+	@echo "	perms: da permisos a la base de datos. Se tiene que esperar un poco despues de instalar para poder ejecutarse con exito"
 
 install:
 	@echo "Construyendo imagen de docker"
