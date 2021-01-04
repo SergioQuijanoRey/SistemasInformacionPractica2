@@ -33,6 +33,15 @@ install:
 	@echo "================================================================================"
 	pipenv install
 
+
 run:
 	@echo "Lanzando aplicacion de python"
 	pipenv run python3 ./src/python/main.py
+
+perms:
+	@echo ""
+	@echo "Dando permisos a la base de datos"
+	@echo "================================================================================"
+	docker exec mariadb_practicas mysql -u root "-psergio" -e "GRANT ALL PRIVILEGES ON *.* TO 'sergio'@localhost IDENTIFIED BY 'sergio';"
+	docker exec mariadb_practicas mysql -u root "-psergio" -e "FLUSH PRIVILEGES;"
+	docker exec mariadb_practicas mysql -u root "-psergio" -e "COMMIT;"
