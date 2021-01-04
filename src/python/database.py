@@ -33,6 +33,9 @@ class DatabaseRepository:
         # Inicializamos la base de datos
         self.initialize_data()
 
+        # Cargamos los triggers
+        self.load_triggers()
+
     def connect(self):
         """Codigo que conecta con la base de datos"""
         raise Exception("DatabaseRepository es una interfaz que no puede ser instanciada")
@@ -105,6 +108,10 @@ class DatabaseRepository:
             print(f"El codigo de error fue: {e}")
             print("Los cambios no se han guardado :(((")
 
+    def load_triggers(self):
+        """Carga los triggers de la base de datos, a partir de una serie de ficheros"""
+        raise Exception("DatabaseRepository es una interfaz que no puede ser instanciada")
+
 
 class SQLiteDatabase(DatabaseRepository):
     def connect(self):
@@ -119,6 +126,15 @@ class SQLiteDatabase(DatabaseRepository):
 
     def initialize_data(self):
         self.try_execute_sql_file("./src/sql/CreacionTablas.sql")
+
+    def load_triggers(self):
+        triggers = [
+            "./src/sql/Triggers.sql"
+        ]
+
+        for trigger in triggers:
+            self.try_execute_sql_file(trigger)
+
 
 class MariaDatabase(DatabaseRepository):
 
@@ -149,3 +165,11 @@ class MariaDatabase(DatabaseRepository):
 
     def initialize_data(self):
         self.try_execute_sql_file("./src/sql/CreacionTablas.sql", ignore_error = True)
+
+    def load_triggers(self):
+        triggers = [
+            "./src/sql/Triggers.sql"
+        ]
+
+        for trigger in triggers:
+            self.try_execute_sql_file(trigger)
