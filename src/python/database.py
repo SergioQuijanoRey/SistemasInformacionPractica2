@@ -27,10 +27,17 @@ class DatabaseRepository:
         self.conn = None
         self.cursor = None
 
+        # Nos conectamos a la base de datos
         self.connect()
+
+        # Inicializamos la base de datos
+        self.initialize_data()
 
     def connect(self):
         """Codigo que conecta con la base de datos"""
+        raise Exception("DatabaseRepository es una interfaz que no puede ser instanciada")
+
+    def initialize_data(self):
         raise Exception("DatabaseRepository es una interfaz que no puede ser instanciada")
 
     def try_execute(self, query: str, err_msg: str = "ERROR! ejecutando una peticion a la base de datos"):
@@ -109,6 +116,9 @@ class SQLiteDatabase(DatabaseRepository):
         self.conn = conn
         self.cursor = self.conn.cursor()
 
+    def initialize_data(self):
+        self.try_execute_sql_file("./src/sql/CreacionTablas.sql")
+
 class MariaDatabase(DatabaseRepository):
 
     def connect(self):
@@ -135,3 +145,6 @@ class MariaDatabase(DatabaseRepository):
 
         self.conn = conn
         self.cursor = self.conn.cursor()
+
+    def initialize_data(self):
+        self.try_execute_sql_file("./src/sql/CreacionTablas.sql")
