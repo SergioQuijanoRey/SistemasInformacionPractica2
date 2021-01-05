@@ -139,8 +139,33 @@ class DatabaseRepository:
             print(f"El codigo de error fue {e}")
             print("Vuelvelo a intentar desde el menu principal")
 
+    def notificar_estado_covid(self, usr_type: int, dni: str):
+        # Condicion de seguridad
+        if usr_type != 0 and usr_type != 1:
+            print("ERROR en DatabaseRepository.notificar_estado_covid()")
+            print("El usr_type no tiene un valor valido")
+            return
+
+        # Usuario Invitado
+        if usr_type == 0:
+            try:
+                self.execute(f"UPDATE Invitados SET covid = FALSE WHERE DNIInvitado = '{dni}'")
+            except Exception as e:
+                print("No se pudo notificar el estado covid del peridoista")
+                print(f"El error fue {e}")
+
+        # Usuario Periodista
+        else:
+            try:
+                self.execute(f"UPDATE Periodista SET covid = FALSE WHERE DNIPeriodista = '{dni}'")
+            except Exception as e:
+                print("No se pudo notificar el estado covid del peridoista")
+                print(f"El error fue {e}")
+
+
+
     def mostrar_periodistas(self):
-        """Mostramos los periodistas almacenados en la base de datos"""
+        """Mostramos los usuarios tipo Periodistas almacenados en la base de datos"""
         print("Los periodistas de la base de datos son:")
         results = self.try_execute("SELECT * FROM Periodista")
         for result in results:
@@ -157,3 +182,13 @@ class DatabaseRepository:
             identificador = result[0]
             nombre = result[1]
             print(f"Rueda de prensa {nombre} con identificador {identificador}")
+
+    def mostrar_invitados(self):
+        """Mostramos los usuarios tipo Invitado de la base de datos"""
+        print("Los invitados de la base de datos son:")
+
+        results = self.try_execute("SELECT DNIInvitado, Nombre FROM Invitados;")
+        for result in results:
+            dni = result[0]
+            nombre = result[1]
+            print(f"Invitado {nombre} tiene DNI {dni}")

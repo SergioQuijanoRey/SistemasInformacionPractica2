@@ -1,5 +1,6 @@
 import DatabaseRepository
 import UI
+from utils import get_usr_data
 
 def comprar_entrada(db):
     #Tomamos los datos
@@ -27,7 +28,41 @@ def comprar_entrada(db):
     db.commit()
 
 def covid(db):
-    pass
+    """Se toman los datos para notificar el estado COVID, despues se llama al metodo de la base de datos"""
+
+    # Mostramos los tipos de usuario
+    print("Los tipos de persona que pueden notificar su estado son:")
+    print("0: Invitados")
+    print("1: Periodista")
+
+    # Tomamos el tipo de usurio
+    done = False
+    usr_type = None
+    while done == False:
+        usr_type = get_usr_data("Introduzca el tipo de usuario: ", int, "El tipo de dato no es un entero valido")
+
+        if usr_type != 0 and usr_type != 1:
+            print("Los unicos valores validos son 0 y 1, vuelve a intentarlo")
+            continue
+
+        done = True
+
+    # Mostramos los DNIS para que el usuario sepa cual seleccionar
+    if usr_type == 0:
+        db.mostrar_invitados()
+    else:
+        db.mostrar_periodistas()
+
+    # El usario introduce los datos
+    dni = get_usr_data("Introduzca el DNI deseado: ", str, "El tipo de dato no es correcto")
+
+    # Lanzamos la peticion a la base de datos
+    db.notificar_estado_covid(usr_type, dni)
+
+    input("Pulsa una tecla para CONTINUAR...")
+
+
+
 
 def devolver_entrada(db):
     pass
