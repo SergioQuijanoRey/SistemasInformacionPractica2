@@ -3,6 +3,7 @@ all:
 	@echo "	install: instala el software necesario para lanzar la aplicacion: docker + pipenv"
 	@echo "	run: ejecuta la aplicacion"
 	@echo "	perms: da permisos a la base de datos. Se tiene que esperar un poco despues de instalar para poder ejecutarse con exito"
+	@echo "	database: conecta con la base de datos corriendo en el contenedor"
 
 install:
 	@echo "Construyendo imagen de docker"
@@ -36,6 +37,9 @@ install:
 
 
 run:
+	@echo "Lanzando el contenedor, si no estaba ya lanzando"
+	docker start mariadb_practicas
+	@echo ""
 	@echo "Lanzando aplicacion de python"
 	pipenv run python3 ./src/python/main.py
 
@@ -46,3 +50,8 @@ perms:
 	docker exec mariadb_practicas mysql -u root "-psergio" -e "GRANT ALL PRIVILEGES ON *.* TO 'sergio'@localhost IDENTIFIED BY 'sergio';"
 	docker exec mariadb_practicas mysql -u root "-psergio" -e "FLUSH PRIVILEGES;"
 	docker exec mariadb_practicas mysql -u root "-psergio" -e "COMMIT;"
+
+database:
+	echo "Conectando con la base de datos"
+	@echo "================================================================================"
+	docker exec -it mariadb_practicas mysql -u sergio "-psergio"
