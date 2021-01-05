@@ -9,3 +9,4 @@
 * [x] Asignar rueda de prensa a pelicula: Jesus
 * [x] Asignar hora invitado para alfombra roja: Lucía
 * [ ] Dar permiso a periodista: Sergio
+* [ ] Quitar del makefile el "python_jesus"
