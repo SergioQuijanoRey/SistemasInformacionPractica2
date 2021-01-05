@@ -4,11 +4,17 @@
 
 # TODO
 
-* [x] Asignar rueda de prensa a pelicula: Jesus
-* [x] Asignar hora invitado para alfombra roja: Lucía
-* [x] Dar permiso a periodista: Sergio
 * [ ] Conseguir que funcione python: Jesus y Juanjo
-* [ ] Crear actividad: Juanjo
 * [ ] Quitar del makefile el "python_jesus"
 * [ ] Separar el CrearTablas.sql en creacion de tablas, triggers e insercion de datos
 * [ ] Trigger: Dar permiso periodista, si el periodista tiene covid, que no pueda acceder ??
+* [ ] Gestionar Asistentes
+    * [ ] Comprar entrada
+    * [ ] Notificar estado Covid: Sergio
+    * [ ] Devolver entrada
+    * [ ] Notificar asistencia actividad gratuita
+* [ ] Gestion de asistentes
+    * [x] Asignar hora invitado para alfombra roja: Lucía
+    * [x] Dar permiso a periodista: Sergio
+    * [x] Asignar rueda de prensa a pelicula: Jesus
+    * [ ] Crear actividad: Juanjo
