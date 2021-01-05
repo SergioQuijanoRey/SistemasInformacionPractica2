@@ -140,8 +140,11 @@ class DatabaseRepository:
             print("Vuelvelo a intentar desde el menu principal")
 
     def notificar_estado_covid(self, usr_type: int, dni: str):
+        """Notificamos el estado de COVID de un tipo de usuario """
+        # TODO -- hacer como un trigger de Mariadb
+
         # Condicion de seguridad
-        if usr_type != 0 and usr_type != 1:
+        if usr_type != 0 and usr_type != 1 and usr_type != 2:
             print("ERROR en DatabaseRepository.notificar_estado_covid()")
             print("El usr_type no tiene un valor valido")
             return
@@ -149,17 +152,28 @@ class DatabaseRepository:
         # Usuario Invitado
         if usr_type == 0:
             try:
-                self.execute(f"UPDATE Invitados SET covid = FALSE WHERE DNIInvitado = '{dni}'")
+                self.execute(f"UPDATE Invitados SET covid = TRUE WHERE DNIInvitado = '{dni}'")
+                self.commit()
             except Exception as e:
-                print("No se pudo notificar el estado covid del peridoista")
+                print("No se pudo notificar el estado covid del invitado")
                 print(f"El error fue {e}")
 
         # Usuario Periodista
+        elif usr_type == 1:
+            try:
+                self.execute(f"UPDATE Periodista SET covid = TRUE WHERE DNIPeriodista = '{dni}'")
+                self.commit()
+            except Exception as e:
+                print("No se pudo notificar el estado covid del periodista")
+                print(f"El error fue {e}")
+
+        # Usuario Asistente
         else:
             try:
-                self.execute(f"UPDATE Periodista SET covid = FALSE WHERE DNIPeriodista = '{dni}'")
+                self.execute(f"UPDATE Asistentes SET Covid = TRUE WHERE DNIAsistente = '{dni}'")
+                self.commit()
             except Exception as e:
-                print("No se pudo notificar el estado covid del peridoista")
+                print("No se pudo notificar el estado covid del asistente")
                 print(f"El error fue {e}")
 
 
@@ -192,3 +206,13 @@ class DatabaseRepository:
             dni = result[0]
             nombre = result[1]
             print(f"Invitado {nombre} tiene DNI {dni}")
+
+    def mostrar_asistentes(self):
+        """Mostramos los usuarios tipo Asistente de la base de datos"""
+        print("Los asistentes de la base de datos son:")
+
+        results = self.try_execute("SELECT DNIAsistente, Nombre FROM Asistentes;")
+        for result in results:
+            dni = result[0]
+            nombre = result[1]
+            print(f"Asistente {nombre} tiene DNI {dni}")

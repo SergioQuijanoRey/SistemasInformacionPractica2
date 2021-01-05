@@ -10,7 +10,8 @@
 * [ ] Trigger: Dar permiso periodista, si el periodista tiene covid, que no pueda acceder ??
 * [ ] Gestionar Asistentes
     * [ ] Comprar entrada
-    * [ ] Notificar estado Covid: Sergio
+    * [x] Notificar estado Covid: Sergio
+        * [ ] Escribirlo como un trigger en vez de con sentencias SQL normales
     * [ ] Devolver entrada
     * [ ] Notificar asistencia actividad gratuita
 * [ ] Gestion de asistentes
