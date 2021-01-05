@@ -1,9 +1,10 @@
 all:
 	@echo "Las funcionalidades de este makefile son:"
 	@echo "	install: instala el software necesario para lanzar la aplicacion: docker + pipenv"
-	@echo "	run: ejecuta la aplicacion"
+	@echo "	database_run: ejecuta la base de datos"
+	@echo "	database_connect: conecta con la base de datos corriendo en el contenedor"
+	@echo "	python_run: lanza la aplicacion corriendo otro contenedor"
 	@echo "	perms: da permisos a la base de datos. Se tiene que esperar un poco despues de instalar para poder ejecutarse con exito"
-	@echo "	database: conecta con la base de datos corriendo en el contenedor"
 
 install:
 	@echo "Construyendo imagen de docker"
@@ -35,8 +36,7 @@ install:
 	@echo "================================================================================"
 	pipenv install
 
-
-run:
+database_run:
 	@echo "Lanzando el contenedor, si no estaba ya lanzando"
 	@echo "================================================================================"
 	docker start mariadb_practicas
@@ -45,21 +45,12 @@ run:
 	@echo "Lanzando aplicacion de python"
 	pipenv run python3 ./src/python/main.py
 
-perms:
-	@echo ""
-	@echo "Dando permisos a la base de datos"
-	@echo "================================================================================"
-	docker exec mariadb_practicas mysql -u root "-psergio" -e "GRANT ALL PRIVILEGES ON *.* TO 'sergio'@localhost IDENTIFIED BY 'sergio';"
-	docker exec mariadb_practicas mysql -u root "-psergio" -e "GRANT ALL PRIVILEGES ON *.* TO 'sergio'@172.20.0.3 IDENTIFIED BY 'sergio';"
-	docker exec mariadb_practicas mysql -u root "-psergio" -e "FLUSH PRIVILEGES;"
-	docker exec mariadb_practicas mysql -u root "-psergio" -e "COMMIT;"
-
-database:
+database_connect:
 	@echo "Conectando con la base de datos"
 	@echo "================================================================================"
 	docker exec -it mariadb_practicas mysql -u sergio "-psergio"
 
-jesus_run:
+python_run:
 	@echo "Creando contenedor con el codigo actualizado"
 	@echo "================================================================================"
 	docker build -t python_jesus:latest -f ./Jesus/Dockerfile .
@@ -74,3 +65,13 @@ jesus_run:
 	@echo "Lanzamos el contenedor"
 	@echo "================================================================================"
 	docker run --name python_jesus --net=own_network --ip 172.20.0.3 -it python_jesus
+
+perms:
+	@echo ""
+	@echo "Dando permisos a la base de datos"
+	@echo "================================================================================"
+	docker exec mariadb_practicas mysql -u root "-psergio" -e "GRANT ALL PRIVILEGES ON *.* TO 'sergio'@localhost IDENTIFIED BY 'sergio';"
+	docker exec mariadb_practicas mysql -u root "-psergio" -e "GRANT ALL PRIVILEGES ON *.* TO 'sergio'@172.20.0.3 IDENTIFIED BY 'sergio';"
+	docker exec mariadb_practicas mysql -u root "-psergio" -e "FLUSH PRIVILEGES;"
+	docker exec mariadb_practicas mysql -u root "-psergio" -e "COMMIT;"
+
