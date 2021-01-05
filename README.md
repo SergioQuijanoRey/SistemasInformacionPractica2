@@ -4,9 +4,11 @@
 
 # TODO
 
-* [ ] Conseguir que funcione python: Jesus y Juanjo
-* [ ] Crear actividad: Juanjo
 * [x] Asignar rueda de prensa a pelicula: Jesus
 * [x] Asignar hora invitado para alfombra roja: Lucía
-* [ ] Dar permiso a periodista: Sergio
+* [x] Dar permiso a periodista: Sergio
+* [ ] Conseguir que funcione python: Jesus y Juanjo
+* [ ] Crear actividad: Juanjo
 * [ ] Quitar del makefile el "python_jesus"
+* [ ] Separar el CrearTablas.sql en creacion de tablas, triggers e insercion de datos
+* [ ] Trigger: Dar permiso periodista, si el periodista tiene covid, que no pueda acceder ??
