@@ -4,6 +4,7 @@ all:
 	@echo "	database_run: ejecuta la base de datos"
 	@echo "	database_connect: conecta con la base de datos corriendo en el contenedor"
 	@echo "	python_run: lanza la aplicacion corriendo otro contenedor"
+	@echo "	plain_run: lanza la aplicacion corriendo directamente desde el host"
 	@echo "	perms: da permisos a la base de datos. Se tiene que esperar un poco despues de instalar para poder ejecutarse con exito"
 
 install:
@@ -11,6 +12,7 @@ install:
 	@echo "================================================================================"
 	docker build -t mariadb_practicas:latest .
 
+	@echo ""
 	@echo "Asignando red de docker"
 	@echo "================================================================================"
 	docker network create --subnet=172.20.0.0/16 own_network 2> /dev/null || echo "La red ya existe"
@@ -37,12 +39,14 @@ install:
 	pipenv install
 
 database_run:
-	@echo "Lanzando el contenedor, si no estaba ya lanzando"
+	@echo "Lanzando el contenedor de bases de datos, si no estaba ya lanzando"
 	@echo "================================================================================"
 	docker start mariadb_practicas
+
+plain_run:
 	@echo ""
+	@echo "Lanzando aplicacion de python desde el host"
 	@echo "================================================================================"
-	@echo "Lanzando aplicacion de python"
 	pipenv run python3 ./src/python/main.py
 
 database_connect:
@@ -51,18 +55,18 @@ database_connect:
 	docker exec -it mariadb_practicas mysql -u sergio "-psergio"
 
 python_run:
-	@echo "Creando contenedor con el codigo actualizado"
+	@echo "Creando contenedor de python con el codigo actualizado"
 	@echo "================================================================================"
 	docker build -t python_jesus:latest -f ./Jesus/Dockerfile .
 
 	@echo ""
-	@echo "Borrando los contenedores corriendo anteriores"
+	@echo "Borrando los contenedores de python corriendo anteriores"
 	@echo "================================================================================"
 	docker stop python_jesus 2> /dev/null || echo "No habia contenedor que parar"
 	docker rm -f python_jesus 2> /dev/null || echo "No habia contenedor que borrar"
 
 	@echo ""
-	@echo "Lanzamos el contenedor"
+	@echo "Lanzamos el contenedor de python"
 	@echo "================================================================================"
 	docker run --name python_jesus --net=own_network --ip 172.20.0.3 -it python_jesus
 
