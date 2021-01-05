@@ -127,43 +127,33 @@ class DatabaseRepository:
         raise Exception(
             "DatabaseRepository es una interfaz que no puede ser instanciada")
 
-
-class MariaDatabase(DatabaseRepository):
-
-    def connect(self):
+    def dar_permiso_periodista(self, dni_periodista: str, id_rueda_prensa: int):
+        """Da permiso de acceso a un periodista a una rueda de prensa"""
         try:
-            # Datos de la base de datos
-            server = secrets.docker_ip
-            database = 'sergio'
-            username = 'sergio'
-            password = 'sergio'
-            port = 3306
+            self.execute(f"INSERT INTO Acceder(DNIPeriodista, IdRuedaPrensa) VALUES ('{dni_periodista}', {id_rueda_prensa});")
+            self.commit()
+            print("Permisos asignados con exito")
 
-            conn = mariadb.connect(
-                user=username,
-                password=password,
-                host=server,
-                port=port,
-                database=database
-            )
+        except Exception as e:
+            print("No ha sido posible dar permisos al periodista")
+            print(f"El codigo de error fue {e}")
+            print("Vuelvelo a intentar desde el menu principal")
 
-        except Exception as err:
-            print("ERROR conectando con la base de datos de MariaDB")
-            print(f"El error fue {err}")
-            exit(-1)
+    def mostrar_periodistas(self):
+        """Mostramos los periodistas almacenados en la base de datos"""
+        print("Los periodistas de la base de datos son:")
+        results = self.try_execute("SELECT * FROM Periodista")
+        for result in results:
+            dni = result[0]
+            name = result[1]
+            print(f"{name} con DNI {dni}")
 
-        self.conn = conn
-        self.cursor = self.conn.cursor()
+    def mostrar_ruedas_prensa(self):
+        """Mostramos las ruedas de prensa almacenadas en la base de datos"""
+        print("Las ruedas de prensa de la base de datos son: ")
+        results = self.try_execute("SELECT IdRuedaPrensa, nombre FROM RuedaDePrensaAsigna")
 
-    def initialize_data(self):
-        self.try_execute_sql_file(
-            "./src/sql/CreacionTablas.sql", ignore_error=True)
-
-    def load_triggers(self):
-        triggers = [
-            "./src/sql/Triggers.sql"
-        ]
-
-        for trigger in triggers:
-            self.try_execute_sql_file(trigger)
-
+        for result in results:
+            identificador = result[0]
+            nombre = result[1]
+            print(f"Rueda de prensa {nombre} con identificador {identificador}")

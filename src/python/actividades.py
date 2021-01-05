@@ -38,36 +38,21 @@ def hora_invitado(db):
 
 
 def permiso_periodista(db):
-    # Mostramos los periodistas
-    print("Los periodistas de la base de datos son:")
-    results = db.try_execute("SELECT * FROM Periodista")
-    for result in results:
-        dni = result[0]
-        name = result[1]
-        print(f"{name} con DNI {dni}")
+    """Tomamos los datos necesarios para dar permiso a un periodista"""
+
+    # Mostramos los periodistas para que el usuario sepa cual elegir
+    db.mostrar_periodistas()
 
     # Tomamos el dni del periodista
     dni_periodista = get_usr_data("Inserte el dni del periodista: ", str, "Los datos introducidos no son validos")
 
-    # Mostramos las actividades
-    print("Las ruedas de prensa de la base de datos son: ")
-    results = db.try_execute("SELECT IdRuedaPrensa, nombre FROM RuedaDePrensaAsigna")
-
-    for result in results:
-        identificador = results[0]
-        nombre = results[1]
-        print(f"Rueda de prensa {nombre} con identificador {identificador}")
+    # Mostramos las actividades para que el usuario sepa cual elegir
+    db.mostrar_ruedas_prensa()
 
     # Seleccionamos la actividad
     id_actividad = get_usr_data("Inserte el identificador de la actividad: ", int, "El identificador introducido no es valido")
 
-    try:
-        db.execute(f"INSERT INTO Acceder(DNIPeriodista, IdRuedaPrensa) VALUES ('{dni_periodista}', {id_actividad});")
-        db.commit()
-    except Exception as e:
-        print("No ha sido posible dar permisos al periodista")
-        print(f"El codigo de error fue {e}")
-        print("Vuelvelo a intentar desde el menu principal")
+    # Lanzamos la peticion a la bse de datos
+    db.dar_permiso_periodista(dni_periodista, id_actividad)
 
-    print("Hecho")
     input("Pulsa una tecla para CONTINUAR...")
