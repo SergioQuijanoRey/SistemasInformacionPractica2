@@ -25,6 +25,9 @@ class DatabaseRepository:
         # Cargamos los triggers
         self.load_triggers()
 
+        # Cargamos los procedimientos
+        self.load_procedures()
+
     def connect(self):
         """Codigo que conecta con la base de datos"""
         raise Exception(
@@ -99,6 +102,7 @@ class DatabaseRepository:
 
         # Obtengo las sentencias del fichero
         sqlSentences = sqlContent.split(";")
+        sqlSentences = [sentence for sentence in sqlSentences if sentence != "\n"]
         sqlSentences = [sentence + ";" for sentence in sqlSentences]
 
         for sentence in sqlSentences:
@@ -126,6 +130,12 @@ class DatabaseRepository:
         """Carga los triggers de la base de datos, a partir de una serie de ficheros"""
         raise Exception(
             "DatabaseRepository es una interfaz que no puede ser instanciada")
+
+    def load_procedures(self):
+        """Cargan los procedimientos a la base de datos"""
+        raise Exception(
+            "DatabaseRepository es una interfaz que no puede ser instanciada")
+
 
     def dar_permiso_periodista(self, dni_periodista: str, id_rueda_prensa: int):
         """Da permiso de acceso a un periodista a una rueda de prensa"""
@@ -237,4 +247,3 @@ class DatabaseRepository:
         except Exception as e:
             print("No se pudo asignar la hora al invitado")
             print(f"El error fue {e}")
-            
