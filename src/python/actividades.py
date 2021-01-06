@@ -1,8 +1,8 @@
 import DatabaseRepository
 import UI
 from utils import get_usr_data
-def crear_actividad(db):
 
+def crear_actividad(db):
     descripcion, fecha = UI.input_actividad()
     db.try_execute(
         f"INSERT INTO Actividad (Descripcion, Fecha) VALUES (\"{descripcion}\", \"{fecha}\")"
