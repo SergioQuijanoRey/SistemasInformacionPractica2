@@ -216,3 +216,25 @@ class DatabaseRepository:
             dni = result[0]
             nombre = result[1]
             print(f"Asistente {nombre} tiene DNI {dni}")
+
+    def mostrar_alfombras(self):
+        """Mostramos las alfombras rojas almacenadas en la base de datos"""
+        print("Las ruedas de prensa de la base de datos son: ")
+        results = self.try_execute("SELECT idAlfombraRoja, horaInicio, horaFin  FROM AlfombraRoja")
+
+        for result in results:
+            identificador = result[0]
+            inicio = result[1]
+            fin = result[2]
+            print(f"Alfombra roja con identificador {identificador}, hora de inicio: {inicio} y hora de fin: {fin}")
+
+    def asignar_hora_invitado(self, dni: str, idAlfombra: int, hora: str):
+        """Asignamos una hora para un invitado en la alfombra roja"""
+        try:
+            self.try_execute(f"INSERT INTO Acudir(DNIInvitado, idAlfombraRoja, hora) VALUES (\"{dni}\", {idAlfombra}, \"{hora}\")")
+            self.commit()
+
+        except Exception as e:
+            print("No se pudo asignar la hora al invitado")
+            print(f"El error fue {e}")
+            
