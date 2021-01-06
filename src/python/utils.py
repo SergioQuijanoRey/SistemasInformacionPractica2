@@ -16,3 +16,10 @@ def get_usr_data(input_msg: str, datatype_converter, err_msg: str = "El tipo de 
         correcto = True
 
     return value
+
+def validate_date(string_date: str):
+    try:
+        # MariaDB uses this format by default
+        datetime.datetime.strptime(string_date, '%Y-%m-%d')
+    except:
+        raise ValueError("INCORRECT DATE TIME")
