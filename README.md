@@ -13,7 +13,7 @@
     * [x] Notificar estado Covid: Sergio
         * [ ] Escribirlo como un trigger en vez de con sentencias SQL normales
     * [ ] Devolver entrada
-    * [ ] Notificar asistencia actividad gratuita: Lucía
+    * [x] Notificar asistencia actividad gratuita: Lucía
 * [ ] Gestion de asistentes
     * [x] Asignar hora invitado para alfombra roja: Lucía
     * [x] Dar permiso a periodista: Sergio
