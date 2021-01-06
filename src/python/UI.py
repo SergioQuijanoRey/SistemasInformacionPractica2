@@ -375,7 +375,7 @@ def input__patrocinador():
     
     return nombre, prevision 
 
-def input_candidato()
+def input_candidato():
 
     dni = input("Introduzca el dni del candidato: ")
     while len(dni) < 0 or len(dni)>9:
