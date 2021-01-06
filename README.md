@@ -23,10 +23,10 @@
 * [ ] Gestion de premios
 	* [ ] Votar
 	* [ ] Planificar premio
-	* [ ] Asignar nominado a premio
+	* [ ] Asignar nominado a premio : Juanjo
 	* [ ] Fallar premio
 * [ ] Gestión de patrocinadores
-	* [ ] Dar de alta a patrocinador : Juanjo
+	* [x] Dar de alta a patrocinador : Juanjo
 	* [ ] Patrocinar actividad no económica
 	* [ ] Subasta de patrocinio económico
 	* [ ] Fijar patrocinador
