@@ -260,6 +260,15 @@ class DatabaseRepository:
             fecha = result[2]
             print(f"idActividad: {identificador}, Descripcion: {descrp}, Fecha: {fecha}")
 
+    def mostrar_nominados(self):
+        """Mostramos los Nominados almacenados en la base de datos"""
+        print("Los Nominados de la Base de Datos son: ")
+        results = self.try_execute("SELECT * FROM Nominados;")
+
+        for result in results:
+            dni = result[0]
+            nombre = result[1]
+            print(f"DNI: {dni}, Nombre: {nombre} ")
 
     def actividad_mayor(self):
         result = self.try_execute("SELECT MAX(idActividad) FROM Actividad;")
