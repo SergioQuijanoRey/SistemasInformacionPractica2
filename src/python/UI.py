@@ -300,16 +300,21 @@ def process_patrocinadores(option,db):
 # JUANJO
 
 def input_actividad():
-
-    idActividad = int(input('Inserte el identificador de Actividad:'))
-
+    #Por el auto_increment, no metemos el identificador
     descripcion = input("Inserte la descripcion de la actividad: ")
-    while len(descripcion)<= 0 or len(descripcion) >300:
+    while len(descripcion)<= 0 or len(descripcion) >3000:
         descripcion = input("Descripcion no valida, inserte otra:")
 
     fecha = input('Inserte un fecha')
-    #Como gestiono la correcta introducción de una fecha?
-    return idActividad, descripcion, fecha
+    #condicion = False
+    #while condicion != True:
+    #    try:
+    #        utils.validate_date(fecha)
+    #        condicion = True 
+    #    except:
+    #        print("Error, la fecha introducida no es correcta")
+    #        fecha=input("inserte de nuevo la fecha")
+    return descripcion, fecha
 
 def input_asistente():
     nombre = input("Introduce el nombre del asistente")
