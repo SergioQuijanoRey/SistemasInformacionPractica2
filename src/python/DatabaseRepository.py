@@ -239,6 +239,18 @@ class DatabaseRepository:
             nombre = result[1]
             print(f"Pelicula \"{nombre}\" con identificador {identificador}")
 
+    def mostrar_actividades(self):
+        """Mostramos las actividades almacenadas en la base de datos"""
+        print("Las actividades de la base de datos son: ")
+        results = self.try_execute("SELECT idActividad, Descripcion, fecha FROM Actividad;")
+
+        for result in results:
+            identificador = result[0]
+            descrp = result[1]
+            fecha = result[2]
+            print(f"idActividad: {identificador}, Descripcion: {descrp}, Fecha: {fecha}")
+
+
     def actividad_mayor(self):
         result = self.try_execute("SELECT MAX(idActividad) FROM Actividad;")
         try:
@@ -266,4 +278,13 @@ class DatabaseRepository:
 
         except Exception as e:
             print("No se pudo asignar la hora al invitado")
+            print(f"El error fue {e}")
+
+    def usar_entrada(self, idActividad, dni, entrada):
+        try:
+            self.execute(f"INSERT INTO UsarEntradas(IdEntrada, IdActividad, DNIAsistentes) VALUES ({entrada}, {idActividad}, \"{dni}\");")
+            self.commit()
+
+        except Exception as e:
+            print("No se pudo asignar la entrada al asistente")
             print(f"El error fue {e}")
