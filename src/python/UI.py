@@ -355,5 +355,16 @@ def input_AbonaPagos():
     
     return cantidad
 
+def input__patrocinador():
 
+    nombre = input("Inserte el nombre del patrocinador: ")
+
+    while len(nombre) < 0 or len(nombre) > 200:
+        nombre = input("Nombre no correcto, prueba otra vez: ")
+
+    prevision = utils.get_int("Inserte la prevision: ")
+    while prevision < 0:
+        prevision=utils.get_int("No puede haber una prevision negativa, inserte otra: ")
+    
+    return nombre, prevision 
 
