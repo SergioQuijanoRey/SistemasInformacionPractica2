@@ -18,14 +18,15 @@
     * [x] Asignar hora invitado para alfombra roja: Lucía
     * [x] Dar permiso a periodista: Sergio
     * [x] Asignar rueda de prensa a pelicula: Jesus
-    * [ ] Crear actividad: Juanjo
+    * [x] Crear actividad: Juanjo
+      * [ ] Poder particularizar la actividad Creada
 * [ ] Gestion de premios
 	* [ ] Votar
 	* [ ] Planificar premio
 	* [ ] Asignar nominado a premio
 	* [ ] Fallar premio
 * [ ] Gestión de patrocinadores
-	* [ ] Dar de alta a patrocinador
+	* [ ] Dar de alta a patrocinador : Juanjo
 	* [ ] Patrocinar actividad no económica
 	* [ ] Subasta de patrocinio económico
 	* [ ] Fijar patrocinador
