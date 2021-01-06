@@ -303,9 +303,9 @@ def input_actividad():
     #Por el auto_increment, no metemos el identificador
     descripcion = input("Inserte la descripcion de la actividad: ")
     while len(descripcion)<= 0 or len(descripcion) >3000:
-        descripcion = input("Descripcion no valida, inserte otra:")
+        descripcion = input("Descripcion no valida, inserte otra: ")
 
-    fecha = input('Inserte un fecha')
+    fecha = input('Inserte un fecha: ')
     #condicion = False
     #while condicion != True:
     #    try:
