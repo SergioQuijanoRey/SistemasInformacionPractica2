@@ -270,6 +270,16 @@ class DatabaseRepository:
             nombre = result[1]
             print(f"DNI: {dni}, Nombre: {nombre} ")
 
+    def mostrar_jueces(self):
+        """Mostramos los Jueces almacenados en la base de datos"""
+        print("Los Jueces de la Base de Datos son: ")
+        results = self.try_execute("SELECT * FROM Jueces;")
+
+        for result in results:
+            dni = result[0]
+            nombre = result[1]
+            print(f"DNI: {dni}, Nombre: {nombre} ")        
+
     def actividad_mayor(self):
         result = self.try_execute("SELECT MAX(idActividad) FROM Actividad;")
         try:
