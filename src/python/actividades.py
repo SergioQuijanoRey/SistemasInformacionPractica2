@@ -11,19 +11,18 @@ def crear_actividad(db):
 
 
 def rueda_pelicula(db):
-    ruedaPrensa = get_usr_data(
-        "Inserte el identificador de la rueda de prensa: ", int, "El dato introducido no es un entero")
-    pelicula = get_usr_data("Inserte el identificador de la película: ",
-                            int, "El dato introducido no es un entero")
-    nombre = input("Inserta el nombre de la Rueda de Prensa: ")
-    plazas = get_usr_data("Inserte el numero de plazas: ",
-                          int, "El dato introducido no es un entero")
+    crear_actividad(db)
+    ruedaPrensa = db.actividad_mayor()
+    
+    db.mostrar_peliculas()
+    pelicula = get_usr_data("Inserte el identificador de la película: ",int, "El dato introducido no es un entero")
+    
+    nombre = get_usr_data("Inserta el nombre de la Rueda de Prensa: ", str)
+    plazas = get_usr_data("Inserte el numero de plazas: ",int, "El dato introducido no es un entero")
     lugar = input("Inserte el lugar: ")
 
-    db.try_execute(
-        f"INSERT INTO RuedaDePrensaAsigna(IdRuedaPrensa, idPelicula, nombre, plazas, lugar) VALUES ({ruedaPrensa}, {pelicula}, \"{nombre}\", {plazas}, \"{lugar}\")"
-    )
-    db.commit()
+    db.asignar_rueda_pelicula(ruedaPrensa,  pelicula, nombre, plazas, lugar)
+    
 
 
 def hora_invitado(db):

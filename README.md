@@ -9,13 +9,23 @@
 * [ ] Separar el CrearTablas.sql en creacion de tablas, triggers e insercion de datos
 * [ ] Trigger: Dar permiso periodista, si el periodista tiene covid, que no pueda acceder ??
 * [ ] Gestionar Asistentes
-    * [ ] Comprar entrada
+    * [ ] Comprar entrada : Juanjo
     * [x] Notificar estado Covid: Sergio
         * [ ] Escribirlo como un trigger en vez de con sentencias SQL normales
     * [ ] Devolver entrada
-    * [ ] Notificar asistencia actividad gratuita
+    * [x] Notificar asistencia actividad gratuita: Lucía
 * [ ] Gestion de asistentes
     * [x] Asignar hora invitado para alfombra roja: Lucía
     * [x] Dar permiso a periodista: Sergio
     * [x] Asignar rueda de prensa a pelicula: Jesus
     * [ ] Crear actividad: Juanjo
+* [ ] Gestion de premios
+	* [ ] Votar
+	* [ ] Planificar premio
+	* [ ] Asignar nominado a premio
+	* [ ] Fallar premio
+* [ ] Gestión de patrocinadores
+	* [ ] Dar de alta a patrocinador
+	* [ ] Patrocinar actividad no económica
+	* [ ] Subasta de patrocinio económico
+	* [ ] Fijar patrocinador

@@ -66,4 +66,14 @@ def devolver_entrada(db):
     pass
 
 def actividad_gratuita(db):
-    pass
+    db.mostrar_actividades()
+
+    id_actividad = get_usr_data("Inserte el identificador de la actividad: ", int, "El identificador introducido no es valido")
+
+    db.mostrar_asistentes()
+
+    dni = get_usr_data("Inserte el dni del Asistente: ", str, "Los datos introducidos no son validos" )
+
+    entrada = get_usr_data("Inserte el numero de entrada: ", int, "El identificador introducido no es valido")
+
+    db.usar_entrada(id_actividad, dni, entrada)
