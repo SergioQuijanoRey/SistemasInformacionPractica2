@@ -21,7 +21,7 @@
     * [x] Crear actividad: Juanjo
       * [ ] Poder particularizar la actividad Creada
 * [ ] Gestion de premios
-	* [ ] Votar : Juanjo
+	* [x] Votar : Juanjo
 	* [ ] Planificar premio
 	* [x] Asignar nominado a premio : Juanjo
 	* [ ] Fallar premio
