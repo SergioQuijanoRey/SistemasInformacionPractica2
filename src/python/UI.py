@@ -4,7 +4,7 @@ import asistentes
 import premios
 import patrocinadores
 import actividades
-from utils import get_int
+import utils
 
 # MENU PRINCIPAL
 
@@ -317,46 +317,43 @@ def input_actividad():
     return descripcion, fecha
 
 def input_asistente():
-    nombre = input("Introduce el nombre del asistente")
+    nombre = input("Introduce el nombre del asistente:  ")
     while len(nombre)<= 0 or len(nombre) >300:
-        nombre = input("Nombre no valido, insertelo de nuevo:")
+        nombre = input("Nombre no valido, insertelo de nuevo:  ")
 
-    dni = input("Introduce el dni del asistente")
+    dni = input("Introduce el dni del asistente:   ")
     while len(dni)<=0 or len(dni)>9:
-        dni = input("Dni incorrecto, insertelo de nuevo:")
+        dni = input("Dni incorrecto, insertelo de nuevo:   ")
 
-    cuentaBancaria = input("introduce el numero de cuenta bancaria")
+    cuentaBancaria = input("introduce el numero de cuenta bancaria:   ")
     while len(cuentaBancaria)>400 or len(cuentaBancaria)<= 0:
-        cuentaBancaria = input("Cuenta Bancaria no valida, inserte otra")
+        cuentaBancaria = input("Cuenta Bancaria no valida, inserte otra:   ")
 
     return nombre, dni, cuentaBancaria
 
 def input_UsarEntrada():
 
-    idEntrada = int(input("Inserte el identificador de la entrada: "))
+    idEntrada = utils.get_int("Inserte el identificador de la entrada: ")
     while idEntrada < 0 :
-        idEntrada = int(input("Identificador no valido, insertelo de nuevo: "))
+        idEntrada = utils.get_int("Identificador no valido, insertelo de nuevo: ")
 
-    idActividad = int(input("Inserte el identificador de la actividad: "))
+    idActividad = utils.get_int("Inserte el identificador de la actividad: ")
     while idActividad < 0:
-        idActividad = int(input("Identificador no valido, insertelo de nuevo: "))
+        idActividad = utils.get_int("Identificador no valido, insertelo de nuevo: ")
 
-    opcion = input("Desea Introducir DNI del Asistente: y/n? ")
-    dniAsistente = NULL
-    if opcion == 'y':
-        dniAsistente = input ("Introduzca el DNI del Asistente: ")
-        while len(dniAsistente) < 0 or len(dniAsistente) > 9:
-            dniAsistente = input ("DNI erroneo. Introduzca el DNI del Asistente: ")
-
-    cantidad = int(input("Introduzca la cantidad, por defecto es 1: "))
+    cantidad = utils.get_int("Introduzca la cantidad, por defecto es 1: ")
     while cantidad < 1:
-        cantidad = int (input("Cantidad no valida, introduzcala de nuevo: "))
+        cantidad = utils.get_int("Cantidad no valida, introduzcala de nuevo: ")
 
-    return idEntrada, idActividad, dniAsistente, cantidad
+    return idEntrada, idActividad, cantidad
 
 
 def input_AbonaPagos():
-    pass
+    cantidad = utils.get_int("Introduzca el precio de la actividad:  ")
+    while cantidad < 0:
+        cantidad = utils.get_int("Meta el precio correctamente: ")
+    
+    return cantidad
 
 
 
