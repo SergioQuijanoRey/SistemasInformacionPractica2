@@ -22,11 +22,11 @@
       * [ ] Poder particularizar la actividad Creada
 * [ ] Gestion de premios
 	* [x] Votar : Juanjo
-	* [ ] Planificar premio : Lucia
+	* [x] Planificar premio : Lucia
 	* [x] Asignar nominado a premio : Juanjo
 	* [ ] Fallar premio
 * [ ] Gestión de patrocinadores
 	* [x] Dar de alta a patrocinador : Juanjo
-	* [ ] Patrocinar actividad no económica
+	* [ ] Patrocinar actividad no económica : Lucía
 	* [ ] Subasta de patrocinio económico
 	* [ ] Fijar patrocinador
