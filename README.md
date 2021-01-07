@@ -31,4 +31,4 @@
 	* [x] Dar de alta a patrocinador : Juanjo
 	* [ ] Patrocinar actividad no económica : Lucía
 	* [ ] Subasta de patrocinio económico
-	* [ ] Fijar patrocinador: Sergio
+	* [x] Fijar patrocinador: Sergio
