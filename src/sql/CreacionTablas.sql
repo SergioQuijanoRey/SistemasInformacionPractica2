@@ -249,9 +249,6 @@ INSERT INTO ActividadAsignada(idActividadAsignada) VALUES
     (13),
     (14),
     (15),
-    (16),
-    (17),
-    (18),
     (19);
 
 CREATE TABLE IF NOT EXISTS UsarEntradas(
