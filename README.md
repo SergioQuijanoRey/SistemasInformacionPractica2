@@ -22,7 +22,7 @@
       * [ ] Poder particularizar la actividad Creada
 * [ ] Gestion de premios
 	* [x] Votar : Juanjo
-	* [ ] Planificar premio
+	* [ ] Planificar premio : Lucia
 	* [x] Asignar nominado a premio : Juanjo
 	* [ ] Fallar premio
 * [ ] Gestión de patrocinadores
