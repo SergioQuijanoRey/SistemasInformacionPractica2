@@ -4,7 +4,7 @@
 
 # TODO
 
-* [ ] Conseguir que funcione python: Jesus y Juanjo
+* [x] Conseguir que funcione python: Jesus y Juanjo
 * [ ] Quitar del makefile el "python_jesus"
 * [ ] Separar el CrearTablas.sql en creacion de tablas, triggers e insercion de datos
 * [ ] Trigger: Dar permiso periodista, si el periodista tiene covid, que no pueda acceder ??
@@ -12,7 +12,9 @@
     * [ ] Comprar entrada : Juanjo
     * [x] Notificar estado Covid: Sergio
         * [ ] Escribirlo como un trigger en vez de con sentencias SQL normales
-    * [ ] Devolver entrada
+    * [x] Devolver entrada: Sergio
+        * [ ] El update no falla aunque el usuario pase mal los parametros
+        * [ ] Trigger para saber si la entrada se puede devolver o no
     * [x] Notificar asistencia actividad gratuita: Lucía
 * [ ] Gestion de asistentes
     * [x] Asignar hora invitado para alfombra roja: Lucía
@@ -24,9 +26,9 @@
 	* [x] Votar : Juanjo
 	* [x] Planificar premio : Lucia
 	* [x] Asignar nominado a premio : Juanjo
-	* [ ] Fallar premio
+	* [ ] Fallar premio : Jesus
 * [ ] Gestión de patrocinadores
 	* [x] Dar de alta a patrocinador : Juanjo
 	* [ ] Patrocinar actividad no económica : Lucía
 	* [ ] Subasta de patrocinio económico
-	* [ ] Fijar patrocinador
+	* [ ] Fijar patrocinador: Sergio

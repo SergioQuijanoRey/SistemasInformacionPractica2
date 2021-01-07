@@ -278,7 +278,7 @@ class DatabaseRepository:
         for result in results:
             dni = result[0]
             nombre = result[1]
-            print(f"DNI: {dni}, Nombre: {nombre} ")   
+            print(f"DNI: {dni}, Nombre: {nombre} ")
 
     def mostrar_galas(self):
         """Mostramos las galas almacenadas en la base de datos"""
@@ -289,6 +289,29 @@ class DatabaseRepository:
             idgala = result[0]
             print(f"Gala con identificador: {idgala}")
 
+    def mostrar_entradas_usuario_no_devueltas(self, usr: str):
+        """
+        Muestra las entradas de un usuario, que no hayan sido ya devueltas
+        """
+
+        query = """
+            SELECT IdEntrada
+            FROM UsarEntradas
+            WHERE DNIAsistentes = '{usr}' AND Devolucion = FALSE;""".format(usr = usr)
+
+        results = None
+        try:
+            results = self.execute(query)
+        except Exception as e:
+            print("No se pudieron mostrar las entradas de este usuario")
+            print(f"El codigo de error fue {e}")
+            raise Exception("Usuario sin entradas")
+
+        # Mostramos las entradas
+        print(f"Las entradas que {usr} puede devolver son:")
+        for result in results:
+            id_entrada = result[0]
+            print(f"Entrada {id_entrada}")
 
     def mostrar_patrocinadores(self):
         """Mostramos los patrocinadores almacenados en la base de datos"""
@@ -349,6 +372,7 @@ class DatabaseRepository:
             print("No se pudo planificar la categoria")
             print(f"El error fue {e}")
 
+<<<<<<< HEAD
     def oferta_no_economica(self, idactividad: int, idpatro: int, coste: float, descrip: str):
         try:
             self.execute(f"INSERT INTO OfertaActividadNoEconomica(IdActividadNoEconomica, IdPatrocinador, Coste, DescripcionRetribucion) VALUES ({idactividad}, {idpatro}, {coste}, \"{descrip}\");")
@@ -357,3 +381,20 @@ class DatabaseRepository:
         except Exception as e:
             print("No se pudo planificar la categoria")
             print(f"El error fue {e}")
+=======
+
+    def devolver_entrada(self, id_entrada: int):
+        """
+        Se devuelve una entrada
+        Para ello se marca como devuelta, para no perder datos de pagos
+        """
+
+        query = """
+            UPDATE UsarEntradas
+            SET Devolucion = TRUE
+            WHERE IdEntrada = '{id_entrada}'
+        """.format(id_entrada = id_entrada)
+
+        self.try_execute(query)
+
+>>>>>>> 9d33198d1f5c3937355b4d7d12bf1a2ba6815766
