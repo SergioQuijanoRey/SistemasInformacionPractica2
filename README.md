@@ -30,5 +30,5 @@
 * [ ] Gestión de patrocinadores
 	* [x] Dar de alta a patrocinador : Juanjo
 	* [ ] Patrocinar actividad no económica : Lucía
-	* [ ] Subasta de patrocinio económico
+	* [ ] Subasta de patrocinio económico: Sergio, pero si alguien me la quiere quitar ok porque yo ya tengo 4
 	* [x] Fijar patrocinador: Sergio
