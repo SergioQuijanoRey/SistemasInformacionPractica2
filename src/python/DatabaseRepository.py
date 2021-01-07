@@ -278,7 +278,17 @@ class DatabaseRepository:
         for result in results:
             dni = result[0]
             nombre = result[1]
-            print(f"DNI: {dni}, Nombre: {nombre} ")        
+            print(f"DNI: {dni}, Nombre: {nombre} ")   
+
+    def mostrar_galas(self):
+        """Mostramos las galas almacenadas en la base de datos"""
+        print("Las Galas de la Base de Datos son: ")
+        results = self.try_execute("SELECT idGala FROM Gala;")
+
+        for result in results:
+            idgala = result[0]
+            print(f"Gala con identificador: {idgala}")
+
 
     def actividad_mayor(self):
         result = self.try_execute("SELECT MAX(idActividad) FROM Actividad;")
@@ -306,7 +316,7 @@ class DatabaseRepository:
             self.commit()
 
         except Exception as e:
-            print("No se pudo asignar la hora al invitado")
+            print("No se pudo asignar la rueda de prensa a la pelicula")
             print(f"El error fue {e}")
 
     def usar_entrada(self, idActividad, dni, entrada):
@@ -316,4 +326,13 @@ class DatabaseRepository:
 
         except Exception as e:
             print("No se pudo asignar la entrada al asistente")
+            print(f"El error fue {e}")
+
+    def presentado_categoria(self, descrip: str, presen: str, idgala: int):
+        try:
+            self.execute(f"INSERT INTO PresentadoCategoria(Descripcion, Presentador, idGala) VALUES (\"{descrip}\", \"{presen}\", {idgala});")
+            self.commit()
+
+        except Exception as e:
+            print("No se pudo planificar la categoria")
             print(f"El error fue {e}")

@@ -1,5 +1,6 @@
 import DatabaseRepository
 import UI
+from utils import get_usr_data
 
 def votar(db):
     db.mostrar_nominados()
@@ -13,7 +14,15 @@ def votar(db):
     db.commit()
 
 def planificar_premio(db):
-    pass
+    descrip = get_usr_data("Inserte la descripcion del premio: ", str, "Los datos introducidos no son validos" )
+    presen = get_usr_data("Inserte el nombre de la persona que presenta el premio: ", str, "Los datos introducidos no son validos" )
+
+    db.mostrar_galas()
+    idgala = get_usr_data("Inserte el identificador de la gala donde sera presentado el premio: ",int, "El dato introducido no es un entero")
+
+    db.presentado_categoria(descrip, presen, idgala)
+
+
 
 def asignar_nominado(db):
 
