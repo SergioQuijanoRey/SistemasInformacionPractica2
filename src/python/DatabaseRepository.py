@@ -342,7 +342,7 @@ class DatabaseRepository:
         """Mostramos el mejor patrocinador para una actividad subastada"""
 
         query = """
-            SELECT IdPatrocinador
+            SELECT IdPatrocinador, Valor
             FROM Puja
             WHERE Valor IN (
                 SELECT MIN(Valor)
@@ -353,8 +353,8 @@ class DatabaseRepository:
 
         patrocinador_escogido = "Desconocido"
         patrocinador_escogido = self.try_execute(query, "No se pudo escoger al mejor patrocinador")
-        patrocinador_escogido = patrocinador_escogido[0][0]
-        print(f"El patrocinador escogido es: {patrocinador_escogido}")
+        valor_puja, patrocinador_escogido = patrocinador_escogido[0][1], patrocinador_escogido[0][0]
+        print(f"El patrocinador escogido es: {patrocinador_escogido} con un valor de {valor_puja}")
 
     def actividad_mayor(self):
         result = self.try_execute("SELECT MAX(idActividad) FROM Actividad;")
