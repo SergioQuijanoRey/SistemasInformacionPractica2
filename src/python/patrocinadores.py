@@ -1,6 +1,7 @@
 import DatabaseRepository
 import UI
 from utils import get_usr_data
+import actividades
 from utils import wait_for_user_input
 
 def alta_patrocinador(db):
@@ -11,7 +12,18 @@ def alta_patrocinador(db):
     db.commit()
 
 def no_economica(db):
-    pass
+    actividades.crear_actividad(db)
+    actividad = db.actividad_mayor()
+
+    db.mostrar_patrocinadores()
+    idpatro = get_usr_data("Inserte el identificador del patrocinador: ",int, "El dato introducido no es un entero")
+
+    coste = get_usr_data("Inserte el coste de la actividad: ",float, "El dato introducido no es valido")
+    descrip = get_usr_data("Inserte la descripcion de la retribucion: ", str, "Los datos introducidos no son validos" )
+
+    db.oferta_no_economica(actividad, idpatro, coste, descrip)
+
+
 
 def subasta(db):
     pass

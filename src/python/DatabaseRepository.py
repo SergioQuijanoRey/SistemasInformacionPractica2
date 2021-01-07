@@ -313,6 +313,17 @@ class DatabaseRepository:
             id_entrada = result[0]
             print(f"Entrada {id_entrada}")
 
+    def mostrar_patrocinadores(self):
+        """Mostramos los patrocinadores almacenados en la base de datos"""
+        print("Los Patrocinadores de la Base de Datos son: ")
+        results = self.try_execute("SELECT IdPatrocinador, Nombre FROM Patrocinador;")
+
+        for result in results:
+            idpatro = result[0]
+            nombre = result[1]
+            print(f"Patrocinador \"{nombre}\" con identificador {idpatro}")
+
+
     def mostrar_subastadas_no_asignadas(self):
         """
         Muestra las actividades subastadas que no han sido ya asignadas
@@ -403,6 +414,15 @@ class DatabaseRepository:
             print("No se pudo planificar la categoria")
             print(f"El error fue {e}")
 
+    def oferta_no_economica(self, idactividad: int, idpatro: int, coste: float, descrip: str):
+        try:
+            self.execute(f"INSERT INTO OfertaActividadNoEconomica(IdActividadNoEconomica, IdPatrocinador, Coste, DescripcionRetribucion) VALUES ({idactividad}, {idpatro}, {coste}, \"{descrip}\");")
+            self.commit()
+        
+        except Exception as e:
+            print("No se pudo planificar la categoria")
+            print(f"El error fue {e}")
+
 
     def devolver_entrada(self, id_entrada: int):
         """
@@ -417,6 +437,7 @@ class DatabaseRepository:
         """.format(id_entrada = id_entrada)
 
         self.try_execute(query)
+
 
     def fijar_patrocinador(self, id_actividad_subastada: int):
         # Marcamos la actividad como asignada
