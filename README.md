@@ -4,7 +4,7 @@
 
 # TODO
 
-* [ ] Conseguir que funcione python: Jesus y Juanjo
+* [x] Conseguir que funcione python: Jesus y Juanjo
 * [ ] Quitar del makefile el "python_jesus"
 * [ ] Separar el CrearTablas.sql en creacion de tablas, triggers e insercion de datos
 * [ ] Trigger: Dar permiso periodista, si el periodista tiene covid, que no pueda acceder ??
@@ -26,7 +26,7 @@
 	* [x] Votar : Juanjo
 	* [x] Planificar premio : Lucia
 	* [x] Asignar nominado a premio : Juanjo
-	* [ ] Fallar premio
+	* [ ] Fallar premio : Jesus
 * [ ] Gestión de patrocinadores
 	* [x] Dar de alta a patrocinador : Juanjo
 	* [ ] Patrocinar actividad no económica : Lucía
