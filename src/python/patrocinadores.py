@@ -12,6 +12,9 @@ def alta_patrocinador(db):
     db.commit()
 
 def no_economica(db):
+    save = "NOECONOMICA"
+    db.savepoint(save)
+    
     actividades.crear_actividad(db)
     actividad = db.actividad_mayor()
 
@@ -21,7 +24,7 @@ def no_economica(db):
     coste = get_usr_data("Inserte el coste de la actividad: ",float, "El dato introducido no es valido")
     descrip = get_usr_data("Inserte la descripcion de la retribucion: ", str, "Los datos introducidos no son validos" )
 
-    db.oferta_no_economica(actividad, idpatro, coste, descrip)
+    db.oferta_no_economica(actividad, idpatro, coste, descrip, save)
 
 
 

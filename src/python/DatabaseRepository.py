@@ -387,7 +387,7 @@ class DatabaseRepository:
             print("No se pudo asignar la hora al invitado")
             print(f"El error fue {e}")
 
-    def asignar_rueda_pelicula(self, ruedaPrensa: int, pelicula: int, nombre: str, plazas: int, lugar: str):
+    def asignar_rueda_pelicula(self, ruedaPrensa: int, pelicula: int, nombre: str, plazas: int, lugar: str, save:str):
         try:
             self.execute(f"INSERT INTO RuedaDePrensaAsigna(IdRuedaPrensa, idPelicula, nombre, plazas, lugar) VALUES ({ruedaPrensa}, {pelicula}, \"{nombre}\", {plazas}, \"{lugar}\");")
             self.commit()
@@ -395,6 +395,7 @@ class DatabaseRepository:
         except Exception as e:
             print("No se pudo asignar la rueda de prensa a la pelicula")
             print(f"El error fue {e}")
+            db.rollback(save)
 
     def usar_entrada(self, idActividad, dni, entrada):
         try:
@@ -414,7 +415,7 @@ class DatabaseRepository:
             print("No se pudo planificar la categoria")
             print(f"El error fue {e}")
 
-    def oferta_no_economica(self, idactividad: int, idpatro: int, coste: float, descrip: str):
+    def oferta_no_economica(self, idactividad: int, idpatro: int, coste: float, descrip: str, save: str):
         try:
             self.execute(f"INSERT INTO OfertaActividadNoEconomica(IdActividadNoEconomica, IdPatrocinador, Coste, DescripcionRetribucion) VALUES ({idactividad}, {idpatro}, {coste}, \"{descrip}\");")
             self.commit()
@@ -422,6 +423,7 @@ class DatabaseRepository:
         except Exception as e:
             print("No se pudo planificar la categoria")
             print(f"El error fue {e}")
+            db.rollback(save)
 
 
     def devolver_entrada(self, id_entrada: int):
