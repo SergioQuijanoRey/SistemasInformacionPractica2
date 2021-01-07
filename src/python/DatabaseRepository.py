@@ -290,6 +290,18 @@ class DatabaseRepository:
             print(f"Gala con identificador: {idgala}")
 
 
+    def mostrar_patrocinadores(self):
+        """Mostramos los patrocinadores almacenados en la base de datos"""
+        print("Los Patrocinadores de la Base de Datos son: ")
+        results = self.try_execute("SELECT IdPatrocinador, Nombre FROM Patrocinador;")
+
+        for result in results:
+            idpatro = result[0]
+            nombre = result[1]
+            print(f"Patrocinador \"{nombre}\" con identificador {idpatro}")
+
+
+
     def actividad_mayor(self):
         result = self.try_execute("SELECT MAX(idActividad) FROM Actividad;")
         try:
@@ -333,6 +345,15 @@ class DatabaseRepository:
             self.execute(f"INSERT INTO PresentadoCategoria(Descripcion, Presentador, idGala) VALUES (\"{descrip}\", \"{presen}\", {idgala});")
             self.commit()
 
+        except Exception as e:
+            print("No se pudo planificar la categoria")
+            print(f"El error fue {e}")
+
+    def oferta_no_economica(self, idactividad: int, idpatro: int, coste: float, descrip: str):
+        try:
+            self.execute(f"INSERT INTO OfertaActividadNoEconomica(IdActividadNoEconomica, IdPatrocinador, Coste, DescripcionRetribucion) VALUES ({idactividad}, {idpatro}, {coste}, \"{descrip}\");")
+            self.commit()
+        
         except Exception as e:
             print("No se pudo planificar la categoria")
             print(f"El error fue {e}")
