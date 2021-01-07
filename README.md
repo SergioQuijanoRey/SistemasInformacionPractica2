@@ -20,6 +20,7 @@
     * [x] Asignar hora invitado para alfombra roja: Lucía
     * [x] Dar permiso a periodista: Sergio
     * [x] Asignar rueda de prensa a pelicula: Jesus
+        * Duda con savepoint
     * [x] Crear actividad: Juanjo
       * [ ] Poder particularizar la actividad Creada
 * [ ] Gestion de premios
@@ -29,6 +30,7 @@
 	* [ ] Fallar premio : Jesus
 * [ ] Gestión de patrocinadores
 	* [x] Dar de alta a patrocinador : Juanjo
-	* [ ] Patrocinar actividad no económica : Lucía
+	* [x] Patrocinar actividad no económica : Lucía
+        * Duda con savepoint
 	* [ ] Subasta de patrocinio económico
-	* [ ] Fijar patrocinador: Sergio
+	* [x] Fijar patrocinador: Sergio

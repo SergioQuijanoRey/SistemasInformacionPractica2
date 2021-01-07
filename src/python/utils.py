@@ -23,3 +23,6 @@ def validate_date(string_date: str):
         datetime.datetime.strptime(string_date, '%Y-%m-%d')
     except:
         raise ValueError("INCORRECT DATE TIME")
+
+def wait_for_user_input():
+    input("Pulse una tecla para CONTINUAR...")

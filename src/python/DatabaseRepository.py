@@ -313,6 +313,7 @@ class DatabaseRepository:
             id_entrada = result[0]
             print(f"Entrada {id_entrada}")
 
+<<<<<<< HEAD
 
     def mostrar_categorias_fallables(self):
         """Mostramos las categorias en las que se ha votado"""
@@ -327,6 +328,61 @@ class DatabaseRepository:
             id_categoria = result[0]
             print(f"Categoria {id_categoria}")
 
+=======
+    def mostrar_patrocinadores(self):
+        """Mostramos los patrocinadores almacenados en la base de datos"""
+        print("Los Patrocinadores de la Base de Datos son: ")
+        results = self.try_execute("SELECT IdPatrocinador, Nombre FROM Patrocinador;")
+
+        for result in results:
+            idpatro = result[0]
+            nombre = result[1]
+            print(f"Patrocinador \"{nombre}\" con identificador {idpatro}")
+
+
+    def mostrar_subastadas_no_asignadas(self):
+        """
+        Muestra las actividades subastadas que no han sido ya asignadas
+        Lanzamos una excepcion para que el menu pueda actuar acuerdo a la situacion
+        """
+
+        query = """
+            SELECT IdActividadSubastada, Nombre FROM ActividadSubastada
+            WHERE IdActividadSubastada NOT IN (
+                SELECT IdActividadAsignada FROM ActividadAsignada
+            );
+        """
+        results = None
+        try:
+            results = self.execute(query)
+        except Exception as e:
+            print("No se pudo encontrar actividades subastadas que no hayan sido ya asignadas")
+            print(f"El error fue {e}")
+            raise Exception("No se encontraron resultados")
+
+        for result in results:
+            id_actividad = result[0]
+            nombre = result[1]
+            print(f"Actividad {nombre} identificada por {id_actividad}")
+
+    def mostrar_mejor_patrocinador(self, id_actividad_subastada: int):
+        """Mostramos el mejor patrocinador para una actividad subastada"""
+
+        query = """
+            SELECT IdPatrocinador, Valor
+            FROM Puja
+            WHERE Valor IN (
+                SELECT MIN(Valor)
+                FROM Puja
+                WHERE IdActividad = {id_actividad_subastada}
+            );
+        """.format(id_actividad_subastada = id_actividad_subastada)
+
+        patrocinador_escogido = "Desconocido"
+        patrocinador_escogido = self.try_execute(query, "No se pudo escoger al mejor patrocinador")
+        valor_puja, patrocinador_escogido = patrocinador_escogido[0][1], patrocinador_escogido[0][0]
+        print(f"El patrocinador escogido es: {patrocinador_escogido} con un valor de {valor_puja}")
+>>>>>>> 3af2af6dd0b12478e95786b56d2dd19c61e310ac
 
     def actividad_mayor(self):
         results = self.try_execute("SELECT MAX(idActividad) FROM Actividad;")
@@ -348,7 +404,7 @@ class DatabaseRepository:
             print("No se pudo asignar la hora al invitado")
             print(f"El error fue {e}")
 
-    def asignar_rueda_pelicula(self, ruedaPrensa: int, pelicula: int, nombre: str, plazas: int, lugar: str):
+    def asignar_rueda_pelicula(self, ruedaPrensa: int, pelicula: int, nombre: str, plazas: int, lugar: str, save:str):
         try:
             self.execute(f"INSERT INTO RuedaDePrensaAsigna(IdRuedaPrensa, idPelicula, nombre, plazas, lugar) VALUES ({ruedaPrensa}, {pelicula}, \"{nombre}\", {plazas}, \"{lugar}\");")
             self.commit()
@@ -356,6 +412,7 @@ class DatabaseRepository:
         except Exception as e:
             print("No se pudo asignar la rueda de prensa a la pelicula")
             print(f"El error fue {e}")
+            db.rollback(save)
 
     def usar_entrada(self, idActividad, dni, entrada):
         try:
@@ -375,6 +432,16 @@ class DatabaseRepository:
             print("No se pudo planificar la categoria")
             print(f"El error fue {e}")
 
+    def oferta_no_economica(self, idactividad: int, idpatro: int, coste: float, descrip: str, save: str):
+        try:
+            self.execute(f"INSERT INTO OfertaActividadNoEconomica(IdActividadNoEconomica, IdPatrocinador, Coste, DescripcionRetribucion) VALUES ({idactividad}, {idpatro}, {coste}, \"{descrip}\");")
+            self.commit()
+        
+        except Exception as e:
+            print("No se pudo planificar la categoria")
+            print(f"El error fue {e}")
+            db.rollback(save)
+
 
     def devolver_entrada(self, id_entrada: int):
         """
@@ -390,6 +457,7 @@ class DatabaseRepository:
 
         self.try_execute(query)
 
+<<<<<<< HEAD
     def fallar_premio(self, idcategoria: int):
         """Se falla la categoria indicada como parametro"""
         try:
@@ -405,3 +473,14 @@ class DatabaseRepository:
             print(f"Nominado: {dni}   Votos: {votos}")
 
         print("")
+=======
+
+    def fijar_patrocinador(self, id_actividad_subastada: int):
+        # Marcamos la actividad como asignada
+        self.try_execute(f"INSERT INTO ActividadAsignada VALUES ({id_actividad_subastada})", f"No se pudo marcar la actividad {id_actividad_subastada} como asignada")
+
+        # Mostramos el patrocinador
+        self.mostrar_mejor_patrocinador(id_actividad_subastada)
+
+
+>>>>>>> 3af2af6dd0b12478e95786b56d2dd19c61e310ac

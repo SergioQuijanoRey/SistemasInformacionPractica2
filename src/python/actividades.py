@@ -12,6 +12,9 @@ def crear_actividad(db):
 
 
 def rueda_pelicula(db):
+    save = "RUEDAPRENSA"
+    db.savepoint(save)
+
     crear_actividad(db)
     ruedaPrensa = db.actividad_mayor()
 
@@ -22,7 +25,7 @@ def rueda_pelicula(db):
     plazas = get_usr_data("Inserte el numero de plazas: ",int, "El dato introducido no es un entero")
     lugar = input("Inserte el lugar: ")
 
-    db.asignar_rueda_pelicula(ruedaPrensa,  pelicula, nombre, plazas, lugar)
+    db.asignar_rueda_pelicula(ruedaPrensa,  pelicula, nombre, plazas, lugar, save)
 
 
 

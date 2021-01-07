@@ -249,9 +249,6 @@ INSERT INTO ActividadAsignada(idActividadAsignada) VALUES
     (13),
     (14),
     (15),
-    (16),
-    (17),
-    (18),
     (19);
 
 CREATE TABLE IF NOT EXISTS UsarEntradas(
@@ -369,6 +366,9 @@ CREATE TABLE IF NOT EXISTS Puja (
 INSERT INTO Puja(IdPatrocinador, IdActividad, Valor) VALUES
     (1, 11, 200.20),
     (2, 12, 202.20),
+    (3, 13, 204.20),
+    (4, 13, 206.20),
+    (5, 13, 300.20),
     (3, 13, 204.20),
     (5, 15, 208.20);
 
