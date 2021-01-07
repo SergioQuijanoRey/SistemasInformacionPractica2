@@ -155,19 +155,15 @@ def process_premios(option,db):
 
     elif option == 1:
         premios.votar(db)
-        os.system("clear")
 
     elif option == 2:
         premios.planificar_premio(db)
-        os.system("clear")
 
     elif option == 3:
         premios.asignar_nominado(db)
-        os.system("clear")
 
     elif option == 4:
         premios.fallar_premio(db)
-        os.system("clear")
 
     else:
         os.system("clear")
@@ -310,7 +306,7 @@ def input_actividad():
     #while condicion != True:
     #    try:
     #        utils.validate_date(fecha)
-    #        condicion = True 
+    #        condicion = True
     #    except:
     #        print("Error, la fecha introducida no es correcta")
     #        fecha=input("inserte de nuevo la fecha")
@@ -352,7 +348,7 @@ def input_AbonaPagos():
     cantidad = utils.get_int("Introduzca el precio de la actividad:  ")
     while cantidad < 0:
         cantidad = utils.get_int("Meta el precio correctamente: ")
-    
+
     return cantidad
 
 def input__patrocinador():
@@ -372,15 +368,15 @@ def input__patrocinador():
             "No puede haber una prevision negativa, inserte otra: ",
             float,
             "El dato insertado no es de tipo float")
-    
-    return nombre, prevision 
+
+    return nombre, prevision
 
 def input_candidato():
 
     dni = input("Introduzca el dni del candidato: ")
     while len(dni) < 0 or len(dni)>9:
         dni = input("dni incorrecto, introduzcalo correctamente: ")
-    
+
     idcategoria = utils.get_int("Introduzca el identificador de la categoria: ")
     while idcategoria < 0:
         idcategoria = utils.get_int("Error, entero no puede ser negativo, introduzcalo de nuevo: ")

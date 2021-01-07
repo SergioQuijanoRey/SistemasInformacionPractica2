@@ -313,8 +313,23 @@ class DatabaseRepository:
             id_entrada = result[0]
             print(f"Entrada {id_entrada}")
 
+
+    def mostrar_categorias_fallables(self):
+        """Mostramos las categorias en las que se ha votado"""
+        try:
+            results = self.execute("SELECT DISTINCT IdCategoria FROM VotarNominado")
+        except Exeption as e:
+            print("No se han encontrado categorias que se puedan fijar")
+            print(f"El error fue {e}")
+
+        print("Las categorías que se pueden fallar son: ")
+        for result in results:
+            id_categoria = result[0]
+            print(f"Categoria {id_categoria}")
+
+
     def actividad_mayor(self):
-        result = self.try_execute("SELECT MAX(idActividad) FROM Actividad;")
+        results = self.try_execute("SELECT MAX(idActividad) FROM Actividad;")
         try:
             max = int(result[0][0])
         except:
@@ -375,3 +390,18 @@ class DatabaseRepository:
 
         self.try_execute(query)
 
+    def fallar_premio(self, idcategoria: int):
+        """Se falla la categoria indicada como parametro"""
+        try:
+            results = self.execute(f"SELECT DNINominado, COUNT(DNINominado) votos FROM VotarNominado  WHERE IdCategoria={idcategoria} GROUP BY DNINominado;")
+        except Exception as e:
+            print("No se pudo fijar la categoria correctamente")
+            print(f"El error fue {e}")
+
+        print("Los resultados de la votacion son:")
+        for result in results:
+            dni = result[0]
+            votos = result[1]
+            print(f"Nominado: {dni}   Votos: {votos}")
+
+        print("")

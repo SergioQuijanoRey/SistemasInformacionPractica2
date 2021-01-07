@@ -35,4 +35,8 @@ def asignar_nominado(db):
     db.commit()
 
 def fallar_premio(db):
-    pass
+
+    db.mostrar_categorias_fallables()
+    categoria = get_usr_data("Inserte el identificador de la categoria que desea fijar: ",int, "El dato introducido no es un entero")
+
+    db.fallar_premio(categoria)
