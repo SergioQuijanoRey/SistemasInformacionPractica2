@@ -63,7 +63,32 @@ def covid(db):
     input("Pulsa una tecla para CONTINUAR...")
 
 def devolver_entrada(db):
-    pass
+    """Se toman los datos necesarios para devolver la entrada"""
+
+    # Preguntamos por el usuario
+    db.mostrar_asistentes()
+
+    # Pedimos que el usuario se identifique
+    usr = input("Seleccione su usuario: ")
+
+    # Mostramos las entradas que el usuario tiene disponibles
+    try:
+        db.mostrar_entradas_usuario_no_devueltas(usr)
+    except Exception:
+        print("Ese usuario no tiene entradas para devolver")
+        input("Pulse una tecla para CONTINUAR...")
+        return
+
+    # Tomamos la entrada del usuario
+    id_entrada = get_usr_data("Introduzca el id de la entrada a devolver: ", int, "El identificador dado no es valido")
+
+    # Realizamos la devolucion de la entrada
+    db.devolver_entrada(id_entrada)
+
+    input("Pulse una tecla para CONTINUAR...")
+
+
+
 
 def actividad_gratuita(db):
     db.mostrar_actividades()

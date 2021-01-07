@@ -12,7 +12,8 @@
     * [ ] Comprar entrada : Juanjo
     * [x] Notificar estado Covid: Sergio
         * [ ] Escribirlo como un trigger en vez de con sentencias SQL normales
-    * [ ] Devolver entrada: Sergio
+    * [x] Devolver entrada: Sergio
+        * [ ] El update no falla aunque el usuario pase mal los parametros
     * [x] Notificar asistencia actividad gratuita: Lucía
 * [ ] Gestion de asistentes
     * [x] Asignar hora invitado para alfombra roja: Lucía
