@@ -3,6 +3,7 @@ import UI
 from utils import get_usr_data
 
 def crear_actividad(db):
+    # TODO -- limpiar esta funcion
     descripcion, fecha = UI.input_actividad()
     db.try_execute(
         f"INSERT INTO Actividad (Descripcion, Fecha) VALUES (\"{descripcion}\", \"{fecha}\")"
@@ -13,22 +14,22 @@ def crear_actividad(db):
 def rueda_pelicula(db):
     crear_actividad(db)
     ruedaPrensa = db.actividad_mayor()
-    
+
     db.mostrar_peliculas()
     pelicula = get_usr_data("Inserte el identificador de la película: ",int, "El dato introducido no es un entero")
-    
+
     nombre = get_usr_data("Inserta el nombre de la Rueda de Prensa: ", str)
     plazas = get_usr_data("Inserte el numero de plazas: ",int, "El dato introducido no es un entero")
     lugar = input("Inserte el lugar: ")
 
     db.asignar_rueda_pelicula(ruedaPrensa,  pelicula, nombre, plazas, lugar)
-    
+
 
 
 def hora_invitado(db):
     db.mostrar_invitados()
     dni = get_usr_data("Inserte el dni del Invitado: ", str, "Los datos introducidos no son validos" )
-    
+
     db.mostrar_alfombras()
     alfombra = get_usr_data("Inserte el identificador de la alfombra roja: ",
                             int, "El dato introducido no es un entero")
@@ -36,7 +37,7 @@ def hora_invitado(db):
     hora = get_usr_data("Inserte la hora a la que acude el invitado ( ej: 20:00:00): ", str, "Los datos introducidos no son validos")
 
     db.asignar_hora_invitado(dni, alfombra, hora)
-    
+
 
 
 def permiso_periodista(db):
