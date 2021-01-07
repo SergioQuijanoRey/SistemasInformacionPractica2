@@ -313,22 +313,6 @@ class DatabaseRepository:
             id_entrada = result[0]
             print(f"Entrada {id_entrada}")
 
-<<<<<<< HEAD
-
-    def mostrar_categorias_fallables(self):
-        """Mostramos las categorias en las que se ha votado"""
-        try:
-            results = self.execute("SELECT DISTINCT IdCategoria FROM VotarNominado")
-        except Exeption as e:
-            print("No se han encontrado categorias que se puedan fijar")
-            print(f"El error fue {e}")
-
-        print("Las categorías que se pueden fallar son: ")
-        for result in results:
-            id_categoria = result[0]
-            print(f"Categoria {id_categoria}")
-
-=======
     def mostrar_patrocinadores(self):
         """Mostramos los patrocinadores almacenados en la base de datos"""
         print("Los Patrocinadores de la Base de Datos son: ")
@@ -382,7 +366,6 @@ class DatabaseRepository:
         patrocinador_escogido = self.try_execute(query, "No se pudo escoger al mejor patrocinador")
         valor_puja, patrocinador_escogido = patrocinador_escogido[0][1], patrocinador_escogido[0][0]
         print(f"El patrocinador escogido es: {patrocinador_escogido} con un valor de {valor_puja}")
->>>>>>> 3af2af6dd0b12478e95786b56d2dd19c61e310ac
 
     def actividad_mayor(self):
         results = self.try_execute("SELECT MAX(idActividad) FROM Actividad;")
@@ -436,7 +419,7 @@ class DatabaseRepository:
         try:
             self.execute(f"INSERT INTO OfertaActividadNoEconomica(IdActividadNoEconomica, IdPatrocinador, Coste, DescripcionRetribucion) VALUES ({idactividad}, {idpatro}, {coste}, \"{descrip}\");")
             self.commit()
-        
+
         except Exception as e:
             print("No se pudo planificar la categoria")
             print(f"El error fue {e}")
@@ -457,7 +440,7 @@ class DatabaseRepository:
 
         self.try_execute(query)
 
-<<<<<<< HEAD
+
     def fallar_premio(self, idcategoria: int):
         """Se falla la categoria indicada como parametro"""
         try:
@@ -473,7 +456,7 @@ class DatabaseRepository:
             print(f"Nominado: {dni}   Votos: {votos}")
 
         print("")
-=======
+
 
     def fijar_patrocinador(self, id_actividad_subastada: int):
         # Marcamos la actividad como asignada
@@ -481,6 +464,3 @@ class DatabaseRepository:
 
         # Mostramos el patrocinador
         self.mostrar_mejor_patrocinador(id_actividad_subastada)
-
-
->>>>>>> 3af2af6dd0b12478e95786b56d2dd19c61e310ac
