@@ -489,5 +489,17 @@ class DatabaseRepository:
         self.try_execute(
             f"INSERT INTO AbonaPagos(cantidadPago, IdEntrada, IdActividad) VALUES ({cantidadPago},{IdEntrada}, {IdActividad})")
         
-        self.commit
+        self.commit()
+
+    def crear_actividad(self, descripcion: str, fecha:str):
+        try:
+            db.execute(
+                f"INSERT INTO Actividad (Descripcion, Fecha) VALUES (\"{descripcion}\", \"{fecha}\")"
+            )
+        except Exception as e:
+            print("No se pudo ")
+            print(f"El error fue {e}")
+            raise Exception("No se ha podido crear la actividad")
+
+        self.commit()
         
