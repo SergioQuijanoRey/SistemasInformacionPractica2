@@ -330,6 +330,21 @@ class DatabaseRepository:
             nombre = result[1]
             print(f"Patrocinador \"{nombre}\" con identificador {idpatro}")
 
+    def mostrar_entradadas_para_actividad(self, IdActividad: str):
+        """Mostramos los identificadores de la entradas para la actividad dada como argumento"""
+        print("Las entradas de la Base de datos para la Actividad son:")
+        query = f"""
+            SELECT IdEntrada FROM UsarEntradas
+            WHERE IdActividad = \"{IdActividad}\"
+        """
+
+        try:
+            self.execute(query)
+        except Exception as e:
+            print("No se realizar la consulta")
+            print(f"El error fue {e}")
+
+
 
     def mostrar_subastadas_no_asignadas(self):
         """
@@ -523,3 +538,25 @@ class DatabaseRepository:
             raise Exception("No hay entradas disponibles")
 
         return ultima_entrada_disponible
+
+    def comprar_entrada(self, IdEntrada: str, IdActividad: str, DNIAsistentes: str, Cantidad: int, cantidadPago:float):
+
+        self.try_execute(
+            f"INSERT INTO UsarEntradas(IdEntrada, IdActividad, DNIAsistentes, Cantidad) VALUES ({IdEntrada}, {IdActividad}, \"{DNIAsistentes}\", {Cantidad})" )#La devolucion se gestiona en el disparador
+
+        self.try_execute(
+            f"INSERT INTO AbonaPagos(cantidadPago, IdEntrada, IdActividad) VALUES ({cantidadPago},{IdEntrada}, {IdActividad})")
+
+        self.commit()
+
+    def crear_actividad(self, descripcion: str, fecha:str):
+        try:
+            db.execute(
+                f"INSERT INTO Actividad (Descripcion, Fecha) VALUES (\"{descripcion}\", \"{fecha}\")"
+            )
+        except Exception as e:
+            print("No se pudo ")
+            print(f"El error fue {e}")
+            raise Exception("No se ha podido crear la actividad")
+
+        self.commit()
