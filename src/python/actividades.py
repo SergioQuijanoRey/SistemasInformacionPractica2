@@ -5,8 +5,8 @@ from utils import *
 def crear_actividad(db):
     # TODO -- limpiar esta funcion
     """Meter cuantas entradas quiere el usuario y hacer el insert """
-    descripcion    = input("Inserte la descripcion de la actividad")
-    fecha          = input("Inserte la fecha de la actividad")
+    descripcion    = input("Inserte la descripcion de la actividad: ")
+    fecha          = input("Inserte la fecha de la actividad: ")
 
     try:
         db.crear_actividad(descripcion, fecha)

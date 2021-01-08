@@ -22,7 +22,7 @@
     * [xx] Asignar hora invitado para alfombra roja: Lucía
         * [ ] Trigger para comprobar que la hora introducida es correcta
     * [xx] Dar permiso a periodista: Sergio
-    * [x] Asignar rueda de prensa a pelicula: Jesus
+    * [xx] Asignar rueda de prensa a pelicula: Jesus
         * Duda con savepoint
     * [x] Crear actividad: Juanjo
       * [ ] Poder particularizar la actividad Creada

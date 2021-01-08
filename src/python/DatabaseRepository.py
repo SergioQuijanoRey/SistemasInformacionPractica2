@@ -562,18 +562,19 @@ class DatabaseRepository:
 
         self.commit()
 
-    def insertar_entradas_para_actividad(IdActividad: str, cantidadEntradas:int):
+    def insertar_entradas_para_actividad(self, IdActividad: str, cantidadEntradas:int):
 
+        # Creamos la peticion para insertar un numero dado de entradas a una actividad
         query = "INSERT INTO UsarEntradas(IdEntrada, IdActividad) VALUES "
-        query += f"({0}, ({IdActividad}), "
+        query += f"({0}, {IdActividad}) "
 
         for i in range (cantidadEntradas-1):
-            query += f",({i+1}, ({IdActividad})"
+            query += f",({i+1}, {IdActividad})"
         query += ";"
 
         try:
-            db.execute(query)
-        except expression as e:
+            self.execute(query)
+        except Exception as e:
             print("Error, crear_actividad, no se pudo insertar las entradas")
             print(f"El error fue {e}")
             raise Exception("No se ha insertar las entradas,")
