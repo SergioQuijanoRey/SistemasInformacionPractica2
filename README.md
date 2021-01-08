@@ -27,7 +27,7 @@
 	* [x] Votar : Juanjo
 	* [x] Planificar premio : Lucia
 	* [x] Asignar nominado a premio : Juanjo
-	* [ ] Fallar premio : Jesus
+	* [x] Fallar premio : Jesus
 * [ ] Gestión de patrocinadores
 	* [x] Dar de alta a patrocinador : Juanjo
 	* [x] Patrocinar actividad no económica : Lucía
