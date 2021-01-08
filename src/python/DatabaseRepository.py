@@ -344,7 +344,24 @@ class DatabaseRepository:
             print("No se realizar la consulta")
             print(f"El error fue {e}")
 
+    def mostrar_subastadas(self):
+        """Mostramos los patrocinadores almacenados en la base de datos"""
+        print("Las actividades subastadas son:")
+        query = f"""
+            SELECT IdActividadSubastada, Nombre FROM ActividadSubastada;
+        """
+        results = None
+        try:
+            results = self.execute(query)
+        except Exception as e:
+            print("No se encontraron los resultados")
+            print(f"El error fue {e}")
+            raise Exception ("No se encontraron los resultados")
 
+        for result in results:
+            id_actividad = result[0]
+            nombre = result[1]
+            print(f"Actividad {nombre} identificada por {id_actividad}")
 
     def mostrar_subastadas_no_asignadas(self):
         """
@@ -634,3 +651,17 @@ class DatabaseRepository:
             print("No se pudo insertar la votacion en la base de datos")
             print(f"El codigo de error fue: {e}")
             raise Exception("No se pudo insertar la votacion")
+
+        self.commit()
+
+
+    def puja(self, idactividad: int, idpatro: int, valor: float):
+        """Se realiza la puja"""
+
+        query = """
+            INSERT INTO Puja(IdPatrocinador, IdActividad, Valor) VALUES
+                ({idpatro}, {idactividad}, {valor});
+        """.format(idpatro = idpatro, idactividad = idactividad, valor = valor )
+
+        self.try_execute(query)    
+        self.commit()

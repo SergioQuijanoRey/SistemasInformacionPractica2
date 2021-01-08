@@ -36,7 +36,7 @@ def planificar_premio(db):
     idgala = get_usr_data("Inserte el identificador de la gala donde sera presentado el premio: ",int, "El dato introducido no es un entero")
 
     db.presentado_categoria(descrip, presen, idgala)
-
+    wait_for_user_input()
 
 
 def asignar_nominado(db):
@@ -48,6 +48,7 @@ def asignar_nominado(db):
         f"INSERT INTO SerCandidato(DNINominado, IdCategoria) VALUES (\"{dni}\",{idcategoria})")
 
     db.commit()
+    wait_for_user_input()
 
 def fallar_premio(db):
 
@@ -55,3 +56,4 @@ def fallar_premio(db):
     categoria = get_usr_data("Inserte el identificador de la categoria que desea fijar: ",int, "El dato introducido no es un entero")
 
     db.fallar_premio(categoria)
+    wait_for_user_input()

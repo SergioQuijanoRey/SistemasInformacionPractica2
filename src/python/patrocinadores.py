@@ -16,8 +16,15 @@ def no_economica(db):
     save = "NOECONOMICA"
     db.savepoint(save)
 
-    actividades.crear_actividad(db)
-    actividad = db.actividad_mayor()
+    actividad = None
+    try:
+        actividad = crear_actividad(db)
+    except Exception as e:
+        print("No se pudo crear la actividad para la rueda de prensa")
+        print(f"El codigo de error fue {e}")
+        print("Intentelo de nuevo")
+        return
+
 
     db.mostrar_patrocinadores()
     idpatro = get_usr_data("Inserte el identificador del patrocinador: ",int, "El dato introducido no es un entero")
@@ -30,7 +37,21 @@ def no_economica(db):
 
 
 def subasta(db):
-    pass
+    """ Un patrocinador hace una puja en una subasta"""
+
+    # Mostramos las actividades que se pueden subastar
+    db.mostrar_subastadas()
+    idactividad = get_usr_data("Inserte el identificador de la actividad: ",int, "El dato introducido no es un entero")
+
+    # Mostramos los patrocinadores y elegimos
+    db.mostrar_patrocinadores()
+    idpatro = get_usr_data("Inserte el identificador del patrocinador: ",int, "El dato introducido no es un entero")
+
+    valor = get_usr_data("Inserte el valor de la subasta: ",float, "El dato introducido no es valido")
+
+    db.puja(idactividad, idpatro, valor)
+    wait_for_user_input()
+
 
 def fijar(db):
     """Fijamos el patrocinador que gana una determinada puja"""

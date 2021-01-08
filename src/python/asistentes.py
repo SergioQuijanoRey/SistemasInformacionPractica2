@@ -25,6 +25,7 @@ def comprar_entrada(db):
 
     db.comprar_entrada(IdEntrada, IdActividad, DNIAsistentes, Cantidad, cantidadPago)
 
+    wait_for_user_input()
 
     #db.rollback("ComprarEntrada")
 
