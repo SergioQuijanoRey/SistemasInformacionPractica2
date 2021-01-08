@@ -464,3 +464,13 @@ class DatabaseRepository:
 
         # Mostramos el patrocinador
         self.mostrar_mejor_patrocinador(id_actividad_subastada)
+
+    def comprar_entrada(self, IdEntrada: str, IdActividad: str, DNIAsistentes: str, Cantidad: int, cantidadPago:float):
+
+        self.try_execute(
+            f"INSERT INTO UsarEntradas(IdEntrada, IdActividad, DNIAsistentes, Cantidad) VALUES ({IdEntrada}, {IdActividad}, \"{DNIAsistentes}\", {Cantidad})" )#La devolucion se gestiona en el disparador
+
+        self.try_execute(
+            f"INSERT INTO AbonaPagos(cantidadPago, IdEntrada, IdActividad) VALUES ({cantidadPago},{IdEntrada}, {IdActividad})")
+
+        
