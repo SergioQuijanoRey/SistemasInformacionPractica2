@@ -35,7 +35,7 @@
 	* [x] Dar de alta a patrocinador : Juanjo
 	* [x] Patrocinar actividad no económica : Lucía
         * Duda con savepoint
-	* [ ] Subasta de patrocinio económico
+	* [x] Subasta de patrocinio económico
 	* [x] Fijar patrocinador: Sergio
 
 * **Triggers**:
