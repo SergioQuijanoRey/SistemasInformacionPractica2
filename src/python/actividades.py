@@ -6,18 +6,13 @@ def crear_actividad(db):
     # TODO -- limpiar esta funcion
     # TODO -- devolver identificador de la actividad creada
     """Meter cuantas entradas quiere el usuario y hacer el insert """
-    descripcion, fecha = UI.input_actividad()
-    try:
-        db.execute(
-            f"INSERT INTO Actividad (Descripcion, Fecha) VALUES (\"{descripcion}\", \"{fecha}\")"
-        )
-    except Exception as e:
-        print("No se pudo ")
-        print(f"El error fue {e}")
-        raise Exception("No se ha podido crear la actividad")
+    descripcion    = input("Inserte la descripcion de la actividad")
+    fecha          = input("Inserte la fecha de la actividad")
+
+    db.crear_actividad(descripcion, fecha)
+
 
     IdActividad = db.actividad_mayor()
-
     cantidadEntradas = utils.get_int("Cuantas entradas desea que tenga la actividad: ")
     query = "INSERT INTO UsarEntradas(IdEntrada, IdActividad) VALUES "
     query += f"({0}, ({IdActividad}), "
@@ -33,6 +28,21 @@ def crear_actividad(db):
         raise Exception("No se ha insertar las entradas,")
 
     db.commit()
+    query = "INSERT INTO UsarEntradas(IdEntrada, IdActividad) VALUES "
+    query += f"({0}, ({IdActividad}), "
+    for i+1 in range cantidadEntradas:
+        query += f",({i}, ({IdActividad})"
+    query += ";"
+
+    try:
+        db.execute(query)
+    except expression as e:
+        print("Error, crear_actividad, no se pudo insertar las entradas")
+        print(f"El error fue {e}")
+        raise Exception("No se ha insertar las entradas,")
+
+    db.commit()
+    db.insertar_entradas_para_actividad(IdActividad)
 
 
 def rueda_pelicula(db):
