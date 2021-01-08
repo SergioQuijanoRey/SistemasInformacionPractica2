@@ -155,15 +155,19 @@ def process_premios(option,db):
 
     elif option == 1:
         premios.votar(db)
+        os.system("clear")
 
     elif option == 2:
         premios.planificar_premio(db)
+        os.system("clear")
 
     elif option == 3:
         premios.asignar_nominado(db)
+        os.system("clear")
 
     elif option == 4:
         premios.fallar_premio(db)
+        os.system("clear")
 
     else:
         os.system("clear")
@@ -209,19 +213,17 @@ def process_actividades(option,db):
         print('Volviendo al menu principal...')
 
     elif option == 1:
-        try:
-            actividades.crear_actividad(db)
-        except:
-            pass
-
+        actividades.crear_actividad(db)
         os.system("clear")
 
     elif option == 2:
         actividades.rueda_pelicula(db)
+        os.system("clear")
 
 
     elif option == 3:
         actividades.hora_invitado(db)
+        os.system("clear")
 
     elif option == 4:
         actividades.permiso_periodista(db)
