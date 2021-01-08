@@ -4,26 +4,32 @@ from utils import get_usr_data
 
 def comprar_entrada(db):
     #Tomamos los datos
-    nombre, dni, cuentaBancaria = UI.input_asistente()
-    idEntrada, idActividad, cantidadEntradas = UI.input_UsarEntrada()
+    
+ 
     cantidadPago = UI.input_AbonaPagos()
 
     #db.savepoint("ComprarEntrada")
+    db.mostrar_asistentes()
+    DNIAsistentes = input("Introduce el dni del asistente:   ")
+  
+    db.mostrar_actividades()
+    IdActividad = input ("Introduce el Identificador de la actividad")
 
-    db.try_execute(
-        f"INSERT INTO Asistentes(DNIAsistente, Nombre, CuentaBancaria) VALUES (\"{dni}\",\"{nombre}\",\"{cuentaBancaria}\")"
-    )
+    db.mostrar_entradadas_para_actividad(IdActividad)
+    IdEntrada = utils.get_int("Introduzca el identificador de la entrada")
 
-    db.try_execute(
-        f"INSERT INTO UsarEntradas(IdEntrada, IdActividad, DNIAsistentes, Cantidad) VALUES ({idEntrada}, {idActividad}, \"{dni}\", {cantidadEntradas})" )#La devolucion se gestiona en el disparador
+    precioEntrada = utils.get_int("Introduzca el precio de una entrada")
+    cantidadEntradas = utils.get_int("Introduzca la cantidad de entradas que quiere: ")
+    cantidadPago = precioEntrada*cantidadEntradas
 
-    db.try_execute(
-        f"INSERT INTO AbonaPagos(Cantidad, IdEntrada, IdActividad) VALUES ({cantidadPago},{idEntrada}, {idActividad})")
+
+    db.comprar_entrada(IdEntrada, IdActividad, DNIAsistentes, Cantidad, cantidadPago)
+
 
     #db.rollback("ComprarEntrada")
 
     #Hacer efectivos los cambios
-    db.commit()
+
 
 def covid(db):
     """Se toman los datos para notificar el estado COVID, despues se llama al metodo de la base de datos"""
@@ -63,32 +69,7 @@ def covid(db):
     input("Pulsa una tecla para CONTINUAR...")
 
 def devolver_entrada(db):
-    """Se toman los datos necesarios para devolver la entrada"""
-
-    # Preguntamos por el usuario
-    db.mostrar_asistentes()
-
-    # Pedimos que el usuario se identifique
-    usr = input("Seleccione su usuario: ")
-
-    # Mostramos las entradas que el usuario tiene disponibles
-    try:
-        db.mostrar_entradas_usuario_no_devueltas(usr)
-    except Exception:
-        print("Ese usuario no tiene entradas para devolver")
-        input("Pulse una tecla para CONTINUAR...")
-        return
-
-    # Tomamos la entrada del usuario
-    id_entrada = get_usr_data("Introduzca el id de la entrada a devolver: ", int, "El identificador dado no es valido")
-
-    # Realizamos la devolucion de la entrada
-    db.devolver_entrada(id_entrada)
-
-    input("Pulse una tecla para CONTINUAR...")
-
-
-
+    pass
 
 def actividad_gratuita(db):
     db.mostrar_actividades()
