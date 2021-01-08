@@ -4,10 +4,33 @@ from utils import get_usr_data
 
 def crear_actividad(db):
     # TODO -- limpiar esta funcion
+    """Meter cuantas entradas quiere el usuario y hacer el insert """
     descripcion, fecha = UI.input_actividad()
-    db.try_execute(
-        f"INSERT INTO Actividad (Descripcion, Fecha) VALUES (\"{descripcion}\", \"{fecha}\")"
-    )
+    try:
+        db.execute(
+            f"INSERT INTO Actividad (Descripcion, Fecha) VALUES (\"{descripcion}\", \"{fecha}\")"
+        )
+    except Exception as e:
+        print("No se pudo ")
+        print(f"El error fue {e}")
+        raise Exception("No se ha podido crear la actividad")
+
+    IdActividad = db.actividad_mayor()
+
+    cantidadEntradas = utils.get_int("Cuantas entradas desea que tenga la actividad: ")
+    query = "INSERT INTO UsarEntradas(IdEntrada, IdActividad) VALUES "
+    query + = f"({0}, ({IdActividad}), "
+    for i+1 in range cantidadEntradas:
+        query + = f",({i}, ({IdActividad})"
+    query + = ";"
+
+    try:
+        db.execute(query)
+    except expression as e:
+        print("Error, crear_actividad, no se pudo insertar las entradas")
+        print(f"El error fue {e}")
+        raise Exception("No se ha insertar las entradas,")
+
     db.commit()
 
 
