@@ -13,7 +13,7 @@ def crear_actividad(db):
 
     IdActividad = db.actividad_mayor()
     cantidadEntradas = utils.get_int("Cuantas entradas desea que tenga la actividad: ")
-    db.insertar_entradas_para_actividad(IdActividad)
+    db.insertar_entradas_para_actividad(IdActividad,cantidadEntradas)
 
 
 
