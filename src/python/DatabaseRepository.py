@@ -561,20 +561,20 @@ class DatabaseRepository:
 
         self.commit()
 
-    # def insertar_entradas_para_actividad(IdActividad: str):
+    def insertar_entradas_para_actividad(IdActividad: str, cantidadEntradas:int):
 
-    #     query = "INSERT INTO UsarEntradas(IdEntrada, IdActividad) VALUES "
-    #     query += f"({0}, ({IdActividad}), "
+        query = "INSERT INTO UsarEntradas(IdEntrada, IdActividad) VALUES "
+        query += f"({0}, ({IdActividad}), "
 
-    #     for i+1 in range(len(cantidadEntradas)):
-    #         query += f",({i}, ({IdActividad})"
-    #     query += ";"
+        for i in range (cantidadEntradas-1):
+            query += f",({i+1}, ({IdActividad})"
+        query += ";"
 
-    #     try:
-    #         db.execute(query)
-    #     except expression as e:
-    #         print("Error, crear_actividad, no se pudo insertar las entradas")
-    #         print(f"El error fue {e}")
-    #         raise Exception("No se ha insertar las entradas,")
+        try:
+            db.execute(query)
+        except expression as e:
+            print("Error, crear_actividad, no se pudo insertar las entradas")
+            print(f"El error fue {e}")
+            raise Exception("No se ha insertar las entradas,")
 
-    #     self.commit()
+        self.commit()
