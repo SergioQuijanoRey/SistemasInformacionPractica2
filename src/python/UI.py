@@ -351,26 +351,6 @@ def input_AbonaPagos():
 
     return cantidad
 
-def input__patrocinador():
-
-    nombre = input("Inserte el nombre del patrocinador: ")
-
-    while len(nombre) < 0 or len(nombre) > 200:
-        nombre = input("Nombre no correcto, prueba otra vez: ")
-
-    prevision=utils.get_usr_data(
-        "Inserte prevision:  ",
-        float,
-        "El dato insertado no es de tipo float")
-
-    while prevision < 0:
-        prevision=utils.get_usr_data(
-            "No puede haber una prevision negativa, inserte otra: ",
-            float,
-            "El dato insertado no es de tipo float")
-
-    return nombre, prevision
-
 def input_candidato():
 
     dni = input("Introduzca el dni del candidato: ")

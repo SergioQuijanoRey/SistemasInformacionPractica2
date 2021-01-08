@@ -81,9 +81,10 @@ def devolver_entrada(db):
 
     # Tomamos la entrada del usuario
     id_entrada = get_usr_data("Introduzca el id de la entrada a devolver: ", int, "El identificador dado no es valido")
+    id_actividad = get_usr_data("Introduzca el id de la actividad de la anterior entrada: ", int, "El identificador dado no es valido")
 
     # Realizamos la devolucion de la entrada
-    db.devolver_entrada(id_entrada)
+    db.devolver_entrada(id_actividad, id_entrada)
 
     input("Pulse una tecla para CONTINUAR...")
 

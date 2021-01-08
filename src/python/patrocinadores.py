@@ -12,9 +12,10 @@ def alta_patrocinador(db):
     db.commit()
 
 def no_economica(db):
+    # TODO -- usar que actividad devuelva el identificador de la actividad creada
     save = "NOECONOMICA"
     db.savepoint(save)
-    
+
     actividades.crear_actividad(db)
     actividad = db.actividad_mayor()
 

@@ -28,6 +28,9 @@ class DatabaseRepository:
         # Cargamos los procedimientos
         self.load_procedures()
 
+    def __del__(self):
+        self.commit()
+
     def connect(self):
         """Codigo que conecta con la base de datos"""
         raise Exception(
@@ -295,7 +298,7 @@ class DatabaseRepository:
         """
 
         query = """
-            SELECT IdEntrada
+            SELECT IdEntrada, IdActividad
             FROM UsarEntradas
             WHERE DNIAsistentes = '{usr}' AND Devolucion = FALSE;""".format(usr = usr)
 
@@ -307,11 +310,15 @@ class DatabaseRepository:
             print(f"El codigo de error fue {e}")
             raise Exception("Usuario sin entradas")
 
+        if len(results) == 0:
+            raise Exception("Usuario sin entradas")
+
         # Mostramos las entradas
         print(f"Las entradas que {usr} puede devolver son:")
         for result in results:
             id_entrada = result[0]
-            print(f"Entrada {id_entrada}")
+            id_actividad = result[1]
+            print(f"Entrada {id_entrada} de la actividad {id_actividad}")
 
     def mostrar_patrocinadores(self):
         """Mostramos los patrocinadores almacenados en la base de datos"""
@@ -426,7 +433,7 @@ class DatabaseRepository:
             db.rollback(save)
 
 
-    def devolver_entrada(self, id_entrada: int):
+    def devolver_entrada(self, id_actividad: int, id_entrada: int):
         """
         Se devuelve una entrada
         Para ello se marca como devuelta, para no perder datos de pagos
@@ -435,10 +442,11 @@ class DatabaseRepository:
         query = """
             UPDATE UsarEntradas
             SET Devolucion = TRUE
-            WHERE IdEntrada = '{id_entrada}'
-        """.format(id_entrada = id_entrada)
+            WHERE IdEntrada = '{id_entrada}' AND IdActividad = '{id_actividad}'
+        """.format(id_entrada = id_entrada, id_actividad = id_actividad)
 
         self.try_execute(query)
+        self.commit()
 
 
     def fallar_premio(self, idcategoria: int):
@@ -464,3 +472,9 @@ class DatabaseRepository:
 
         # Mostramos el patrocinador
         self.mostrar_mejor_patrocinador(id_actividad_subastada)
+
+    def alta_patrocinador(self, nombre, prevision):
+        self.try_execute(
+            f"INSERT INTO Patrocinador (Nombre, Prevision) VALUES (\"{nombre}\",{prevision})"
+        )
+        self.commit()

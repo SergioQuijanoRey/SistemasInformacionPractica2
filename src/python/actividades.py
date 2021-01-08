@@ -4,6 +4,7 @@ from utils import get_usr_data
 
 def crear_actividad(db):
     # TODO -- limpiar esta funcion
+    # TODO -- devolver identificador de la actividad creada
     descripcion, fecha = UI.input_actividad()
     db.try_execute(
         f"INSERT INTO Actividad (Descripcion, Fecha) VALUES (\"{descripcion}\", \"{fecha}\")"
