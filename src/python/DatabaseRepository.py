@@ -556,7 +556,7 @@ class DatabaseRepository:
                 f"INSERT INTO Actividad (Descripcion, Fecha) VALUES (\"{descripcion}\", \"{fecha}\")"
             )
         except Exception as e:
-            print("No se pudo ")
+            print("No se pudo insertar la actividad en la base de datos")
             print(f"El error fue {e}")
             raise Exception("No se ha podido crear la actividad")
 

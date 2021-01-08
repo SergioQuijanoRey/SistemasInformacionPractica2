@@ -24,7 +24,7 @@
     * [xx] Dar permiso a periodista: Sergio
     * [xx] Asignar rueda de prensa a pelicula: Jesus
         * Duda con savepoint
-    * [x] Crear actividad: Juanjo
+    * [xx] Crear actividad: Juanjo
       * [ ] Poder particularizar la actividad Creada
 * [ ] Gestion de premios
 	* [x] Votar : Juanjo

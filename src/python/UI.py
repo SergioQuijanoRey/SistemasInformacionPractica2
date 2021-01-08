@@ -209,7 +209,11 @@ def process_actividades(option,db):
         print('Volviendo al menu principal...')
 
     elif option == 1:
-        actividades.crear_actividad(db)
+        try:
+            actividades.crear_actividad(db)
+        except:
+            pass
+
         os.system("clear")
 
     elif option == 2:
