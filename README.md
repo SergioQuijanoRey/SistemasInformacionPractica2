@@ -37,3 +37,9 @@
         * Duda con savepoint
 	* [ ] Subasta de patrocinio económico
 	* [x] Fijar patrocinador: Sergio
+
+* **Triggers**:
+    * [ ] Trigger para saber si la entrada se puede devolver o no segun fecha y covid
+    * [ ] Trigger para comprobar que la hora introducida es correcta
+    * [ ] Trigger para comprobar en votar, que la categoria, el juez y nominado esten de verdad relacionados
+    * [ ] Trigger para ver que en devolver entrada, los datos sean correctos, porque el UPDATE no falla
