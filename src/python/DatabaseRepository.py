@@ -389,6 +389,45 @@ class DatabaseRepository:
         valor_puja, patrocinador_escogido = patrocinador_escogido[0][1], patrocinador_escogido[0][0]
         print(f"El patrocinador escogido es: {patrocinador_escogido} con un valor de {valor_puja}")
 
+    def mostrar_categorias_de_juez(self, id_juez: str):
+        """Muestra las categorias en las que puede votar un juez"""
+        query = """
+            SELECT IdCategoria
+            FROM ValorarCategoria
+            WHERE DNIJuez = '{id_juez}';
+        """.format(id_juez = id_juez)
+
+        results = self.try_execute(query, "Error seleccionando las categorias en las que un juez puede votar")
+
+        # TODO -- no estamos manejando esto con excepciones
+        if results is None or len(results) == 0:
+            return
+
+        for result in results:
+            id_categoria = result[0]
+            print(f"Categoria con identificador {id_categoria}")
+
+
+    def mostrar_nominados_de_categoria(self, id_categoria: int):
+        """Muestra los nominados de una categoria concreta"""
+
+        query = """
+            SELECT DNINominado
+            FROM SerCandidato
+            WHERE idCategoria = {id_categoria};
+        """.format(id_categoria = id_categoria)
+
+        try:
+            results = self.execute(query)
+        except Exception as e:
+            print("Fallo seleccionando los nominados de la categoria")
+            print(f"El error fue {e}")
+            raise("No se pudieron seleccionar nominados")
+
+        for result in results:
+            dni = result[0]
+            print(f"Nominado con DNI: {dni}")
+
     def actividad_mayor(self):
         results = self.try_execute("SELECT MAX(idActividad) FROM Actividad;")
         try:
@@ -580,3 +619,18 @@ class DatabaseRepository:
             raise Exception("No se ha insertar las entradas,")
 
         self.commit()
+
+    def votar(self, id_juez: str, id_categoria: int, id_nominado: str):
+        """Se realiza una votacion"""
+
+        query = """
+            INSERT INTO VotarNominado(DNIJuez, IdCategoria, DNINominado) VALUES
+                ("{id_juez}", {id_categoria}, "{id_nominado}");
+        """.format(id_juez = id_juez, id_categoria = id_categoria, id_nominado = id_nominado )
+
+        try:
+            self.execute(query)
+        except Exception as e:
+            print("No se pudo insertar la votacion en la base de datos")
+            print(f"El codigo de error fue: {e}")
+            raise Exception("No se pudo insertar la votacion")

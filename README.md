@@ -18,7 +18,7 @@
         * [ ] Trigger para saber si la entrada se puede devolver o no
     * [xx] Notificar asistencia actividad gratuita: Lucía
         * [ ] Mostrar actividades que tengan disponibles entradas para simplificar las cosas
-* [ ] Gestion de asistentes
+* [xx] Gestion de asistentes
     * [xx] Asignar hora invitado para alfombra roja: Lucía
         * [ ] Trigger para comprobar que la hora introducida es correcta
     * [xx] Dar permiso a periodista: Sergio
@@ -27,7 +27,7 @@
     * [xx] Crear actividad: Juanjo
       * [ ] Poder particularizar la actividad Creada
 * [ ] Gestion de premios
-	* [x] Votar : Juanjo
+	* [xx] Votar: Juanjo
 	* [x] Planificar premio : Lucia
 	* [x] Asignar nominado a premio : Juanjo
 	* [x] Fallar premio : Jesus

@@ -366,13 +366,3 @@ def input_candidato():
         idcategoria = utils.get_int("Error, entero no puede ser negativo, introduzcalo de nuevo: ")
 
     return dni, idcategoria
-
-def input_votacion():
-
-    dni = input("Introduzca el dni del Juez: ")
-    while len(dni) < 0 or len(dni)>9:
-        dni = input("dni incorrecto, introduzcalo correctamente: ")
-
-    dniNominado, idcategoria = input_candidato()
-
-    return dni, idcategoria, dniNominado
