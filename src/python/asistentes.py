@@ -1,6 +1,6 @@
 import DatabaseRepository
 import UI
-from utils import get_usr_data
+from utils import *
 
 def comprar_entrada(db):
     #Tomamos los datos
@@ -88,18 +88,24 @@ def devolver_entrada(db):
 
     input("Pulse una tecla para CONTINUAR...")
 
-
-
-
 def actividad_gratuita(db):
+    # Mostramos las actividades para que el usuario elija una
     db.mostrar_actividades()
-
     id_actividad = get_usr_data("Inserte el identificador de la actividad: ", int, "El identificador introducido no es valido")
 
+    # Mostramos los asistentes para que el usuario se identifique
     db.mostrar_asistentes()
-
     dni = get_usr_data("Inserte el dni del Asistente: ", str, "Los datos introducidos no son validos" )
 
-    entrada = get_usr_data("Inserte el numero de entrada: ", int, "El identificador introducido no es valido")
+    # Usar la ultima entrada que este disponible
+    # Si no hay entradas disponibles, notificarlo al usuario
+    try:
+        db.usar_entrada(id_actividad, dni)
+    except:
+        print("Esta actividad no tiene entradas disponibles")
+        print("Pruebe con otra actividad")
+        wait_for_user_input()
+        return
 
-    db.usar_entrada(id_actividad, dni, entrada)
+    print("Asignacion realizada")
+    wait_for_user_input()

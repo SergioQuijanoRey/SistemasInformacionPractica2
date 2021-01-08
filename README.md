@@ -10,12 +10,14 @@
 * [ ] Trigger: Dar permiso periodista, si el periodista tiene covid, que no pueda acceder ??
 * [ ] Gestionar Asistentes
     * [ ] Comprar entrada : Juanjo
-    * [x] Notificar estado Covid: Sergio
-        * [ ] Escribirlo como un trigger en vez de con sentencias SQL normales
-    * [x] Devolver entrada: Sergio
+    * [xx] Notificar estado Covid: Sergio
+        * [ ] Escribir triggers relacionados con tener covid
+        * [ ] El update no falla aunque el usuario pase mal los parametros
+    * [xx] Devolver entrada: Sergio
         * [ ] El update no falla aunque el usuario pase mal los parametros
         * [ ] Trigger para saber si la entrada se puede devolver o no
-    * [x] Notificar asistencia actividad gratuita: Lucía
+    * [xx] Notificar asistencia actividad gratuita: Lucía
+        * [ ] Mostrar actividades que tengan disponibles entradas para simplificar las cosas
 * [ ] Gestion de asistentes
     * [x] Asignar hora invitado para alfombra roja: Lucía
     * [x] Dar permiso a periodista: Sergio

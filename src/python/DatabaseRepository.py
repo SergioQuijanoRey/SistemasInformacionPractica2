@@ -404,14 +404,33 @@ class DatabaseRepository:
             print(f"El error fue {e}")
             db.rollback(save)
 
-    def usar_entrada(self, idActividad, dni, entrada):
+    def usar_entrada(self, idActividad, dni):
+        # Tomamos la ultima entrada disponible
+        ultima_entrada_disponible = None
         try:
-            self.execute(f"INSERT INTO UsarEntradas(IdEntrada, IdActividad, DNIAsistentes) VALUES ({entrada}, {idActividad}, \"{dni}\");")
+            ultima_entrada_disponible = self.get_ultima_entrada_disponible(idActividad)
+        except:
+            print("Esa actividad no tiene entradas disponibles")
+            print("Intentelo con otra actividad")
+            raise Exception("No quedan entradas disponibles")
+
+
+        # Asignamos a la actividad y al asistente la entrada
+        try:
+            query = """
+                UPDATE UsarEntradas
+                SET DNIAsistentes = '{dni}'
+                WHERE
+                    IdActividad = {idActividad}
+                    AND IdEntrada = {ultima_entrada_disponible};
+            """.format(dni = dni, idActividad = idActividad, ultima_entrada_disponible = ultima_entrada_disponible)
+            self.execute(query)
             self.commit()
 
         except Exception as e:
             print("No se pudo asignar la entrada al asistente")
             print(f"El error fue {e}")
+            raise Exception("No se puedo asignar entrada")
 
     def presentado_categoria(self, descrip: str, presen: str, idgala: int):
         try:
@@ -478,3 +497,29 @@ class DatabaseRepository:
             f"INSERT INTO Patrocinador (Nombre, Prevision) VALUES (\"{nombre}\",{prevision})"
         )
         self.commit()
+
+    def get_ultima_entrada_disponible(self, idActividad: int):
+        """
+        Devuelve la ultima entrada disponible para una actividad concreta
+        Si no hay entradas disponibles, lanza una excepcion
+        """
+
+        ultima_entrada_disponible = None
+        try:
+            query = """
+                SELECT IdEntrada
+                FROM UsarEntradas
+                WHERE
+                    DNIAsistentes IS NULL
+                    AND IdActividad = {idActividad}
+            """.format(idActividad = idActividad)
+
+            # Tomo el primer resultado devuelto por la base de datos
+            ultima_entrada_disponible = self.execute(query)
+            ultima_entrada_disponible = ultima_entrada_disponible[0][0]
+        except Exception as e:
+            print(f"No se pudo obtener una entrada disponible para la actividad {idActividad}")
+            print(f"El codigo de error fue {e}")
+            raise Exception("No hay entradas disponibles")
+
+        return ultima_entrada_disponible
