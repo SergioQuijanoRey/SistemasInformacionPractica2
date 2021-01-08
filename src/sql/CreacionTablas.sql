@@ -454,7 +454,6 @@ CREATE TABLE IF NOT EXISTS VotarNominado(
 );
 
 INSERT INTO VotarNominado(DNIJuez, IdCategoria, DNINominado) VALUES
-    ("0000000k", 1, "0000000k"),
     ("0000001k", 2, "0000001k"),
     ("0000002k", 3, "0000002k"),
     ("0000003k", 4, "0000003k"),
