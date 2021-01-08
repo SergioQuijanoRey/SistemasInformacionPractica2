@@ -392,12 +392,13 @@ class DatabaseRepository:
     def actividad_mayor(self):
         results = self.try_execute("SELECT MAX(idActividad) FROM Actividad;")
         try:
-            max = int(result[0][0])
+            ultima_actividad = int(results[0][0])
         except:
-            print("Error al convertir idActividad maximo a entero")
-            max = 0
+            print("Error al intentar obtener la ultima actividad insertada en la base de datos")
+            print("Se devuelve la actividad 0")
+            ultima_actividad = 0
 
-        return max
+        return ultima_actividad
 
     def asignar_hora_invitado(self, dni: str, idAlfombra: int, hora: str):
         """Asignamos una hora para un invitado en la alfombra roja"""
@@ -417,7 +418,7 @@ class DatabaseRepository:
         except Exception as e:
             print("No se pudo asignar la rueda de prensa a la pelicula")
             print(f"El error fue {e}")
-            db.rollback(save)
+            self.rollback(save)
 
     def usar_entrada(self, idActividad, dni):
         # Tomamos la ultima entrada disponible
@@ -464,7 +465,7 @@ class DatabaseRepository:
         except Exception as e:
             print("No se pudo planificar la categoria")
             print(f"El error fue {e}")
-            db.rollback(save)
+            self.rollback(save)
 
 
     def devolver_entrada(self, id_actividad: int, id_entrada: int):
@@ -551,7 +552,7 @@ class DatabaseRepository:
 
     def crear_actividad(self, descripcion: str, fecha:str):
         try:
-            db.execute(
+            self.execute(
                 f"INSERT INTO Actividad (Descripcion, Fecha) VALUES (\"{descripcion}\", \"{fecha}\")"
             )
         except Exception as e:
@@ -560,6 +561,7 @@ class DatabaseRepository:
             raise Exception("No se ha podido crear la actividad")
 
         self.commit()
+
 
     # def insertar_entradas_para_actividad(IdActividad: str):
 

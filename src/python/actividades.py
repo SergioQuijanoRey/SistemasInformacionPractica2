@@ -1,6 +1,6 @@
 import DatabaseRepository
 import UI
-from utils import get_usr_data
+from utils import *
 
 def crear_actividad(db):
     # TODO -- limpiar esta funcion
@@ -8,11 +8,16 @@ def crear_actividad(db):
     descripcion    = input("Inserte la descripcion de la actividad")
     fecha          = input("Inserte la fecha de la actividad")
 
-    db.crear_actividad(descripcion, fecha)
+    try:
+        db.crear_actividad(descripcion, fecha)
+    except Exception as e:
+        print("No se pudo crear la actividad")
+        print(f"El codigo de erorr fue {e}")
+        raise Exception("No se pudo crear la actividad")
 
 
     IdActividad = db.actividad_mayor()
-    cantidadEntradas = utils.get_int("Cuantas entradas desea que tenga la actividad: ")
+    cantidadEntradas = get_int("Cuantas entradas desea que tenga la actividad: ")
     db.insertar_entradas_para_actividad(IdActividad,cantidadEntradas)
 
 
@@ -20,7 +25,14 @@ def rueda_pelicula(db):
     save = "RUEDAPRENSA"
     db.savepoint(save)
 
-    crear_actividad(db)
+    try:
+        crear_actividad(db)
+    except Exception as e:
+        print("No se pudo crear la actividad para la rueda de prensa")
+        print(f"El codigo de error fue {e}")
+        print("Intentelo de nuevo")
+        return
+
     ruedaPrensa = db.actividad_mayor()
 
     db.mostrar_peliculas()
@@ -67,4 +79,4 @@ def permiso_periodista(db):
     # Lanzamos la peticion a la bse de datos
     db.dar_permiso_periodista(dni_periodista, id_actividad)
 
-    input("Pulsa una tecla para CONTINUAR...")
+    wait_for_user_input()
