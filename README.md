@@ -21,7 +21,7 @@
 * [ ] Gestion de asistentes
     * [xx] Asignar hora invitado para alfombra roja: Lucía
         * [ ] Trigger para comprobar que la hora introducida es correcta
-    * [x] Dar permiso a periodista: Sergio
+    * [xx] Dar permiso a periodista: Sergio
     * [x] Asignar rueda de prensa a pelicula: Jesus
         * Duda con savepoint
     * [x] Crear actividad: Juanjo
