@@ -19,7 +19,8 @@
     * [xx] Notificar asistencia actividad gratuita: Lucía
         * [ ] Mostrar actividades que tengan disponibles entradas para simplificar las cosas
 * [ ] Gestion de asistentes
-    * [x] Asignar hora invitado para alfombra roja: Lucía
+    * [xx] Asignar hora invitado para alfombra roja: Lucía
+        * [ ] Trigger para comprobar que la hora introducida es correcta
     * [x] Dar permiso a periodista: Sergio
     * [x] Asignar rueda de prensa a pelicula: Jesus
         * Duda con savepoint
