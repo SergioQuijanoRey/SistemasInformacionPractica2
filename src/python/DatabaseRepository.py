@@ -9,6 +9,7 @@ class DatabaseRepository:
     Interfaz que declara las operaciones que puede realizarse con una base de datos
     Por tanto, no puede ser instanciada directamente, debe ser implementada
     """
+    PRECIO_ENTRADA = 15.50
 
     def __init__(self):
         """El inicializador se conecta a la base de datos"""
@@ -330,19 +331,6 @@ class DatabaseRepository:
             nombre = result[1]
             print(f"Patrocinador \"{nombre}\" con identificador {idpatro}")
 
-    def mostrar_entradadas_para_actividad(self, IdActividad: str):
-        """Mostramos los identificadores de la entradas para la actividad dada como argumento"""
-        print("Las entradas de la Base de datos para la Actividad son:")
-        query = f"""
-            SELECT IdEntrada FROM UsarEntradas
-            WHERE IdActividad = \"{IdActividad}\"
-        """
-
-        try:
-            self.execute(query)
-        except Exception as e:
-            print("No se realizar la consulta")
-            print(f"El error fue {e}")
 
     def mostrar_subastadas(self):
         """Mostramos los patrocinadores almacenados en la base de datos"""
@@ -476,7 +464,7 @@ class DatabaseRepository:
             print(f"El error fue {e}")
             self.rollback(save)
 
-    def usar_entrada(self, idActividad, dni):
+    def usar_entrada(self, idActividad: int, dni: str, cantidad: int):
         # Tomamos la ultima entrada disponible
         ultima_entrada_disponible = None
         try:
@@ -491,11 +479,11 @@ class DatabaseRepository:
         try:
             query = """
                 UPDATE UsarEntradas
-                SET DNIAsistentes = '{dni}'
+                SET DNIAsistentes = '{dni}', Cantidad = {cantidad}
                 WHERE
                     IdActividad = {idActividad}
                     AND IdEntrada = {ultima_entrada_disponible};
-            """.format(dni = dni, idActividad = idActividad, ultima_entrada_disponible = ultima_entrada_disponible)
+            """.format(dni = dni, idActividad = idActividad, ultima_entrada_disponible = ultima_entrada_disponible, cantidad = cantidad)
             self.execute(query)
             self.commit()
 
@@ -503,6 +491,8 @@ class DatabaseRepository:
             print("No se pudo asignar la entrada al asistente")
             print(f"El error fue {e}")
             raise Exception("No se puedo asignar entrada")
+
+        return ultima_entrada_disponible
 
     def presentado_categoria(self, descrip: str, presen: str, idgala: int):
         try:
@@ -596,13 +586,16 @@ class DatabaseRepository:
 
         return ultima_entrada_disponible
 
-    def comprar_entrada(self, IdEntrada: str, IdActividad: str, DNIAsistentes: str, Cantidad: int, cantidadPago:float):
+    def comprar_entrada(self, id_entrada: str, id_actividad: str, cantidadPago:float):
 
-        self.try_execute(
-            f"INSERT INTO UsarEntradas(IdEntrada, IdActividad, DNIAsistentes, Cantidad) VALUES ({IdEntrada}, {IdActividad}, \"{DNIAsistentes}\", {Cantidad})" )#La devolucion se gestiona en el disparador
-
-        self.try_execute(
-            f"INSERT INTO AbonaPagos(cantidadPago, IdEntrada, IdActividad) VALUES ({cantidadPago},{IdEntrada}, {IdActividad})")
+        try:
+            self.execute(
+                f"INSERT INTO AbonaPagos(Cantidad, IdEntrada, IdActividad) VALUES ({cantidadPago},{id_entrada}, {id_actividad});"
+            )
+        except Exception as e:
+            print("No se pudo insertar el pago en la base de datos")
+            print(f"El error fue {e}")
+            raise Exception("No se ha podido crear el pago")
 
         self.commit()
 

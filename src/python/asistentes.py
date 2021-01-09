@@ -3,33 +3,38 @@ import UI
 from utils import *
 
 def comprar_entrada(db):
-    #Tomamos los datos
-
-
-    cantidadPago = UI.input_AbonaPagos()
-
-    #db.savepoint("ComprarEntrada")
+    # Mostramos los asistentes y tomamos el dni 
     db.mostrar_asistentes()
-    DNIAsistentes = input("Introduce el dni del asistente:   ")
+    dni = get_usr_data("Introduzca el DNI del asistente: ", str, "El tipo de dato no es correcto")
 
+    # Mostramos las actividades y tomamos el id
     db.mostrar_actividades()
-    IdActividad = input ("Introduce el Identificador de la actividad")
+    id_actividad = get_usr_data("Introduzca el id de la actividad: ", int, "El identificador dado no es valido")
 
-    db.mostrar_entradadas_para_actividad(IdActividad)
-    IdEntrada = utils.get_int("Introduzca el identificador de la entrada")
+    # Pedimos la cantidad de entradas que quiere el asistente
+    cantidad = get_usr_data("Inserte la cantidad de entradas: ", int, "La cantidad introducido no es valida")
 
-    precioEntrada = utils.get_int("Introduzca el precio de una entrada")
-    cantidadEntradas = utils.get_int("Introduzca la cantidad de entradas que quiere: ")
-    cantidadPago = precioEntrada*cantidadEntradas
+    db.savepoint("ComprarEntrada")
 
+    id_entrada = None
+    try:
+        id_entrada = db.usar_entrada(id_actividad, dni, cantidad)
+    except:
+        print("Esta actividad no tiene entradas disponibles")
+        print("Pruebe con otra actividad")
+        wait_for_user_input()
+        return
 
-    db.comprar_entrada(IdEntrada, IdActividad, DNIAsistentes, Cantidad, cantidadPago)
+    cantidadPago = db.PRECIO_ENTRADA*float(cantidad)
 
+    try:
+        db.comprar_entrada(id_entrada, id_actividad,cantidadPago)
+    except:
+        print("No se ha podido tramitar el pago")
+        db.rollback("ComprarEntrada")
+
+    print("Compra realizada")
     wait_for_user_input()
-
-    #db.rollback("ComprarEntrada")
-
-    #Hacer efectivos los cambios
 
 
 def covid(db):
@@ -104,10 +109,13 @@ def actividad_gratuita(db):
     db.mostrar_asistentes()
     dni = get_usr_data("Inserte el dni del Asistente: ", str, "Los datos introducidos no son validos" )
 
+    # Pedimos la cantidad de entradas que quiere el asistente
+    cantidad = get_usr_data("Inserte la cantidad de entradas: ", int, "La cantidad introducido no es valida")
+
     # Usar la ultima entrada que este disponible
     # Si no hay entradas disponibles, notificarlo al usuario
     try:
-        db.usar_entrada(id_actividad, dni)
+        db.usar_entrada(id_actividad, dni, cantidad)
     except:
         print("Esta actividad no tiene entradas disponibles")
         print("Pruebe con otra actividad")
