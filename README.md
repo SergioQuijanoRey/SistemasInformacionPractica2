@@ -9,7 +9,7 @@
 * [ ] Separar el CrearTablas.sql en creacion de tablas, triggers e insercion de datos
 * [ ] Trigger: Dar permiso periodista, si el periodista tiene covid, que no pueda acceder ??
 * [ ] Gestionar Asistentes
-    * [ ] Comprar entrada : Juanjo
+    * [x] Comprar entrada : Juanjo
     * [xx] Notificar estado Covid: Sergio
         * [ ] Escribir triggers relacionados con tener covid
         * [ ] El update no falla aunque el usuario pase mal los parametros
@@ -26,13 +26,13 @@
         * Duda con savepoint
     * [xx] Crear actividad: Juanjo
       * [ ] Poder particularizar la actividad Creada
-* [ ] Gestion de premios
+* [xx] Gestion de premios
 	* [xx] Votar: Juanjo
-	* [x] Planificar premio : Lucia
-	* [x] Asignar nominado a premio : Juanjo
-	* [x] Fallar premio : Jesus
+	* [xx] Planificar premio : Lucia
+	* [xx] Asignar nominado a premio : Juanjo
+	* [xx] Fallar premio : Jesus
 * [ ] Gestión de patrocinadores
-	* [x] Dar de alta a patrocinador : Juanjo
+	* [xx] Dar de alta a patrocinador : Juanjo
 	* [x] Patrocinar actividad no económica : Lucía
         * Duda con savepoint
 	* [x] Subasta de patrocinio económico
@@ -43,3 +43,4 @@
     * [ ] Trigger para comprobar que la hora introducida es correcta: Jesus
     * [ ] Trigger para comprobar en votar, que la categoria, el juez y nominado esten de verdad relacionados: Lucía
     * [ ] Trigger para ver que en devolver entrada, los datos sean correctos, porque el UPDATE no falla
+    * [ ] Trigger para ver que en dar de alta patrocinador, la prevision sea un numero positivo
