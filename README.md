@@ -36,7 +36,7 @@
 	* [x] Patrocinar actividad no económica : Lucía
         * Duda con savepoint
 	* [x] Subasta de patrocinio económico
-	* [x] Fijar patrocinador: Sergio
+	* [xx] Fijar patrocinador: Sergio
 
 * **Triggers**:
     * [ ] Trigger para saber si la entrada se puede devolver o no segun fecha y covid : Juanjo

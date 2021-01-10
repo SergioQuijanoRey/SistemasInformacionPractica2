@@ -376,8 +376,8 @@ class DatabaseRepository:
         """
 
         query = """
-            SELECT IdActividadSubastada, Nombre FROM ActividadSubastada
-            WHERE IdActividadSubastada NOT IN (
+            SELECT DISTINCT IdActividad FROM Puja
+            WHERE IdActividad NOT IN (
                 SELECT IdActividadAsignada FROM ActividadAsignada
             );
         """
@@ -391,8 +391,7 @@ class DatabaseRepository:
 
         for result in results:
             id_actividad = result[0]
-            nombre = result[1]
-            print(f"Actividad {nombre} identificada por {id_actividad}")
+            print(f"Actividad {id_actividad} esta disponible para fijarse")
 
     def mostrar_mejor_patrocinador(self, id_actividad_subastada: int):
         """Mostramos el mejor patrocinador para una actividad subastada"""
@@ -401,15 +400,22 @@ class DatabaseRepository:
             SELECT IdPatrocinador, Valor
             FROM Puja
             WHERE Valor IN (
-                SELECT MIN(Valor)
+                SELECT MAX(Valor)
                 FROM Puja
                 WHERE IdActividad = {id_actividad_subastada}
             );
         """.format(id_actividad_subastada = id_actividad_subastada)
 
         patrocinador_escogido = "Desconocido"
-        patrocinador_escogido = self.try_execute(query, "No se pudo escoger al mejor patrocinador")
-        valor_puja, patrocinador_escogido = patrocinador_escogido[0][1], patrocinador_escogido[0][0]
+
+        try:
+            patrocinador_escogido = self.execute(query)
+            valor_puja, patrocinador_escogido = patrocinador_escogido[0][1], patrocinador_escogido[0][0]
+        except Exception as e:
+            print("No se pudo tomar al mejor patrocinador")
+            print(f"El codigo de error fue {e}")
+            return
+
         print(f"El patrocinador escogido es: {patrocinador_escogido} con un valor de {valor_puja}")
 
     def mostrar_categorias_de_juez(self, id_juez: str):
