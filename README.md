@@ -33,7 +33,7 @@
 	* [xx] Fallar premio : Jesus
 * [ ] Gestión de patrocinadores
 	* [xx] Dar de alta a patrocinador : Juanjo
-	* [x] Patrocinar actividad no económica : Lucía
+	* [xx] Patrocinar actividad no económica : Lucía
         * Duda con savepoint
 	* [xx] Subasta de patrocinio económico
 	* [xx] Fijar patrocinador: Sergio
