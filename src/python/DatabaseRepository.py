@@ -274,6 +274,16 @@ class DatabaseRepository:
             nombre = result[1]
             print(f"DNI: {dni}, Nombre: {nombre} ")
 
+    def mostrar_categorias(self):
+        """Mostramos los Nominados almacenados en la base de datos"""
+        print("Los Nominados de la Base de Datos son: ")
+        results = self.try_execute("SELECT idCategoria, Descripcion FROM PresentadoCategoria;")
+
+        for result in results:
+            categoria = result[0]
+            descrip = result[1]
+            print(f"Categoria '{descrip}' con identificador {categoria} ")
+
     def mostrar_jueces(self):
         """Mostramos los Jueces almacenados en la base de datos"""
         print("Los Jueces de la Base de Datos son: ")
