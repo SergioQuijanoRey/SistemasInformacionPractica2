@@ -1,15 +1,13 @@
 import DatabaseRepository
 import UI
-from utils import get_usr_data
+from utils import get_usr_data, get_int
 import actividades
 from utils import wait_for_user_input
 
 def alta_patrocinador(db):
-    nombre, prevision = UI.input__patrocinador()
-    db.try_execute(
-        f"INSERT INTO Patrocinador (Nombre, Prevision) VALUES (\"{nombre}\",{prevision})"
-    )
-    db.commit()
+    nombre = get_usr_data("Inserte el nombre del patrocinador: ", str,"El dato introducido no es valido") 
+    prevision = get_int("Inserte prevision: ")
+    db.alta_patrocinador(nombre, prevision)
 
 def no_economica(db):
     # TODO -- usar que actividad devuelva el identificador de la actividad creada
