@@ -5,9 +5,13 @@ import actividades
 from utils import wait_for_user_input
 
 def alta_patrocinador(db):
-    nombre = get_usr_data("Inserte el nombre del patrocinador: ", str,"El dato introducido no es valido") 
-    prevision = get_int("Inserte prevision: ")
+    # El usuario introduce los datos del patrocinador
+    nombre = get_usr_data("Inserte el nombre del patrocinador: ", str, "El dato introducido no es valido")
+    prevision = get_usr_data("Inserte prevision: ", float, "El dato introducido no es valido")
+
+    # Añadimos el patrocinador a la base de datos
     db.alta_patrocinador(nombre, prevision)
+    wait_for_user_input()
 
 def no_economica(db):
     # TODO -- usar que actividad devuelva el identificador de la actividad creada
@@ -31,6 +35,7 @@ def no_economica(db):
     descrip = get_usr_data("Inserte la descripcion de la retribucion: ", str, "Los datos introducidos no son validos" )
 
     db.oferta_no_economica(actividad, idpatro, coste, descrip, save)
+    wait_for_user_input()
 
 
 

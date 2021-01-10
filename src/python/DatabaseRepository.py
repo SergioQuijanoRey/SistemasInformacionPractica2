@@ -589,9 +589,11 @@ class DatabaseRepository:
         # Mostramos el patrocinador
         self.mostrar_mejor_patrocinador(id_actividad_subastada)
 
-    def alta_patrocinador(self, nombre, prevision):
+    def alta_patrocinador(self, nombre: str, prevision: float):
+        query = f"INSERT INTO Patrocinador(Nombre, Prevision) VALUES (\"{nombre}\",{prevision});"
         self.try_execute(
-            f"INSERT INTO Patrocinador (Nombre, Prevision) VALUES (\"{nombre}\",{prevision})"
+            query,
+            "No se pudo introducir el nuevo patrocinador"
         )
         self.commit()
 
@@ -691,15 +693,6 @@ class DatabaseRepository:
                 ({idpatro}, {idactividad}, {valor});
         """.format(idpatro = idpatro, idactividad = idactividad, valor = valor )
 
-        self.try_execute(query)
-        self.commit()
-
-    def alta_patrocinador(self, nombre:str , prevision: int):
-        """Se da de alta a un patrocinador"""
-
-        query = """
-            f"INSERT INTO Patrocinador (Nombre, Prevision) VALUES ("{nombre}",{prevision});"
-        """.format(nombre = nombre, prevision = prevision)
         self.try_execute(query)
         self.commit()
 
