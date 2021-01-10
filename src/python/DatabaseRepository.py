@@ -16,6 +16,7 @@ class DatabaseRepository:
 
         self.conn = None
         self.cursor = None
+        self.temporal = False   # Para evitar hacer commits y poder hacer rollback
 
         # Nos conectamos a la base de datos
         self.connect()
@@ -116,6 +117,8 @@ class DatabaseRepository:
     def rollback(self, savepoint: str):
         self.try_execute(
             f"ROLLBACK TO {savepoint};", f"ERROR haciendo el Rollback al savepoint {savepoint}")
+        print("TOdo chido")
+        input("EYEYEEYEYEYE")
 
     def savepoint(self, name: str):
         self.try_execute(f"SAVEPOINT {name};",
@@ -123,6 +126,11 @@ class DatabaseRepository:
 
     def commit(self):
         """Saves  the current changes to the database"""
+
+        # Para hacer operaciones temporales
+        if self.temporal is True:
+            return
+
         try:
             self.conn.commit()
         except Exception as err:
@@ -459,13 +467,11 @@ class DatabaseRepository:
     def actividad_mayor(self):
         results = self.try_execute("SELECT MAX(idActividad) FROM Actividad;")
         try:
-            ultima_actividad = int(results[0][0])
+            return int(results[0][0])
         except:
             print("Error al intentar obtener la ultima actividad insertada en la base de datos")
             print("Se devuelve la actividad 0")
-            ultima_actividad = 0
-
-        return ultima_actividad
+            return 0
 
     def asignar_hora_invitado(self, dni: str, idAlfombra: int, hora: str):
         """Asignamos una hora para un invitado en la alfombra roja"""
@@ -527,14 +533,17 @@ class DatabaseRepository:
             print(f"El error fue {e}")
 
     def oferta_no_economica(self, idactividad: int, idpatro: int, coste: float, descrip: str, save: str):
-        try:
-            self.execute(f"INSERT INTO OfertaActividadNoEconomica(IdActividadNoEconomica, IdPatrocinador, Coste, DescripcionRetribucion) VALUES ({idactividad}, {idpatro}, {coste}, \"{descrip}\");")
-            self.commit()
+        query = f"INSERT INTO OfertaActividadNoEconomica(IdActividadNoEconomica, IdPatrocinador, Coste, DescripcionRetribucion) VALUES ({idactividad}, {idpatro}, {coste}, \"{descrip}\");"
 
+        try:
+            self.execute(query)
         except Exception as e:
-            print("No se pudo planificar la categoria")
+            print("No se pudo crear la oferta no economica")
             print(f"El error fue {e}")
             self.rollback(save)
+            return
+
+        self.commit()
 
 
     def devolver_entrada(self, id_actividad: int, id_entrada: int):

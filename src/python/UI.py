@@ -14,6 +14,11 @@ def main_menu(db):
     print("~" * 80)
 
     while True:
+        # Por si acaso ocurre una excepcion y dejamos la base de datos en
+        # un estado inconsistente. No deberia ocurrir, es una condicion de
+        # seguridad
+        db.temporal = False
+
         show_options()
         try:
             option = int(input("Elija una opcion: "))

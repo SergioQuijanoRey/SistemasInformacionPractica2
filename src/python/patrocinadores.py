@@ -14,17 +14,18 @@ def alta_patrocinador(db):
     wait_for_user_input()
 
 def no_economica(db):
-    # TODO -- usar que actividad devuelva el identificador de la actividad creada
+    db.temporal = True
+
     save = "NOECONOMICA"
     db.savepoint(save)
 
-    actividad = None
     try:
-        actividad = crear_actividad(db)
+        actividades.crear_actividad(db)
     except Exception as e:
         print("No se pudo crear la actividad para la rueda de prensa")
         print(f"El codigo de error fue {e}")
         print("Intentelo de nuevo")
+        db.temporal = False
         return
 
 
@@ -33,7 +34,10 @@ def no_economica(db):
 
     coste = get_usr_data("Inserte el coste de la actividad: ",float, "El dato introducido no es valido")
     descrip = get_usr_data("Inserte la descripcion de la retribucion: ", str, "Los datos introducidos no son validos" )
+    actividad = db.actividad_mayor()
+    actividad = 200
 
+    db.temporal = False
     db.oferta_no_economica(actividad, idpatro, coste, descrip, save)
     wait_for_user_input()
 
@@ -44,7 +48,7 @@ def subasta(db):
 
     # Mostramos las actividades que se pueden subastar
     db.mostrar_subastadas()
-    idactividad = get_usr_data("Inserte el identificador de la actividad: ",int, "El dato introducido no es un entero")
+    idactividad = get_usr_data("No se pudo crear la oferta no economica",int, "El dato introducido no es un entero")
 
     # Mostramos los patrocinadores y elegimos
     db.mostrar_patrocinadores()

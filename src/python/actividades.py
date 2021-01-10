@@ -3,7 +3,6 @@ import UI
 from utils import *
 
 def crear_actividad(db):
-    # TODO -- limpiar esta funcion
     """Meter cuantas entradas quiere el usuario y hacer el insert """
     descripcion    = input("Inserte la descripcion de la actividad: ")
     fecha          = input("Inserte la fecha de la actividad: ")
@@ -16,30 +15,6 @@ def crear_actividad(db):
         print(f"El codigo de erorr fue {e}")
         wait_for_user_input()
         raise Exception("No se pudo crear la actividad")
-
-
-
-    # Tomamos el identificador de la actividad creada
-    IdActividad = db.actividad_mayor()
-
-    # Preguntamos por la cantidad de entradas que queremos asignar a la actividad
-    cantidadEntradas = get_int("Cuantas entradas desea que tenga la actividad: ")
-
-    try:
-        db.insertar_entradas_para_actividad(IdActividad,cantidadEntradas)
-    except Exception as e:
-        print("No se pudieron añadir entradas para la actividad")
-        print(f"El codigo de erorr fue {e}")
-
-        # TODO -- esto esta ok?
-        return 0
-
-    print("Actividad creada")
-    wait_for_user_input()
-
-    # Devolvemos el identificador de la actividad para ser usada por otras funciones
-    return IdActividad
-
 
 def rueda_pelicula(db):
     save = "RUEDAPRENSA"
