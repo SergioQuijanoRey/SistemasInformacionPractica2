@@ -42,19 +42,21 @@ def crear_actividad(db):
     return IdActividad
 
 def rueda_pelicula(db):
+    db.temporal = True
+
     save = "RUEDAPRENSA"
     db.savepoint(save)
 
-    ruedaPrensa = None
     try:
-        ruedaPrensa = crear_actividad(db)
+        crear_actividad(db)
     except Exception as e:
         print("No se pudo crear la actividad para la rueda de prensa")
         print(f"El codigo de error fue {e}")
         print("Intentelo de nuevo")
+        db.temporal = False
         return
 
-
+    ruedaPrensa = db.actividad_mayor()
     db.mostrar_peliculas()
     pelicula = get_usr_data("Inserte el identificador de la película: ",int, "El dato introducido no es un entero")
 
@@ -62,6 +64,7 @@ def rueda_pelicula(db):
     plazas = get_usr_data("Inserte el numero de plazas: ",int, "El dato introducido no es un entero")
     lugar = input("Inserte el lugar: ")
 
+    db.temporal = False
     db.asignar_rueda_pelicula(ruedaPrensa,  pelicula, nombre, plazas, lugar, save)
     wait_for_user_input()
 
