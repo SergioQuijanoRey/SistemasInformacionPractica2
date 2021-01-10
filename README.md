@@ -40,6 +40,6 @@
 
 * **Triggers**:
     * [ ] Trigger para saber si la entrada se puede devolver o no segun fecha y covid : Juanjo
-    * [ ] Trigger para comprobar que la hora introducida es correcta
-    * [ ] Trigger para comprobar en votar, que la categoria, el juez y nominado esten de verdad relacionados
+    * [ ] Trigger para comprobar que la hora introducida es correcta: Jesus
+    * [ ] Trigger para comprobar en votar, que la categoria, el juez y nominado esten de verdad relacionados: Lucía
     * [ ] Trigger para ver que en devolver entrada, los datos sean correctos, porque el UPDATE no falla
