@@ -9,7 +9,7 @@
 * [ ] Separar el CrearTablas.sql en creacion de tablas, triggers e insercion de datos
 * [ ] Trigger: Dar permiso periodista, si el periodista tiene covid, que no pueda acceder ??
 * [ ] Gestionar Asistentes
-    * [x] Comprar entrada : Juanjo
+    * [xx] Comprar entrada : Juanjo
     * [xx] Notificar estado Covid: Sergio
         * [ ] Escribir triggers relacionados con tener covid
         * [ ] El update no falla aunque el usuario pase mal los parametros
