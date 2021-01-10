@@ -35,7 +35,6 @@ def no_economica(db):
     coste = get_usr_data("Inserte el coste de la actividad: ",float, "El dato introducido no es valido")
     descrip = get_usr_data("Inserte la descripcion de la retribucion: ", str, "Los datos introducidos no son validos" )
     actividad = db.actividad_mayor()
-    actividad = 200
 
     db.temporal = False
     db.oferta_no_economica(actividad, idpatro, coste, descrip, save)
@@ -48,7 +47,7 @@ def subasta(db):
 
     # Mostramos las actividades que se pueden subastar
     db.mostrar_subastadas()
-    idactividad = get_usr_data("No se pudo crear la oferta no economica",int, "El dato introducido no es un entero")
+    idactividad = get_usr_data("Id de la actividad: ",int, "El dato introducido no es un entero")
 
     # Mostramos los patrocinadores y elegimos
     db.mostrar_patrocinadores()

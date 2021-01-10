@@ -35,7 +35,7 @@
 	* [xx] Dar de alta a patrocinador : Juanjo
 	* [x] Patrocinar actividad no económica : Lucía
         * Duda con savepoint
-	* [x] Subasta de patrocinio económico
+	* [xx] Subasta de patrocinio económico
 	* [xx] Fijar patrocinador: Sergio
 
 * **Triggers**:
@@ -44,3 +44,4 @@
     * [ ] Trigger para comprobar en votar, que la categoria, el juez y nominado esten de verdad relacionados: Lucía
     * [ ] Trigger para ver que en devolver entrada, los datos sean correctos, porque el UPDATE no falla
     * [ ] Trigger para ver que en dar de alta patrocinador, la prevision sea un numero positivo
+	* [ ] Trigger para que subasta patrocinio economico no se permitan propuestas economicas negativas
