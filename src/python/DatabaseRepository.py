@@ -658,3 +658,12 @@ class DatabaseRepository:
 
         self.try_execute(query)    
         self.commit()
+        
+    def alta_patrocinador(self, nombre:str , prevision: int)
+        """Se da de alta a un patrocinador"""
+        
+        query = """
+            f"INSERT INTO Patrocinador (Nombre, Prevision) VALUES ("{nombre}",{prevision});"
+        """.format(nombre = nombre, prevision = prevision)
+        self.try_execute(query)
+        self.commit()
