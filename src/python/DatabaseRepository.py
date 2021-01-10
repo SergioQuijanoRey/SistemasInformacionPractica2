@@ -422,6 +422,19 @@ class DatabaseRepository:
             id_categoria = result[0]
             print(f"Categoria con identificador {id_categoria}")
 
+    def mostrar_categorias_fallables(self):
+        """Mostramos las categorias en las que se ha votado"""
+        try:
+            results = self.execute("SELECT DISTINCT IdCategoria FROM VotarNominado")
+        except Exeption as e:
+            print("No se han encontrado categorias que se puedan fijar")
+            print(f"El error fue {e}")
+
+        print("Las categorías que se pueden fallar son: ")
+        for result in results:
+            id_categoria = result[0]
+            print(f"Categoria {id_categoria}")
+
 
     def mostrar_nominados_de_categoria(self, id_categoria: int):
         """Muestra los nominados de una categoria concreta"""
@@ -545,8 +558,9 @@ class DatabaseRepository:
         try:
             results = self.execute(f"SELECT DNINominado, COUNT(DNINominado) votos FROM VotarNominado  WHERE IdCategoria={idcategoria} GROUP BY DNINominado;")
         except Exception as e:
-            print("No se pudo fijar la categoria correctamente")
+            print("No se pudo fallar la categoria correctamente")
             print(f"El error fue {e}")
+            return
 
         print("Los resultados de la votacion son:")
         for result in results:
@@ -554,7 +568,18 @@ class DatabaseRepository:
             votos = result[1]
             print(f"Nominado: {dni}   Votos: {votos}")
 
-        print("")
+        # Tomamos el ganador
+        max_votos = int(result[0][1])
+        ganador = result[0][0]
+        for result in results:
+            current_candidato = result[0]
+            current_votos = int(result[1])
+
+            if current_votos > max_votos:
+                max_votos = current_votos
+                ganador = current_candidato
+
+        print(f"Por tanto, el ganador es {ganador} con {max_votos} votos")
 
 
     def fijar_patrocinador(self, id_actividad_subastada: int):

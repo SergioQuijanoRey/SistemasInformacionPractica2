@@ -47,13 +47,10 @@ def asignar_nominado(db):
 
     # El usuario introduce la categoria en la que quiere meter al candidato
     db.mostrar_categorias()
-    idcategoria = get_usr_data("Introduzca el identificador de la categoria", int, "El identificador no es valido")
+    idcategoria = get_usr_data("Introduzca el identificador de la categoria: ", int, "El identificador no es valido")
 
     # Insertamos los datos en la base de datos
-    db.asignar_nominado_a_categoria()
-
-
-    db.commit()
+    db.asignar_nominado_a_categoria(idcategoria, dni)
     wait_for_user_input()
 
 def fallar_premio(db):
