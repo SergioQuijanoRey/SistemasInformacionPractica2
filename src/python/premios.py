@@ -41,11 +41,17 @@ def planificar_premio(db):
 
 def asignar_nominado(db):
 
+    # El usuario introduce el DNI del candidato
     db.mostrar_nominados()
-    dni, idcategoria = UI.input_candidato()
+    dni = get_usr_data("Introduzca el dni del candidato: ", str, "Dato introducido no valido")
 
-    db.try_execute(
-        f"INSERT INTO SerCandidato(DNINominado, IdCategoria) VALUES (\"{dni}\",{idcategoria})")
+    # El usuario introduce la categoria en la que quiere meter al candidato
+    db.mostrar_categorias()
+    idcategoria = get_usr_data("Introduzca el identificador de la categoria", int, "El identificador no es valido")
+
+    # Insertamos los datos en la base de datos
+    db.asignar_nominado_a_categoria()
+
 
     db.commit()
     wait_for_user_input()

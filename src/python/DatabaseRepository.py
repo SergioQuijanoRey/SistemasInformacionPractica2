@@ -656,14 +656,21 @@ class DatabaseRepository:
                 ({idpatro}, {idactividad}, {valor});
         """.format(idpatro = idpatro, idactividad = idactividad, valor = valor )
 
-        self.try_execute(query)    
+        self.try_execute(query)
         self.commit()
-        
-    def alta_patrocinador(self, nombre:str , prevision: int)
+
+    def alta_patrocinador(self, nombre:str , prevision: int):
         """Se da de alta a un patrocinador"""
-        
+
         query = """
             f"INSERT INTO Patrocinador (Nombre, Prevision) VALUES ("{nombre}",{prevision});"
         """.format(nombre = nombre, prevision = prevision)
         self.try_execute(query)
+        self.commit()
+
+    def asignar_nominado_a_categoria(self, idCategoria: int, dniNominado: str):
+        self.try_execute(
+            f"INSERT INTO SerCandidato(DNINominado, IdCategoria) VALUES (\"{dniNominado}\",{idCategoria});",
+            "No se pudo asignar el nominado a esta categoria"
+        )
         self.commit()

@@ -356,15 +356,3 @@ def input_AbonaPagos():
         cantidad = utils.get_int("Meta el precio correctamente: ")
 
     return cantidad
-
-def input_candidato():
-
-    dni = input("Introduzca el dni del candidato: ")
-    while len(dni) < 0 or len(dni)>9:
-        dni = input("dni incorrecto, introduzcalo correctamente: ")
-
-    idcategoria = utils.get_int("Introduzca el identificador de la categoria: ")
-    while idcategoria < 0:
-        idcategoria = utils.get_int("Error, entero no puede ser negativo, introduzcalo de nuevo: ")
-
-    return dni, idcategoria
