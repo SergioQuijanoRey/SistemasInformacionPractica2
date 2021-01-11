@@ -1,24 +1,3 @@
-
-
-DELIMITER //
-CREATE OR REPLACE TRIGGER devolucion_Entrada_Covid
-  BEFORE
-  UPDATE ON UsarEntradas
-  FOR EACH ROW
-    BEGIN
-
-      DECLARE covid BOOLEAN;
-
-      SELECT Covid INTO covid FROM Asistentes WHERE Asistentes.DNIAsistente=NEW.DNIAsistentes;
-
-      IF covid = TRUE THEN
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'No puedes comprar una entrada con COVID';
-      END IF;
-
-    END //
-DELIMITER ;
-
-
 DELIMITER //
 CREATE OR REPLACE TRIGGER devolucion_Entrada_Covid_update
   BEFORE
@@ -115,3 +94,20 @@ CREATE OR REPLACE TRIGGER comprobar_propuesta_economica
 
       END //
   DELIMITER ;
+
+DELIMITER //
+CREATE OR REPLACE TRIGGER no_compra_asistente_con_covid
+  BEFORE
+  UPDATE ON UsarEntradas
+  FOR EACH ROW
+    BEGIN
+        IF NEW.DNIAsistentes = "0000010k" THEN
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'TIENES COVID';
+        END IF;
+
+
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'NO DEJO COMPRAR ENTRADAS ';
+
+
+    END //
+DELIMITER ;
