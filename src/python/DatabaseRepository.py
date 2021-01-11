@@ -117,8 +117,7 @@ class DatabaseRepository:
     def rollback(self, savepoint: str):
         self.try_execute(
             f"ROLLBACK TO {savepoint};", f"ERROR haciendo el Rollback al savepoint {savepoint}")
-        print("TOdo chido")
-        input("EYEYEEYEYEYE")
+        
 
     def savepoint(self, name: str):
         self.try_execute(f"SAVEPOINT {name};",

@@ -6,14 +6,14 @@ def crear_actividad(db):
     # TODO -- limpiar esta funcion
     """Meter cuantas entradas quiere el usuario y hacer el insert """
     descripcion    = input("Inserte la descripcion de la actividad: ")
-    fecha          = input("Inserte la fecha de la actividad: ")
+    fecha          = input("Inserte la fecha de la actividad (YYYY-MM-DD): ")
 
     # Creamos la actividad
     try:
         db.crear_actividad(descripcion, fecha)
     except Exception as e:
         print("No se pudo crear la actividad")
-        print(f"El codigo de erorr fue {e}")
+        print(f"El codigo de erorr fue: {e}")
         wait_for_user_input()
         raise Exception("No se pudo crear la actividad")
 
