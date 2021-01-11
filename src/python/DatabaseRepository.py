@@ -24,12 +24,6 @@ class DatabaseRepository:
         # Inicializamos la base de datos
         self.initialize_data()
 
-        # Cargamos los triggers
-        self.load_triggers()
-
-        # Cargamos los procedimientos
-        self.load_procedures()
-
     def __del__(self):
         self.commit()
 
@@ -117,7 +111,7 @@ class DatabaseRepository:
     def rollback(self, savepoint: str):
         self.try_execute(
             f"ROLLBACK TO {savepoint};", f"ERROR haciendo el Rollback al savepoint {savepoint}")
-        
+
 
     def savepoint(self, name: str):
         self.try_execute(f"SAVEPOINT {name};",

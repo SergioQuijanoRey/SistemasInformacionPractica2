@@ -2,9 +2,9 @@
 
 DELIMITER //
 CREATE OR REPLACE TRIGGER devolucion_Entrada_Covid
-  AFTER 
+  BEFORE
   UPDATE ON UsarEntradas
-  FOR EACH ROW 
+  FOR EACH ROW
     BEGIN
 
       DECLARE covid BOOLEAN;
@@ -12,10 +12,7 @@ CREATE OR REPLACE TRIGGER devolucion_Entrada_Covid
       SELECT Covid INTO covid FROM Asistentes WHERE Asistentes.DNIAsistente=NEW.DNIAsistentes;
 
       IF covid = TRUE THEN
-        UPDATE UsarEntradas SET Devolucion = TRUE WHERE UsarEntradas.DNIAsistentes=NEW.DNIAsistentes;
-        select "penguin" as log into outfile '/tmp/result.txt';
-      ELSE 
-        select ":_(" as log into outfile '/tmp/result2.txt';
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'No puedes comprar una entrada con COVID';
       END IF;
 
     END //
@@ -24,9 +21,9 @@ DELIMITER ;
 
 DELIMITER //
 CREATE OR REPLACE TRIGGER devolucion_Entrada_Covid_update
-  BEFORE 
+  BEFORE
   UPDATE ON Asistentes
-  FOR EACH ROW 
+  FOR EACH ROW
     BEGIN
 
       IF NEW.Covid = TRUE THEN
@@ -35,8 +32,6 @@ CREATE OR REPLACE TRIGGER devolucion_Entrada_Covid_update
 
     END //
 DELIMITER ;
-
-
 
 
 --Trigger para comprobar la hora a la que acude el invitado en asignar_hora_invitado
