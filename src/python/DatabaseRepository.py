@@ -156,8 +156,6 @@ class DatabaseRepository:
 
     def notificar_estado_covid(self, usr_type: int, dni: str):
         """Notificamos el estado de COVID de un tipo de usuario """
-        # TODO -- hacer como un trigger de Mariadb
-
         # Condicion de seguridad
         if usr_type != 0 and usr_type != 1 and usr_type != 2:
             print("ERROR en DatabaseRepository.notificar_estado_covid()")
@@ -421,7 +419,7 @@ class DatabaseRepository:
 
         results = self.try_execute(query, "Error seleccionando las categorias en las que un juez puede votar")
 
-        # TODO -- no estamos manejando esto con excepciones
+        # No estamos manejando esto con excepciones
         if results is None or len(results) == 0:
             return
 

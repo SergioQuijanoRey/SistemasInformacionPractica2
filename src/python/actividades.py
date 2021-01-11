@@ -3,7 +3,6 @@ import UI
 from utils import *
 
 def crear_actividad(db):
-    # TODO -- limpiar esta funcion
     """Meter cuantas entradas quiere el usuario y hacer el insert """
     descripcion    = input("Inserte la descripcion de la actividad: ")
     fecha          = input("Inserte la fecha de la actividad (YYYY-MM-DD): ")
@@ -34,8 +33,6 @@ def crear_actividad(db):
     except Exception as e:
         print("No se pudieron añadir entradas para la actividad")
         print(f"El codigo de erorr fue {e}")
-
-        # TODO -- esto esta ok?
         raise Exception("No se pudieron añadir las entradas a la actividad")
 
     print("Actividad creada")
