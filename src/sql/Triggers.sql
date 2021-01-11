@@ -1,11 +1,22 @@
 
 
-CREATE TRIGGER devolucionEntradaCovid
-AFTER INSERT OR UPDATE ON UsarEntradas
-BEGIN
-    IF EXISTS (SELECT * FROM Asistentes WHERE DNIAsistente = :new.DNIAsistente AND covid = true ) THEN
-        UPDATE Devolucion SET Devolucion = TRUE;
-END;
+DELIMITER //
+  CREATE OR REPLACE TRIGGER devolucionEntradaCovid
+    BEFORE 
+    INSERT OR UPDATE ON UsarEntradas 
+      BEGIN
+
+        DECLARE covid BOOLEAN;
+
+        SELECT Covid INTO covid FROM Asistentes AS asis WHERE asis.DNIAsistente=NEW.DNIAsistente;
+
+        IF covid == True THEN
+          UPDATE NEW.Devolucion SET NEW.Devolucion=True;
+        END IF;
+
+      END //
+DELIMITER ;
+
 
 --Trigger para comprobar la hora a la que acude el invitado en asignar_hora_invitado
 DELIMITER //
