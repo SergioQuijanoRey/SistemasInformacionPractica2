@@ -43,5 +43,7 @@
     * [x ] Trigger para comprobar que la hora introducida es correcta: Jesus
     * [ ] Trigger para comprobar en votar, que la categoria, el juez y nominado esten de verdad relacionados
     * [ ] Trigger para ver que en devolver entrada, los datos sean correctos, porque el UPDATE no falla
-    * [ ] Trigger para ver que en dar de alta patrocinador, la prevision sea un numero positivo
+    * [x ] Trigger para ver que en usar entrada, la cantidad de entradas no sea negativa : Junta directiva
+    * [x ] Trigger para ver que en dar de alta patrocinador, la prevision sea un numero positivo : Jesus
+    * [x ] Trigger para ver que en oferta no economica, el coste sea un numero positivo : Lucia
 	* [x ] Trigger para que subasta patrocinio economico no se permitan propuestas economicas negativas : Lucia

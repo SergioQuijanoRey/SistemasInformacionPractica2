@@ -27,7 +27,7 @@ CREATE OR REPLACE TRIGGER comprobar_hora_invitado
         END IF;
 
     END //
-  DELIMITER;
+  DELIMITER ;
 
 --Trigger para que subasta patrocinio economico no se permitan propuestas economicas negativas
 DELIMITER //
@@ -42,4 +42,49 @@ CREATE OR REPLACE TRIGGER comprobar_propuesta_economica
         END IF;
 
     END //
-  DELIMITER;
+  DELIMITER ;
+
+--Trigger para ver que en oferta no economica, el coste sea un numero positivo
+  DELIMITER //
+  CREATE OR REPLACE TRIGGER comprobar_coste_no_economica
+    BEFORE
+    INSERT ON OfertaActividadNoEconomica
+    FOR EACH ROW
+      BEGIN
+
+          IF NEW.Coste < 0 THEN
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El coste de la oferta no puede ser negativo';
+          END IF;
+
+      END //
+    DELIMITER ;
+
+--Trigger para ver que en dar de alta patrocinador, la prevision sea un numero positivo
+  DELIMITER //
+  CREATE OR REPLACE TRIGGER comprobar_prevision_patrocinador
+    BEFORE
+    INSERT ON Patrocinador
+    FOR EACH ROW
+      BEGIN
+
+          IF NEW.Prevision < 0 THEN
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'La prevision no puede ser negativa';
+          END IF;
+
+      END //
+  DELIMITER ;
+
+--Trigger para ver que en usar entrada, la cantidad de entradas no sea negativa
+  DELIMITER //
+  CREATE OR REPLACE TRIGGER comprobar_cantidad_entradas
+    BEFORE
+    UPDATE ON UsarEntradas
+    FOR EACH ROW
+      BEGIN
+
+          IF NEW.Cantidad <= 0 THEN
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'La cantidad de entradas no puede ser negativa o nula';
+          END IF;
+
+      END //
+  DELIMITER ;
