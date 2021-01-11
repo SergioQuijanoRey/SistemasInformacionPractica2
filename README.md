@@ -44,4 +44,4 @@
     * [ ] Trigger para comprobar en votar, que la categoria, el juez y nominado esten de verdad relacionados
     * [ ] Trigger para ver que en devolver entrada, los datos sean correctos, porque el UPDATE no falla
     * [ ] Trigger para ver que en dar de alta patrocinador, la prevision sea un numero positivo
-	* [ ] Trigger para que subasta patrocinio economico no se permitan propuestas economicas negativas : Lucia
+	* [x ] Trigger para que subasta patrocinio economico no se permitan propuestas economicas negativas : Lucia

@@ -28,3 +28,18 @@ CREATE OR REPLACE TRIGGER comprobar_hora_invitado
 
     END //
   DELIMITER;
+
+--Trigger para que subasta patrocinio economico no se permitan propuestas economicas negativas
+DELIMITER //
+CREATE OR REPLACE TRIGGER comprobar_propuesta_economica
+  BEFORE
+  INSERT ON Puja
+  FOR EACH ROW
+    BEGIN
+
+        IF NEW.Valor < 0 THEN
+          SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'No se pueden pujar valores negativos';
+        END IF;
+
+    END //
+  DELIMITER;
