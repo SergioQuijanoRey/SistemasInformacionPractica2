@@ -13,7 +13,9 @@ CREATE OR REPLACE TRIGGER devolucion_Entrada_Covid
 
       IF covid = TRUE THEN
         UPDATE UsarEntradas SET Devolucion = TRUE WHERE UsarEntradas.DNIAsistentes=NEW.DNIAsistentes;
-        --select "penguin" as log into outfile '/tmp/result.txt'
+        select "penguin" as log into outfile '/tmp/result.txt';
+      ELSE 
+        select ":_(" as log into outfile '/tmp/result2.txt';
       END IF;
 
     END //
