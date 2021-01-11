@@ -6,3 +6,6 @@ ENV MYSQL_USER=sergio \
     MYSQL_PASSWORD=sergio \
     MYSQL_DATABASE=sergio \
     MYSQL_ROOT_PASSWORD=sergio
+
+# SQL files with trigger code are added to the database
+COPY ./src/sql/Triggers.sql /code/
