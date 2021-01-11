@@ -28,6 +28,7 @@
       * [ ] Poder particularizar la actividad Creada
 * [xx] Gestion de premios
 	* [xx] Votar: Juanjo
+        * [ ] Un juez puede votar en categorñías que no le corresponde
 	* [xx] Planificar premio : Lucia
 	* [xx] Asignar nominado a premio : Juanjo
 	* [xx] Fallar premio : Jesus
