@@ -6,6 +6,7 @@ all:
 	@echo "	python_run: lanza la aplicacion corriendo otro contenedor"
 	@echo "	plain_run: lanza la aplicacion corriendo directamente desde el host"
 	@echo "	perms: da permisos a la base de datos. Se tiene que esperar un poco despues de instalar para poder ejecutarse con exito"
+	@echo "	load_triggers: carga los triggers en la base de datos"
 
 install:
 	@echo "Construyendo imagen de docker"
@@ -52,7 +53,7 @@ plain_run:
 database_connect:
 	@echo "Conectando con la base de datos"
 	@echo "================================================================================"
-	docker exec -it mariadb_practicas mysql -u sergio "-psergio"
+	docker exec -it mariadb_practicas mysql -u sergio "-psergio" sergio
 
 python_run:
 	@echo "Creando contenedor de python con el codigo actualizado"
@@ -79,3 +80,9 @@ perms:
 	docker exec mariadb_practicas mysql -u root "-psergio" -e "FLUSH PRIVILEGES;"
 	docker exec mariadb_practicas mysql -u root "-psergio" -e "COMMIT;"
 
+load_triggers:
+	@echo ""
+	@echo "Cargando los triggers en la base de datos"
+	@echo "================================================================================"
+	docker exec mariadb_practicas mysql -u root "-psergio" "sergio" -e "SOURCE /code/Triggers.sql;"
+	docker exec mariadb_practicas mysql -u root "-psergio" "sergio" -e "COMMIT;"
