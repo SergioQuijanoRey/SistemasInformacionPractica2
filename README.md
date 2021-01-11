@@ -20,7 +20,7 @@
         * [ ] Mostrar actividades que tengan disponibles entradas para simplificar las cosas
 * [xx] Gestion de asistentes
     * [xx] Asignar hora invitado para alfombra roja: Lucía
-        * [ ] Trigger para comprobar que la hora introducida es correcta
+        * [x ] Trigger para comprobar que la hora introducida es correcta
     * [xx] Dar permiso a periodista: Sergio
     * [xx] Asignar rueda de prensa a pelicula: Jesus
         * Duda con savepoint
@@ -40,8 +40,8 @@
 
 * **Triggers**:
     * [ ] Trigger para saber si la entrada se puede devolver o no segun fecha y covid : Juanjo
-    * [ ] Trigger para comprobar que la hora introducida es correcta: Jesus
-    * [ ] Trigger para comprobar en votar, que la categoria, el juez y nominado esten de verdad relacionados: Lucía
+    * [x ] Trigger para comprobar que la hora introducida es correcta: Jesus
+    * [ ] Trigger para comprobar en votar, que la categoria, el juez y nominado esten de verdad relacionados
     * [ ] Trigger para ver que en devolver entrada, los datos sean correctos, porque el UPDATE no falla
     * [ ] Trigger para ver que en dar de alta patrocinador, la prevision sea un numero positivo
-	* [ ] Trigger para que subasta patrocinio economico no se permitan propuestas economicas negativas
+	* [ ] Trigger para que subasta patrocinio economico no se permitan propuestas economicas negativas : Lucia
