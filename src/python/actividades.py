@@ -24,7 +24,10 @@ def crear_actividad(db):
 
     # Preguntamos por la cantidad de entradas que queremos asignar a la actividad
     cantidadEntradas = get_int("Cuantas entradas desea que tenga la actividad: ")
-    db.insertar_entradas_para_actividad(IdActividad,cantidadEntradas)
+    if cantidadEntradas<=0:
+        print("Error: El numero de entradas no es valido ")
+        print("Cambiando numero de entradas por defecto a 1 ")
+        cantidadEntradas=1
 
     try:
         db.insertar_entradas_para_actividad(IdActividad,cantidadEntradas)
@@ -33,7 +36,7 @@ def crear_actividad(db):
         print(f"El codigo de erorr fue {e}")
 
         # TODO -- esto esta ok?
-        return 0
+        raise Exception("No se pudieron añadir las entradas a la actividad")
 
     print("Actividad creada")
     wait_for_user_input()
