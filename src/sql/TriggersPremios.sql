@@ -11,9 +11,9 @@ CREATE OR REPLACE TRIGGER juez_y_nominado_en_la_categoria
         SELECT DNIJuez INTO dni_juez FROM ValorarCategoria WHERE DNIJuez = NEW.DNIJuez AND IdCategoria = NEW.IdCategoria;
         SELECT DNINominado INTO nominado FROM SerCandidato WHERE DNINominado = NEW.DNINominado AND IdCategoria = NEW.IdCategoria;
 
-        IF NEW.DNIJuez <> dni_juez THEN
+        IF dni_juez IS NULL THEN
             SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El juez no esta asignado a esa categoria';
-        ELSEIF NEW.DNINominado <> nominado THEN
+        ELSEIF nominado IS NULL THEN
             SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El candidato no esta nominado a esa categoria';
         END IF;
 
