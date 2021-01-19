@@ -55,4 +55,4 @@
 * [ ] Describir en el PDF las transacciones
 * [ ] Fe de erratas de la práctica 2 en el PDF
 * [x] Poner el código de los disparadores en el PDF
-* [ ] Motivacion del software escogido en el PDF (media página)
+* [x] Motivacion del software escogido en el PDF (media página)
