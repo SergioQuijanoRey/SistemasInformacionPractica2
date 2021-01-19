@@ -48,3 +48,12 @@
     * [x ] Trigger para ver que en dar de alta patrocinador, la prevision sea un numero positivo : Jesus
     * [x ] Trigger para ver que en oferta no economica, el coste sea un numero positivo : Lucia
 	* [x ] Trigger para que subasta patrocinio economico no se permitan propuestas economicas negativas : Lucia
+
+## Cosas que revisar antes de hacer la entrega
+
+* [ ] Comprobar que cada subsistema tenga al menos un trigger
+* [ ] Describir en el PDF las transacciones
+* [ ] Fe de erratas de la práctica 2 en el PDF
+* [ ] Poner el código de los disparadores en el PDF
+* [ ] Motivacion del software escogido en el PDF (media página)
+
