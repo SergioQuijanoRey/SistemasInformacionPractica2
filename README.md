@@ -51,7 +51,7 @@
 
 ## Cosas que revisar antes de hacer la entrega
 
-* [ ] Comprobar que cada subsistema tenga al menos un trigger
+* [x] Comprobar que cada subsistema tenga al menos un trigger
 * [ ] Describir en el PDF las transacciones
 * [ ] Fe de erratas de la práctica 2 en el PDF
 * [ ] Poner el código de los disparadores en el PDF
