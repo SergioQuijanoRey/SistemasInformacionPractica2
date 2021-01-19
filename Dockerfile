@@ -9,3 +9,4 @@ ENV MYSQL_USER=sergio \
 
 # SQL files with trigger code are added to the database
 COPY ./src/sql/Triggers.sql /code/
+COPY ./src/sql/TriggersPremios.sql /code/

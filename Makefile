@@ -85,4 +85,5 @@ load_triggers:
 	@echo "Cargando los triggers en la base de datos"
 	@echo "================================================================================"
 	docker exec mariadb_practicas mysql -u root "-psergio" "sergio" -e "SOURCE /code/Triggers.sql;"
+	docker exec mariadb_practicas mysql -u root "-psergio" "sergio" -e "SOURCE /code/TriggersPremios.sql;"
 	docker exec mariadb_practicas mysql -u root "-psergio" "sergio" -e "COMMIT;"
